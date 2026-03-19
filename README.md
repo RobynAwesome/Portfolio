@@ -1,4 +1,4 @@
-![Full-Stack Developer](./github.jpg)
+![I build apps.](./github.jpg)
 
 # I am a Full-Stack Developer.
 
