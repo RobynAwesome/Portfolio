@@ -2,29 +2,8 @@
 
 # *I'm Kholofelo*
 
-## **A freelance Full-stack MERN Developer** | **Tech communicator** | **BSc in Computer Engineering Student**
-
-I build scalable ***backends*** and smooth, eye‑catching ***UI's*** that showcase my expertise in the ***MERN stack***. From high-performance computing to crafting platforms like the 5-a-side **5's Arena Eco-system*for Hellenic Football Club.*, I engineer solutions that are simple, impactful, and built to scale.
-
----
-
-## 🚀 *The Arsenal*
-
-*I build with:*
-
-* **JavaScript & TypeScript** — *for confidence, clarity, and dynamic logic.*
-* **Node.js & MongoDB** — *for robust, high-performance backends.*
-* **React + Vite** — *for lightning-fast speed and modularity.*
-* **TailwindCSS & CSS** — *for responsive, beautiful design.*
-* **GitHub Pages / Netlify** — *for rapid, reliable deployment.*
-* **PWA Setup** — *for seamless, app‑like performance.*
-
----
-
-## 💡 *Beyond the Code*
-
-* 🎓 **Pursuing:** BEng in Computer Engineering at CPUT.
-* 💻 **Building:** Custom freelance web solutions for paying clients.
+## **A freelance Full-stack MERN Developer** 
+I build scalable ***backends*** and smooth, eye‑catching ***UI's*** that showcase my expertise in the ***MERN stack***.
 
 ---
 
