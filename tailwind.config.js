@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primaryGreen: "#2ecc71", // heavy green
-        primaryBlue: "#3498db", // medium blue
-        neutralGray: "#7f8c8d", // low gray
+        brandBlue: "#3b82f6",
+        brandGreen: "#22c55e",
+        brandGray: "#6b7280",
       },
     },
   },
