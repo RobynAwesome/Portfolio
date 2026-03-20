@@ -1,23 +1,14 @@
-function MoreAboutMe() {
-  return (
-    <section id="about" className="py-20 text-center bg-neutralGray">
-      <h3 className="mb-6 text-3xl font-bold text-primaryGreen">
-        More About Me
-      </h3>
-      <p className="max-w-3xl mx-auto mb-6">
-        I have the knowledge and skills to build the apps you are dreaming
-        about. My years of experience and my passion for building scalable,
-        beautiful interfaces make me the perfect partner to bring your ideas to
-        life.
-      </p>
-      <a
-        href="#contact"
-        className="px-6 py-3 transition rounded-lg shadow bg-primaryGreen hover:bg-primaryBlue"
-      >
-        Let’s Talk
-      </a>
-    </section>
-  );
-}
+import React from "react";
+
+// MoreAboutMe.tsx
+export const MoreAboutMe = () => (
+  <section className="px-6 py-16 text-white bg-gray-800">
+    <h3 className="mb-8 text-3xl font-bold text-green-400">More About Me</h3>
+    <p className="max-w-xl text-gray-300">
+      I’m a hands-on web developer who thrives on collaboration, open-source
+      contributions, and crafting recruiter-friendly portfolios.
+    </p>
+  </section>
+);
 
 export default MoreAboutMe;

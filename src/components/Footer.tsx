@@ -1,26 +1,21 @@
-function Footer() {
-  return (
-    <footer className="py-6 text-center text-white bg-primaryGreen">
-      <p>&copy; {new Date().getFullYear()} Kholofelo. MIT Licensed.</p>
-      <div className="flex justify-center mt-4 space-x-6">
-        <a
-          href="https://github.com/yourusername"
-          className="hover:text-primaryBlue"
-        >
-          GitHub
-        </a>
-        <a
-          href="https://linkedin.com/in/yourusername"
-          className="hover:text-primaryBlue"
-        >
-          LinkedIn
-        </a>
-        <a href="#contact" className="hover:text-primaryBlue">
-          Contact
-        </a>
-      </div>
-    </footer>
-  );
-}
+import React from "react";
 
-export default Footer;
+export const Footer = () => (
+  <footer className="py-6 text-center text-white bg-green-700">
+    <p>
+      © {new Date().getFullYear()} Kholofelo.dev — Built with React &
+      TailwindCSS
+    </p>
+    <div className="flex justify-center gap-4 mt-2">
+      <a href="https://github.com/yourusername" className="hover:text-blue-300">
+        GitHub
+      </a>
+      <a
+        href="https://linkedin.com/in/yourusername"
+        className="hover:text-blue-300"
+      >
+        LinkedIn
+      </a>
+    </div>
+  </footer>
+);

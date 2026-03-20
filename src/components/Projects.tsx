@@ -1,39 +1,21 @@
-function Projects() {
-  const projects = [
-    {
-      title: "Portfolio Builder",
-      desc: "Recruiter-friendly showcase built with React + TailwindCSS",
-      link: "#",
-    },
-    {
-      title: "Open Source Contributions",
-      desc: "Collaborative coding projects on GitHub",
-      link: "#",
-    },
-  ];
+import React from "react";
 
-  return (
-    <section id="projects" className="py-20 text-center bg-primaryGreen">
-      <h3 className="mb-10 text-3xl font-bold text-white">Projects</h3>
-      <div className="grid max-w-5xl gap-8 mx-auto md:grid-cols-2">
-        {projects.map((proj) => (
-          <div
-            key={proj.title}
-            className="p-6 text-white transition duration-300 transform rounded-lg shadow bg-neutralGray hover:scale-105"
-          >
-            <h4 className="mb-2 text-xl font-semibold">{proj.title}</h4>
-            <p className="mb-4">{proj.desc}</p>
-            <a
-              href={proj.link}
-              className="text-primaryGreen hover:text-primaryBlue"
-            >
-              View Project
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+const projects = [
+  { name: "Portfolio", tech: "React + Vite + TailwindCSS" },
+  { name: "Open Source Docs", tech: "Markdown + GitHub Pages" },
+  { name: "UI Toolkit", tech: "TypeScript + TailwindCSS" },
+];
 
-export default Projects;
+export const Projects = () => (
+  <section className="px-6 py-16 text-white bg-gray-900">
+    <h3 className="mb-8 text-3xl font-bold text-green-400">Projects</h3>
+    <ul className="space-y-6">
+      {projects.map((proj) => (
+        <li key={proj.name} className="p-6 bg-gray-800 rounded-lg shadow-md">
+          <h4 className="text-xl font-semibold text-blue-300">{proj.name}</h4>
+          <p className="mt-2 text-gray-300">{proj.tech}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+);

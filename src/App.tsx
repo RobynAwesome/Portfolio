@@ -1,32 +1,23 @@
-import DynamicNavbar from "./components/DynamicNavbar";
-import Hero from "./components/Hero";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import ProjectFilter from "./components/ProjectFilter";
-import CertificatesAnimated from "./components/CertificatesAnimated";
-import ExperienceTimeline from "./components/ExperienceTimeline";
-import MilestoneCards from "./components/MilestoneCards";
-import RecruiterCTA from "./components/RecruiterCTA";
-import HireMeBanner from "./components/HireMeBanner";
-import MoreAboutMe from "./components/MoreAboutMe";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import { Navbar } from "./components/Navbar";
+import { Hero } from "./components/Hero";
+import { Skills } from "./components/Skills";
+import { Projects } from "./components/Projects";
+import { Certificates } from "./components/Certificates";
+import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
+import { MoreAboutMe } from "./components/MoreAboutMe";
 
 function App() {
   return (
-    <div className="text-white bg-neutralGray">
-      <DynamicNavbar />
-      <Hero />
-      <Skills />
-      <Projects />
-      <ProjectFilter />
-      <CertificatesAnimated />
-      <ExperienceTimeline />
-      <MilestoneCards />
-      <RecruiterCTA />
-      <HireMeBanner />
-      <MoreAboutMe />
-      <Contact />
+    <div className="flex flex-col min-h-screen text-white bg-gray-900">
+      <Navbar />
+      <main className="flex-grow">
+        <Hero />
+        <Skills />
+        <Projects />
+        <Certificates />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );
