@@ -3,7 +3,9 @@
 # *I'm Kholofelo*
 
 ⛑ A freelance Full-stack MERN Developer building scalable ***backends*** smooth, eye‑catching ***UI's*** 
+
 ---
+
 ## 🚀 *I develop with:*
 
 + **JavaScript & TypeScript** — *for confidence, clarity, and dynamic logic.*
