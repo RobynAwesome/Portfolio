@@ -1,14 +1,11 @@
-// tailwind.config.js
-export default {
+import type { Config } from "tailwindcss";
+
+const config: Config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {
-      colors: {
-        brandBlue: "#3b82f6",
-        brandGreen: "#22c55e",
-        brandGray: "#6b7280",
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };
+
+export default config;

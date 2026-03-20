@@ -2,6 +2,7 @@
   "name": "portfolio",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,23 +14,28 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.2.2",
     "@vitejs/plugin-react": "^6.0.1",
     "autoprefixer": "^10.4.27",
     "postcss": "^8.5.8",
     "tailwindcss": "^4.2.2",
     "vite": "^8.0.1"
   },
-  "description": "![Full-Stack Developer](/github.jpg)",
-  "main": "eslint.config.js",
+  "description": "Full-Stack Developer",
+  "main": "index.html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RobynAwesome/Portfolio.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "mongodb",
+    "express",
+    "react",
+    "node",
+    "mern"
+  ],
+  "author": "Kholofelo Robyn Rababalela",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/RobynAwesome/Portfolio/issues"
   },
