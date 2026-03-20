@@ -1,14 +1,13 @@
 ![Full-Stack Developer](/github.jpg)
 
-# I am a Full-Stack Developer.
+# *wussp I'm Kholofelo.*
 
-Hey, I'm Kholofelo  
-I'm a hands-on Full-Stack Developer & Tech Communicator.  
-I build scalable backends, smooth and eye‑catching UI's that showcase my skills MERN stack and certificates — always with collaboration in mind.
+A hands-on **Freelance Full-Stack Developer** & **Tech Communicator**.  
+I build scalable ***backends***, smooth and eye‑catching ***UI's*** that showcase my skills and knowledge on ***MERN stack*** —
 
----https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/
+---
 
-## I build with:
+## *I build with:*
 
 ⚡ TypeScript & JavaScript for confidence and clarity  
 ⚛️ React + Vite for speed and modularity  
