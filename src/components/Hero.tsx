@@ -8,6 +8,7 @@ export default function Hero() {
       <p className="max-w-2xl mb-6 text-lg text-center">
         Hands-on Web Developer & Tech Communicator.
       </p>
+      <div className="w-32 h-32 bg-red-500"></div>
 
       {/* Test Tailwind here */}
       <div className="w-32 h-32 bg-red-500"></div>
