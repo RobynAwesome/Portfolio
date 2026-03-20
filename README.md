@@ -12,7 +12,7 @@
 * **Node.js & MongoDB** — *for robust, high-performance backends.*
 * **React + Vite** — *for lightning-fast speed and modularity.*
 * **TailwindCSS & CSS** — *for responsive, beautiful design.*
-* **GitHub Pages / Netlify** — *for rapid, reliable deployment.*
+* **GitHub Pages** — *for rapid, reliable deployment.*
 * **PWA Setup** — *for seamless, app‑like performance.*
 
 ---
