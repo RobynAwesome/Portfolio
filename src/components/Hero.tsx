@@ -1,16 +1,19 @@
-import React from "react";
-
-const Hero = () => (
-  <section className="flex flex-col items-center justify-center py-20 text-center bg-gradient-to-b from-green-700 to-blue-800">
-    <h2 className="mb-4 text-4xl font-bold">Hi, I’m Kholofelo</h2>
-    <p className="max-w-xl text-lg">
-      Hands-on Web Developer & Tech Communicator. I craft modular, scalable apps
-      with React, Vite, TailwindCSS, and TypeScript.
-    </p>
-    <button className="px-6 py-3 mt-6 text-green-400 bg-gray-800 rounded-lg hover:bg-gray-700">
-      Let’s Collaborate
-    </button>
-  </section>
-);
-
-export default Hero;
+export default function Hero() {
+  return (
+    <section
+      id="home"
+      className="flex flex-col items-center justify-center min-h-screen px-6 text-white border bg-gradient-to-r from-brandGreen via-brandBlue to-brandGray border-brandGray"
+    >
+      <h1 className="text-5xl font-extrabold mb-4 drop-shadow-[0_2px_2px_rgba(107,114,128,0.8)]">
+        Kholofelo.dev
+      </h1>
+      <p className="max-w-2xl py-4 mb-6 text-lg text-center border-t border-b border-brandGray">
+        Hands-on Web Developer & Tech Communicator. Crafting modular, scalable
+        apps with React, Vite, TailwindCSS, and TypeScript.
+      </p>
+      <button className="px-6 py-3 font-semibold transition bg-white border rounded-lg shadow-md text-brandGreen hover:bg-brandGray hover:text-white border-brandGray">
+        Let’s Collaborate
+      </button>
+    </section>
+  );
+}

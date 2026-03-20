@@ -1,18 +1,24 @@
-import React from "react";
-
-const Navbar = () => (
-  <nav className="flex items-center justify-between px-6 py-4 text-white bg-green-700 shadow-md">
-    <h1 className="text-xl font-bold">Kholofelo.dev</h1>
-    <ul className="flex gap-6">
-      {["Home", "Skills", "Projects", "Certificates", "About", "Contact"].map(
-        (item) => (
-          <li key={item} className="cursor-pointer hover:text-blue-300">
-            {item}
-          </li>
-        ),
-      )}
-    </ul>
-  </nav>
-);
-
-export default Navbar;
+export default function Navbar() {
+  return (
+    <nav className="flex items-center justify-between px-8 py-4 text-white shadow-md bg-brandBlue">
+      <h1 className="text-2xl font-bold">Kholofelo.dev</h1>
+      <ul className="flex gap-6">
+        <li>
+          <a href="#home" className="hover:text-brandGreen">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#skills" className="hover:text-brandGreen">
+            Skills
+          </a>
+        </li>
+        <li>
+          <a href="#projects" className="hover:text-brandGreen">
+            Projects
+          </a>
+        </li>
+      </ul>
+    </nav>
+  );
+}
