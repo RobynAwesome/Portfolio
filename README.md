@@ -1,29 +1,33 @@
 ![Full-Stack Developer](/github.jpg)
 
-# I am a Full-Stack Developer.
+# *I'm Kholofelo*
 
-Hey, I'm Kholofelo  
-I'm a hands-on Full-Stack Developer & Tech Communicator.  
-I build scalable backends, smooth and eye‑catching UI's that showcase my skills MERN stack and certificates — always with collaboration in mind.
-
----https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/
-
-## I build with:
-
-⚡ TypeScript & JavaScript for confidence and clarity  
-⚛️ React + Vite for speed and modularity  
-🎨 TailwindCSS for responsive, beautiful design  
-🚀 GitHub Pages / Netlify for fast deployment  
-📱 PWA setup for app‑like performance  
+⛑ A freelance Full-stack MERN Developer building scalable ***backends*** smooth, eye‑catching ***UI's*** 
 
 ---
 
-💬 Want to collaborate or hire me?  
-Let’s connect:  
-- [GitHub](https://github.com/RobynAwesome)  
-- [LinkedIn](https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/)
+## 🚀 *I develop with:*
+
++ **JavaScript & TypeScript** — *for confidence, clarity, and dynamic logic.*
+ * **Node.js & MongoDB** — *for robust, high-performance backends.*
++ **React + Vite** — *for lightning-fast speed and modularity.*
+ * **TailwindCSS & CSS** — *for responsive, beautiful design.*
++ **GitHub Pages** — *for rapid, reliable deployment.*
+ * **PWA Setup** — *for seamless, app‑like performance.*
+
+## ⚛️ *Building dreams into reality* 
+ _***This repo is my portfolio source built to be simple and an representation of my me.***_
 
 ---
 
-Curious about me❓  
-This repo is my portfolio source — built to be simple, impactful,
+### **Want to collaborate or hire me?**
+-- [**GitHub Profile**](https://github.com/RobynAwesome/) 
+
+-- [**LinkedIn Profile**](https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7) 
+
+-- [**HackerRank Portfolio**](https://www.hackerrank.com/profile/rkholofelo) 
+
+-- [**ko-fi donations**](https://ko-fi.com/robynawesome) 
+
+-- [**ORCID](https://orcid.org/0009-0000-3995-6147)
+ 
