@@ -1,6 +1,6 @@
 ![Full-Stack Developer](/github.jpg)
 
-# wussp, I'm *Kholofelo*
+# wussp, *I'm Kholofelo*
 
 ## **Freelance Full-Stack MERN Developer** | **Tech Communicator** | **Computer Engineering Student**
 
