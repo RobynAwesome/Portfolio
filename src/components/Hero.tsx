@@ -1,18 +1,14 @@
-export default function Skills() {
-  const skills = ["React", "Vite", "AWS", "JavaScript", "HTML", "CSS"];
+export default function Hero() {
   return (
-    <section id="skills" className="py-20 bg-gray-100 text-center">
-      <h2 className="text-3xl font-bold mb-10">Skills</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-        {skills.map((skill) => (
-          <div
-            key={skill}
-            className="p-6 bg-white rounded-lg shadow hover:scale-105 transition-transform"
-          >
-            {skill}
-          </div>
-        ))}
-      </div>
+    <section className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
+      <h1 className="text-5xl font-bold mb-4">Hi, I’m Kholofelo</h1>
+      <p className="text-xl mb-6">Web Developer & Tech Communicator</p>
+      <a
+        href="#projects"
+        className="px-6 py-3 bg-white text-indigo-600 rounded-lg shadow-lg hover:scale-105 transition-transform"
+      >
+        Explore My Work
+      </a>
     </section>
   );
 }
