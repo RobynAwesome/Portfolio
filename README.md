@@ -23,11 +23,11 @@
 ### **Want to collaborate or hire me?**
 -- [**GitHub Profile**](https://github.com/RobynAwesome/) 
 
--- [**LinkedIn Profile**](https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7) 
+-- [**LinkedIn Profile**](https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app) 
 
 -- [**HackerRank Portfolio**](https://www.hackerrank.com/profile/rkholofelo) 
 
 -- [**ko-fi donations**](https://ko-fi.com/robynawesome) 
 
--- [**ORCID](https://orcid.org/0009-0000-3995-6147)
+-- [**ORCID**](https://orcid.org/0009-0000-3995-6147)
  
