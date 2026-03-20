@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DarkModeToggle from "./DarkModeToggle";
 
-function Navbar() {
+function DynamicNavbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -12,7 +12,6 @@ function Navbar() {
 
   return (
     <nav
-      aria-label="Main Navigation"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled ? "bg-primaryGreen shadow-lg" : "bg-transparent"
       }`}
@@ -24,7 +23,6 @@ function Navbar() {
           </span>
           <span className="text-xl font-semibold tracking-wide">Kholofelo</span>
         </a>
-
         <ul className="hidden space-x-6 md:flex">
           <li>
             <a href="#skills" className="hover:text-primaryBlue">
@@ -47,7 +45,6 @@ function Navbar() {
             </a>
           </li>
         </ul>
-
         <div className="flex items-center space-x-4">
           <a
             href="https://github.com/yourusername"
@@ -72,4 +69,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default DynamicNavbar;
