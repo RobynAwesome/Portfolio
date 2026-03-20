@@ -17,10 +17,13 @@
 
 ---
 
-## 💬 *Let's Build Something Great*
+## 💬 *_Curious about me❓_*
 
-## *_Curious about me❓_* 
-**This repo is my portfolio source — built to be simple, impactful, and an authentic representation of my work.**
+## *Let's Build Something Great*
+
+---
+
+_***This repo is my portfolio source — built to be simple, impactful, and an authentic representation of my work.***_
 
 ### **Want to collaborate or hire me? Let’s connect:**
 * [**GitHub**](https://github.com/RobynAwesome/)
