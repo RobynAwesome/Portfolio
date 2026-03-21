@@ -121,6 +121,246 @@ function TypingCode() {
   );
 }
 
+/* ───── Infinite scrolling tech marquee ───── */
+function TechMarquee() {
+  const techs = [
+    "React", "Node.js", "MongoDB", "Express", "TypeScript", "JavaScript",
+    "TailwindCSS", "Vite", "Next.js", "HTML5", "CSS3", "Git", "REST APIs",
+    "Framer Motion", "Figma", "VS Code", "npm", "Vercel",
+  ];
+  const doubled = [...techs, ...techs];
+
+  return (
+    <div className="relative overflow-hidden py-6">
+      <div className="absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-[#060d18] to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-[#060d18] to-transparent" />
+      <motion.div
+        className="flex gap-6 whitespace-nowrap"
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+      >
+        {doubled.map((tech, i) => (
+          <span
+            key={i}
+            className="inline-flex items-center gap-2 rounded-full border border-[#1a2744] bg-[#0f1a30]/50 px-5 py-2 text-sm font-semibold text-gray-400"
+          >
+            <span
+              className="h-2 w-2 rounded-full"
+              style={{
+                background: i % 3 === 0 ? "#00e89d" : i % 3 === 1 ? "#0ea5e9" : "#a855f7",
+              }}
+            />
+            {tech}
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+/* ───── GitHub-style contribution graph ───── */
+function ContributionGraph() {
+  const weeks = 15;
+  const days = 7;
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+
+  // Generate deterministic "contributions" based on position
+  const getLevel = (w: number, d: number) => {
+    const seed = (w * 7 + d * 13 + 42) % 17;
+    if (seed < 4) return 0;
+    if (seed < 8) return 1;
+    if (seed < 12) return 2;
+    if (seed < 15) return 3;
+    return 4;
+  };
+
+  const colors = [
+    "rgba(255,255,255,0.03)",
+    "rgba(0,232,157,0.2)",
+    "rgba(0,232,157,0.4)",
+    "rgba(0,232,157,0.65)",
+    "rgba(0,232,157,0.9)",
+  ];
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6 }}
+      className="rounded-2xl p-5"
+      style={{
+        background: "rgba(15, 23, 42, 0.5)",
+        border: "1px solid rgba(0, 232, 157, 0.12)",
+      }}
+    >
+      <div className="mb-3 flex items-center justify-between">
+        <span className="text-xs font-bold text-gray-400">Coding Activity</span>
+        <span className="text-[10px] text-gray-600">Last 15 weeks</span>
+      </div>
+      <div className="flex gap-[3px]">
+        {Array.from({ length: weeks }).map((_, w) => (
+          <div key={w} className="flex flex-col gap-[3px]">
+            {Array.from({ length: days }).map((_, d) => (
+              <motion.div
+                key={d}
+                className="h-[11px] w-[11px] rounded-[3px]"
+                style={{ background: colors[getLevel(w, d)] }}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={inView ? { scale: 1, opacity: 1 } : {}}
+                transition={{
+                  duration: 0.15,
+                  delay: (w * days + d) * 0.008,
+                  type: "spring",
+                  stiffness: 500,
+                }}
+                whileHover={{
+                  scale: 1.8,
+                  boxShadow: "0 0 8px rgba(0,232,157,0.6)",
+                }}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center justify-end gap-1 text-[9px] text-gray-600">
+        <span>Less</span>
+        {colors.map((c, i) => (
+          <div
+            key={i}
+            className="h-[9px] w-[9px] rounded-[2px]"
+            style={{ background: c }}
+          />
+        ))}
+        <span>More</span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ───── Animated "Currently Building" status ───── */
+function CurrentlyBuilding() {
+  const [dotCount, setDotCount] = useState(1);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDotCount((d) => (d % 3) + 1);
+    }, 500);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.02 }}
+      className="relative overflow-hidden rounded-2xl p-6"
+      style={{
+        background: "rgba(15, 23, 42, 0.6)",
+        border: "1px solid rgba(14, 165, 233, 0.2)",
+      }}
+    >
+      {/* Animated scanning line */}
+      <motion.div
+        className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-transparent via-[#00e89d] to-transparent"
+        animate={{ x: [0, 400, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        style={{ opacity: 0.3 }}
+      />
+
+      <div className="flex items-center gap-3 mb-3">
+        <motion.div
+          className="h-3 w-3 rounded-full bg-[#00e89d]"
+          animate={{
+            scale: [1, 1.3, 1],
+            boxShadow: [
+              "0 0 0px rgba(0,232,157,0.5)",
+              "0 0 12px rgba(0,232,157,0.8)",
+              "0 0 0px rgba(0,232,157,0.5)",
+            ],
+          }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        />
+        <span className="text-xs font-bold text-[#00e89d] uppercase tracking-widest">
+          Currently Building{".".repeat(dotCount)}
+        </span>
+      </div>
+      <h4 className="text-lg font-black text-white mb-1">5's Arena Platform</h4>
+      <p className="text-xs text-gray-500 mb-3">Full-stack booking system + community blog</p>
+
+      <div className="flex items-center gap-4">
+        <div className="flex-1">
+          <div className="mb-1 flex justify-between text-[10px]">
+            <span className="text-gray-500">Progress</span>
+            <span className="text-[#00e89d] font-bold">68%</span>
+          </div>
+          <div className="h-1.5 rounded-full bg-[#0f1a30] overflow-hidden">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-[#00e89d] to-[#0ea5e9]"
+              initial={{ width: 0 }}
+              whileInView={{ width: "68%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
+            />
+          </div>
+        </div>
+        <div className="flex -space-x-2">
+          {["#00e89d", "#0ea5e9", "#a855f7"].map((c, i) => (
+            <motion.div
+              key={i}
+              className="h-6 w-6 rounded-full border-2 border-[#0f172a]"
+              style={{ background: c }}
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ───── 3D Tilt card wrapper ───── */
+function TiltCard({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [transform, setTransform] = useState("perspective(1000px) rotateX(0deg) rotateY(0deg)");
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`);
+  };
+
+  const handleMouseLeave = () => {
+    setTransform("perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)");
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+      style={{
+        ...style,
+        transform,
+        transition: "transform 0.15s ease-out",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 /* ───── Floating particles component ───── */
 function FloatingParticles() {
   return (
@@ -622,6 +862,11 @@ export default function ResumePage() {
         </div>
       </section>
 
+      {/* ───── Scrolling Tech Marquee ───── */}
+      <section className="mx-auto max-w-5xl px-4 mt-4">
+        <TechMarquee />
+      </section>
+
       {/* ───── About Me + Interests + Toolbox (moox style) ───── */}
       <section className="mx-auto mt-8 max-w-5xl px-12 sm:px-20 lg:px-36">
         <AnimatedSection>
@@ -804,6 +1049,16 @@ export default function ResumePage() {
               </div>
             </div>
             <TypingCode />
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* ───── Activity + Currently Building ───── */}
+      <section className="mx-auto mt-16 max-w-5xl px-12 sm:px-20 lg:px-36">
+        <AnimatedSection>
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <ContributionGraph />
+            <CurrentlyBuilding />
           </div>
         </AnimatedSection>
       </section>
@@ -1154,51 +1409,54 @@ export default function ResumePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="overflow-hidden rounded-3xl"
-                style={{
-                  background: "rgba(15, 23, 42, 0.5)",
-                  border: "1px solid rgba(14, 165, 233, 0.15)",
-                }}
               >
-                {/* Screenshot */}
-                <div className="relative h-64 overflow-hidden sm:h-80">
-                  <img
-                    src="/web-image-5s.png"
-                    alt="Bookit 5's Arena"
-                    className="h-full w-full object-cover object-top"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
-                </div>
-
-                {/* Content */}
-                <div className="p-8 sm:p-10">
-                  <div className="mb-3 flex items-start justify-between">
-                    <p className="text-xs font-bold tracking-widest text-[#0ea5e9] uppercase">
-                      Full-Stack Booking Platform
-                    </p>
-                    <p className="text-xs text-gray-500 italic">5's Arena</p>
+                <TiltCard
+                  className="overflow-hidden rounded-3xl"
+                  style={{
+                    background: "rgba(15, 23, 42, 0.5)",
+                    border: "1px solid rgba(14, 165, 233, 0.15)",
+                  }}
+                >
+                  {/* Screenshot */}
+                  <div className="relative h-64 overflow-hidden sm:h-80">
+                    <img
+                      src="/web-image-5s.png"
+                      alt="Bookit 5's Arena"
+                      className="h-full w-full object-cover object-top"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
                   </div>
-                  <h3 className="mb-2 text-2xl font-black text-white sm:text-3xl">
-                    Bookit — Real-time venue booking system
-                  </h3>
-                  <p className="mb-6 text-sm text-gray-500">
-                    3 months and counting
-                  </p>
-                  <p className="flex flex-wrap gap-2 text-sm text-gray-400">
-                    {[
-                      "React",
-                      "Node.js",
-                      "Express",
-                      "MongoDB",
-                      "CSS",
-                      "JavaScript",
-                    ].map((t) => (
-                      <span key={t} className="text-[#0ea5e9]/70">
-                        #{t}
-                      </span>
-                    ))}
-                  </p>
-                </div>
+
+                  {/* Content */}
+                  <div className="p-8 sm:p-10">
+                    <div className="mb-3 flex items-start justify-between">
+                      <p className="text-xs font-bold tracking-widest text-[#0ea5e9] uppercase">
+                        Full-Stack Booking Platform
+                      </p>
+                      <p className="text-xs text-gray-500 italic">5's Arena</p>
+                    </div>
+                    <h3 className="mb-2 text-2xl font-black text-white sm:text-3xl">
+                      Bookit — Real-time venue booking system
+                    </h3>
+                    <p className="mb-6 text-sm text-gray-500">
+                      3 months and counting
+                    </p>
+                    <p className="flex flex-wrap gap-2 text-sm text-gray-400">
+                      {[
+                        "React",
+                        "Node.js",
+                        "Express",
+                        "MongoDB",
+                        "CSS",
+                        "JavaScript",
+                      ].map((t) => (
+                        <span key={t} className="text-[#0ea5e9]/70">
+                          #{t}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                </TiltCard>
               </motion.div>
 
               {/* 5's Arena Blog */}
@@ -1207,48 +1465,51 @@ export default function ResumePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="overflow-hidden rounded-3xl"
-                style={{
-                  background: "rgba(15, 23, 42, 0.5)",
-                  border: "1px solid rgba(0, 232, 157, 0.15)",
-                }}
               >
-                <div className="relative h-64 overflow-hidden sm:h-80">
-                  <img
-                    src="/web-image-5s.png"
-                    alt="5's Arena Blog"
-                    className="h-full w-full object-cover object-center"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
-                </div>
-
-                <div className="p-8 sm:p-10">
-                  <div className="mb-3 flex items-start justify-between">
-                    <p className="text-xs font-bold tracking-widest text-[#00e89d] uppercase">
-                      Community Blog
-                    </p>
-                    <p className="text-xs text-gray-500 italic">5's Arena</p>
+                <TiltCard
+                  className="overflow-hidden rounded-3xl"
+                  style={{
+                    background: "rgba(15, 23, 42, 0.5)",
+                    border: "1px solid rgba(0, 232, 157, 0.15)",
+                  }}
+                >
+                  <div className="relative h-64 overflow-hidden sm:h-80">
+                    <img
+                      src="/web-image-5s.png"
+                      alt="5's Arena Blog"
+                      className="h-full w-full object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
                   </div>
-                  <h3 className="mb-2 text-2xl font-black text-white sm:text-3xl">
-                    Community blog with auth, RBAC & rich text
-                  </h3>
-                  <p className="mb-6 text-sm text-gray-500">
-                    3 months and counting
-                  </p>
-                  <p className="flex flex-wrap gap-2 text-sm text-gray-400">
-                    {[
-                      "React",
-                      "Node.js",
-                      "Express",
-                      "MongoDB",
-                      "TailwindCSS",
-                    ].map((t) => (
-                      <span key={t} className="text-[#00e89d]/70">
-                        #{t}
-                      </span>
-                    ))}
-                  </p>
-                </div>
+
+                  <div className="p-8 sm:p-10">
+                    <div className="mb-3 flex items-start justify-between">
+                      <p className="text-xs font-bold tracking-widest text-[#00e89d] uppercase">
+                        Community Blog
+                      </p>
+                      <p className="text-xs text-gray-500 italic">5's Arena</p>
+                    </div>
+                    <h3 className="mb-2 text-2xl font-black text-white sm:text-3xl">
+                      Community blog with auth, RBAC & rich text
+                    </h3>
+                    <p className="mb-6 text-sm text-gray-500">
+                      3 months and counting
+                    </p>
+                    <p className="flex flex-wrap gap-2 text-sm text-gray-400">
+                      {[
+                        "React",
+                        "Node.js",
+                        "Express",
+                        "MongoDB",
+                        "TailwindCSS",
+                      ].map((t) => (
+                        <span key={t} className="text-[#00e89d]/70">
+                          #{t}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                </TiltCard>
               </motion.div>
 
               {/* Portfolio */}
@@ -1257,46 +1518,49 @@ export default function ResumePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className="overflow-hidden rounded-3xl"
-                style={{
-                  background: "rgba(15, 23, 42, 0.5)",
-                  border: "1px solid rgba(168, 85, 247, 0.15)",
-                }}
               >
-                <div className="relative h-64 overflow-hidden sm:h-80">
-                  <img
-                    src="/profile-banner-1.jpg"
-                    alt="Portfolio Website"
-                    className="h-full w-full object-cover object-center"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
-                </div>
-
-                <div className="p-8 sm:p-10">
-                  <div className="mb-3 flex items-start justify-between">
-                    <p className="text-xs font-bold tracking-widest text-[#a855f7] uppercase">
-                      Personal Brand
-                    </p>
-                    <p className="text-xs text-gray-500 italic">Personal</p>
+                <TiltCard
+                  className="overflow-hidden rounded-3xl"
+                  style={{
+                    background: "rgba(15, 23, 42, 0.5)",
+                    border: "1px solid rgba(168, 85, 247, 0.15)",
+                  }}
+                >
+                  <div className="relative h-64 overflow-hidden sm:h-80">
+                    <img
+                      src="/profile-banner-1.jpg"
+                      alt="Portfolio Website"
+                      className="h-full w-full object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
                   </div>
-                  <h3 className="mb-2 text-2xl font-black text-white sm:text-3xl">
-                    Animated portfolio with Framer Motion
-                  </h3>
-                  <p className="mb-6 text-sm text-gray-500">Ongoing</p>
-                  <p className="flex flex-wrap gap-2 text-sm text-gray-400">
-                    {[
-                      "React",
-                      "TypeScript",
-                      "TailwindCSS",
-                      "Vite",
-                      "Framer Motion",
-                    ].map((t) => (
-                      <span key={t} className="text-[#a855f7]/70">
-                        #{t}
-                      </span>
-                    ))}
-                  </p>
-                </div>
+
+                  <div className="p-8 sm:p-10">
+                    <div className="mb-3 flex items-start justify-between">
+                      <p className="text-xs font-bold tracking-widest text-[#a855f7] uppercase">
+                        Personal Brand
+                      </p>
+                      <p className="text-xs text-gray-500 italic">Personal</p>
+                    </div>
+                    <h3 className="mb-2 text-2xl font-black text-white sm:text-3xl">
+                      Animated portfolio with Framer Motion
+                    </h3>
+                    <p className="mb-6 text-sm text-gray-500">Ongoing</p>
+                    <p className="flex flex-wrap gap-2 text-sm text-gray-400">
+                      {[
+                        "React",
+                        "TypeScript",
+                        "TailwindCSS",
+                        "Vite",
+                        "Framer Motion",
+                      ].map((t) => (
+                        <span key={t} className="text-[#a855f7]/70">
+                          #{t}
+                        </span>
+                      ))}
+                    </p>
+                  </div>
+                </TiltCard>
               </motion.div>
             </div>
           </AnimatedSection>
