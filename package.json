@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "cd server && node --watch server.js",
     "build": "vite build",
     "preview": "vite preview",
     "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./src/index.css --watch"
