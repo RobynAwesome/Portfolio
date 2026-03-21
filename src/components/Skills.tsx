@@ -167,17 +167,17 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-24 sm:py-32 relative">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-12 sm:px-20 lg:px-36">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 leading-tight text-center">
             Full-Stack <span className="gradient-text">Architect.</span>
           </h2>
-          <p className="text-gray-400 text-base sm:text-lg max-w-2xl leading-relaxed mb-16">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-16 text-center">
             My experience across the entire MERN stack gives me confidence in the
             technologies & tools I use. Whether you need help bootstrapping your project
             or building production-grade features, I bring both frontend finesse and

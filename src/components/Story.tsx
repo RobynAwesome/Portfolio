@@ -8,7 +8,7 @@ export default function Story() {
 
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden bg-gradient-to-br from-[#00e89d]/30 via-[#0ea5e9]/35 to-[#00e89d]/25">
-      <div className="relative max-w-7xl mx-auto px-8" ref={ref}>
+      <div className="relative max-w-5xl mx-auto px-12 sm:px-20 lg:px-36" ref={ref}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left — Text */}
           <motion.div
@@ -33,26 +33,62 @@ export default function Story() {
               my very first webpage — the drive to create something that matters.
             </p>
 
-            {/* LinkedIn posts placeholder */}
-            <div className="mb-8">
-              <h3 className="text-sm font-semibold tracking-widest uppercase text-[#0ea5e9] mb-4">
-                Latest from LinkedIn
-              </h3>
-              <div className="space-y-3">
-                {[1, 2, 3].map((i) => (
+            {/* LinkedIn posts */}
+            <div className="mb-8 rounded-2xl border border-[#0ea5e9]/30 bg-[#0b1426]/60 backdrop-blur-sm overflow-hidden">
+              {/* Header */}
+              <div className="flex items-center gap-2 px-5 py-3 border-b border-[#0ea5e9]/20">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#0ea5e9]" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                <span className="text-xs font-bold tracking-widest uppercase text-[#0ea5e9]">
+                  Latest from LinkedIn
+                </span>
+              </div>
+
+              {/* Post cards */}
+              <div className="divide-y divide-[#0ea5e9]/10">
+                {[
+                  {
+                    text: "Excited to share my latest project — a full-stack booking system for 5's Arena! Built with React, Node.js, and MongoDB.",
+                    time: "2d",
+                    likes: 24,
+                  },
+                  {
+                    text: "Just completed my HackerRank JavaScript certification. Always learning, always growing in the MERN ecosystem.",
+                    time: "1w",
+                    likes: 18,
+                  },
+                  {
+                    text: "Reflecting on my journey from writing my first HTML page to building production-grade full-stack applications. The tech community is incredible.",
+                    time: "2w",
+                    likes: 31,
+                  },
+                ].map((post, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                    className="flex items-start gap-3 px-5 py-4 hover:bg-white/[0.02] transition-colors"
                   >
-                    {/* Profile pic placeholder */}
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00e89d]/50 to-[#0ea5e9]/50 flex-shrink-0" />
-                    <div className="flex-1 space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-white">Kholofelo Robyn</span>
-                        <div className="h-2 w-12 rounded bg-gray-400/30" />
+                    <img
+                      src="/web-image-2.JPG"
+                      alt="Profile"
+                      className="w-9 h-9 rounded-full object-cover object-top flex-shrink-0 border border-[#0ea5e9]/30"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-bold text-white">Kholofelo Robyn</span>
+                        <span className="text-xs text-gray-500">{post.time}</span>
                       </div>
-                      <div className="h-2 w-full rounded bg-gray-400/25" />
-                      <div className="h-2 w-3/4 rounded bg-gray-400/20" />
+                      <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">
+                        {post.text}
+                      </p>
+                      <div className="flex items-center gap-3 mt-2">
+                        <span className="flex items-center gap-1 text-[10px] text-[#0ea5e9]/70">
+                          <svg viewBox="0 0 24 24" className="w-3 h-3" fill="currentColor">
+                            <path d="M14 9V5a3 3 0 00-6 0v1H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2v-5a2 2 0 00-2-2h-4zm-4-4a1 1 0 012 0v4H10V5z" />
+                          </svg>
+                          {post.likes}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ))}

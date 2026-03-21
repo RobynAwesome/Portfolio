@@ -29,7 +29,7 @@ export default function OpenSource() {
       {/* Gradient background transition */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b1426]/50 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 relative" ref={ref}>
+      <div className="max-w-5xl mx-auto px-12 sm:px-20 lg:px-36 relative" ref={ref}>
         {/* Open Source card — moox.io style large card */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}

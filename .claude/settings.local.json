@@ -43,7 +43,8 @@
       "Bash(powershell -Command \"Start-Sleep -Seconds 3\")",
       "Bash(npm ls:*)",
       "Bash(npx tsc:*)",
-      "Bash(npx -p typescript tsc --noEmit)"
+      "Bash(npx -p typescript tsc --noEmit)",
+      "Bash(ls C:/Users/rkhol/Portfolio/public/web-image-5s* C:/Users/rkhol/Portfolio/public/profile-banner*)"
     ]
   }
 }

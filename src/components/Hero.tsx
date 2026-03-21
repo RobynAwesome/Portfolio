@@ -22,69 +22,47 @@ interface SkillBadge {
 
 const skillBadges: SkillBadge[] = [
   {
-    label: "React",
-    sublabel: "Frontend Framework",
+    label: "Web Developer",
+    sublabel: "Professional",
     description:
       "Component-driven UIs with React 18+, hooks, state management, and Framer Motion animations. Used across all my projects.",
     repoUrl: "https://github.com/RobynAwesome/Bookit-5s-Arena",
     repoName: "Bookit-5s-Arena",
-    position: { top: "38%", right: "-12%" },
+    position: { top: "22%", left: "-18%" },
     delay: 0,
-    color: "#61dafb",
+    color: "#0ea5e9",
   },
   {
-    label: "Node.js",
-    sublabel: "Backend Runtime",
+    label: "MERN Stack",
+    sublabel: "Full-Stack",
     description:
       "Server-side JavaScript with Express.js, building RESTful APIs, authentication systems, and real-time features.",
     repoUrl: "https://github.com/RobynAwesome/5s-Arena-Blog",
     repoName: "5s-Arena-Blog",
-    position: { top: "32%", left: "-14%" },
+    position: { top: "8%", right: "-8%" },
     delay: 0.8,
-    color: "#68a063",
+    color: "#00e89d",
   },
   {
-    label: "MongoDB",
-    sublabel: "Database",
+    label: "React & Node.js",
+    sublabel: "Core Stack",
     description:
       "NoSQL database design, schema modeling with Mongoose, aggregation pipelines, and optimized queries for scalable apps.",
     repoUrl: "https://github.com/RobynAwesome/Bookit-5s-Arena",
     repoName: "Bookit-5s-Arena",
-    position: { top: "62%", left: "-10%" },
+    position: { top: "50%", right: "-14%" },
     delay: 1.6,
-    color: "#4db33d",
+    color: "#0ea5e9",
   },
   {
-    label: "JavaScript",
-    sublabel: "Core Language",
+    label: "MongoDB & APIs",
+    sublabel: "Backend",
     description:
       "Modern ES2024+, async/await patterns, clean architecture, DOM manipulation, and TypeScript for type safety.",
     repoUrl: "https://github.com/RobynAwesome/Portfolio",
     repoName: "Portfolio",
-    position: { top: "60%", right: "-8%" },
+    position: { top: "72%", left: "5%" },
     delay: 2.4,
-    color: "#f7df1e",
-  },
-  {
-    label: "TailwindCSS",
-    sublabel: "UI Framework",
-    description:
-      "Utility-first CSS framework for rapid, responsive, and beautiful UI development with custom design systems.",
-    repoUrl: "https://github.com/RobynAwesome/5s-Arena-Blog",
-    repoName: "5s-Arena-Blog",
-    position: { top: "50%", right: "-14%" },
-    delay: 3.2,
-    color: "#38bdf8",
-  },
-  {
-    label: "Express.js",
-    sublabel: "API Framework",
-    description:
-      "Building robust REST APIs with middleware, route handling, authentication, RBAC, and image upload pipelines.",
-    repoUrl: "https://github.com/RobynAwesome/Bookit-5s-Arena",
-    repoName: "Bookit-5s-Arena",
-    position: { top: "46%", left: "-16%" },
-    delay: 4,
     color: "#00e89d",
   },
 ];
@@ -96,68 +74,57 @@ function SkillBadgeComponent({ badge }: { badge: SkillBadge }) {
     <>
       <motion.button
         onClick={() => setExpanded(true)}
-        animate={{ y: [0, badge.delay % 2 === 0 ? -8 : 8, 0] }}
+        animate={{ y: [0, badge.delay % 2 === 0 ? -6 : 6, 0] }}
         transition={{
-          duration: 4 + badge.delay * 0.3,
+          duration: 5 + badge.delay * 0.3,
           repeat: Infinity,
           ease: "easeInOut",
           delay: badge.delay * 0.2,
         }}
-        className="absolute rounded-full px-6 py-3.5 cursor-pointer transition-all duration-300 z-10 group text-left"
+        className="absolute rounded-2xl px-7 py-4 cursor-pointer transition-all duration-300 z-10 group text-center min-w-[160px]"
         style={{
           ...badge.position,
-          background: `linear-gradient(135deg, rgba(15, 26, 48, 0.75) 0%, rgba(15, 26, 48, 0.55) 100%)`,
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          border: `2px solid ${badge.color}50`,
-          boxShadow: `0 0 20px ${badge.color}15, inset 0 1px 0 0 rgba(255,255,255,0.1), 0 8px 32px rgba(0,0,0,0.4)`,
+          background: `linear-gradient(135deg, rgba(10, 18, 36, 0.85) 0%, rgba(15, 26, 48, 0.75) 100%)`,
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          border: `2px solid ${badge.color}40`,
+          boxShadow: `0 0 25px ${badge.color}12, inset 0 1px 0 0 rgba(255,255,255,0.08), 0 10px 40px rgba(0,0,0,0.5)`,
         }}
         whileHover={{
-          scale: 1.12,
-          boxShadow: `0 0 30px ${badge.color}40, 0 0 60px ${badge.color}15, inset 0 1px 0 0 rgba(255,255,255,0.15), 0 12px 40px rgba(0,0,0,0.5)`,
+          scale: 1.08,
+          boxShadow: `0 0 35px ${badge.color}35, 0 0 70px ${badge.color}12, inset 0 1px 0 0 rgba(255,255,255,0.12), 0 14px 50px rgba(0,0,0,0.6)`,
         }}
-        whileTap={{ scale: 0.95 }}
+        whileTap={{ scale: 0.96 }}
       >
         {/* Outer glow border */}
         <div
-          className="absolute -inset-[2px] rounded-full pointer-events-none"
+          className="absolute -inset-[2px] rounded-2xl pointer-events-none"
           style={{
-            border: `2px solid ${badge.color}35`,
-            boxShadow: `0 0 15px ${badge.color}20`,
+            border: `2px solid ${badge.color}25`,
+            boxShadow: `0 0 20px ${badge.color}15`,
           }}
         />
         {/* Inner glass border */}
         <div
-          className="absolute inset-0 rounded-full pointer-events-none"
+          className="absolute inset-0 rounded-2xl pointer-events-none"
           style={{
-            border: `1px solid rgba(255,255,255,0.12)`,
+            border: `1px solid rgba(255,255,255,0.08)`,
           }}
         />
-        {/* Glossy shine gradient */}
-        <div className="absolute inset-x-0 top-0 h-1/2 rounded-t-full bg-gradient-to-b from-white/[0.12] to-transparent pointer-events-none" />
+        {/* Glossy shine */}
+        <div className="absolute inset-x-0 top-0 h-1/2 rounded-t-2xl bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none" />
 
+        {/* Small top label */}
+        <p className="text-[10px] text-gray-500 tracking-wide relative mb-0.5">
+          {badge.sublabel}
+        </p>
+        {/* Bold main title */}
         <p
-          className="text-sm font-bold relative tracking-wide"
+          className="text-base font-black relative tracking-wide leading-tight"
           style={{ color: badge.color }}
         >
           {badge.label}
         </p>
-        <p className="text-[11px] text-gray-400 group-hover:text-gray-300 transition-colors relative">
-          {badge.sublabel}
-        </p>
-
-        {/* Pulsing dot hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.7, 0] }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            delay: badge.delay * 0.5 + 2,
-          }}
-          className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full"
-          style={{ backgroundColor: badge.color }}
-        />
       </motion.button>
 
       {/* Expanded modal overlay */}
@@ -291,7 +258,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 w-full">
+      <div className="relative z-10 max-w-5xl mx-auto px-12 sm:px-20 lg:px-36 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side -- Text content */}
           <div className="max-w-xl">
@@ -376,7 +343,7 @@ export default function Hero() {
           >
             <div
               className="relative flex items-center justify-center"
-              style={{ width: "460px", height: "540px" }}
+              style={{ width: "560px", height: "660px" }}
             >
               {/* Concentric rounded circles behind the person (moox-style) */}
               <motion.div
@@ -384,45 +351,37 @@ export default function Hero() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2, delay: 0.5 }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                style={{ width: "420px", height: "420px" }}
+                style={{ width: "520px", height: "520px" }}
               >
                 {/* Outermost circle */}
                 <div
                   className="absolute inset-0 rounded-full"
                   style={{
-                    border: "1px solid rgba(0, 232, 157, 0.08)",
+                    border: "1.5px solid rgba(14, 165, 233, 0.15)",
                   }}
                 />
                 {/* Second circle */}
                 <div
                   className="absolute rounded-full"
                   style={{
-                    inset: "40px",
-                    border: "1px solid rgba(0, 232, 157, 0.12)",
+                    inset: "50px",
+                    border: "1.5px solid rgba(14, 165, 233, 0.20)",
                   }}
                 />
                 {/* Third circle */}
                 <div
                   className="absolute rounded-full"
                   style={{
-                    inset: "80px",
-                    border: "1px solid rgba(14, 165, 233, 0.10)",
-                  }}
-                />
-                {/* Fourth circle */}
-                <div
-                  className="absolute rounded-full"
-                  style={{
-                    inset: "120px",
-                    border: "1px solid rgba(14, 165, 233, 0.14)",
+                    inset: "100px",
+                    border: "1.5px solid rgba(0, 232, 157, 0.18)",
                   }}
                 />
                 {/* Innermost circle */}
                 <div
                   className="absolute rounded-full"
                   style={{
-                    inset: "160px",
-                    border: "1px solid rgba(0, 232, 157, 0.10)",
+                    inset: "150px",
+                    border: "1.5px solid rgba(0, 232, 157, 0.22)",
                   }}
                 />
               </motion.div>
@@ -456,7 +415,7 @@ export default function Hero() {
                 <TransparentImage
                   src="/profile.png"
                   alt="Kholofelo Robyn Rababalela"
-                  className="w-72 xl:w-80 object-contain drop-shadow-[0_0_40px_rgba(0,232,157,0.15)] hero-profile-img"
+                  className="w-[420px] xl:w-[480px] object-contain drop-shadow-[0_0_40px_rgba(0,232,157,0.15)] hero-profile-img"
                   threshold={190}
                 />
               </div>

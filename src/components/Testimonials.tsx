@@ -27,7 +27,7 @@ export default function Testimonials() {
       {/* Gradient transition */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#060d18] via-[#0b1426]/50 to-[#060d18]" />
 
-      <div className="relative max-w-7xl mx-auto px-6" ref={ref}>
+      <div className="relative max-w-5xl mx-auto px-12 sm:px-20 lg:px-36" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

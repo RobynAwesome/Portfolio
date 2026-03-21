@@ -14,7 +14,7 @@ export default function AISection() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#060d18] via-[#0b1426] to-[#060d18]" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#00e89d]/5 via-[#0ea5e9]/5 to-[#6366f1]/5" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-5xl mx-auto px-12 sm:px-20 lg:px-36">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* LEFT — Text */}
           <motion.div
