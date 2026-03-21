@@ -1,5 +1,5 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import {
   Download,
   MapPin,
@@ -10,7 +10,144 @@ import {
   Calendar,
   Briefcase,
   GraduationCap,
+  Terminal,
+  Sparkles,
+  Code2,
+  Rocket,
 } from "lucide-react";
+
+/* ───── Animated counter hook ───── */
+function useCounter(target: number, duration = 2000) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, target, duration]);
+
+  return { count, ref };
+}
+
+/* ───── Typing animation component ───── */
+function TypingCode() {
+  const lines = [
+    { text: "const dev = {", color: "#0ea5e9" },
+    { text: '  name: "Kholofelo",', color: "#00e89d" },
+    { text: '  stack: "MERN",', color: "#f7df1e" },
+    { text: '  passion: "Building apps",', color: "#a855f7" },
+    { text: "  available: true,", color: "#00e89d" },
+    { text: "};", color: "#0ea5e9" },
+  ];
+  const [visibleLines, setVisibleLines] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const timer = setInterval(() => {
+      setVisibleLines((v) => {
+        if (v >= lines.length) {
+          clearInterval(timer);
+          return v;
+        }
+        return v + 1;
+      });
+    }, 400);
+    return () => clearInterval(timer);
+  }, [inView, lines.length]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="rounded-2xl overflow-hidden"
+      style={{
+        background: "rgba(15, 23, 42, 0.7)",
+        border: "1px solid rgba(0, 232, 157, 0.2)",
+      }}
+    >
+      {/* Terminal header */}
+      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+        </div>
+        <span className="text-[10px] text-gray-500 ml-2 flex items-center gap-1">
+          <Terminal size={10} />
+          developer.js
+        </span>
+      </div>
+      {/* Code lines */}
+      <div className="p-4 font-mono text-sm space-y-1">
+        {lines.slice(0, visibleLines).map((line, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center gap-2"
+          >
+            <span className="text-gray-600 text-xs w-4 text-right">{i + 1}</span>
+            <span style={{ color: line.color }}>{line.text}</span>
+          </motion.div>
+        ))}
+        {visibleLines < lines.length && (
+          <motion.span
+            className="inline-block w-2 h-4 bg-[#00e89d] ml-6"
+            animate={{ opacity: [1, 0] }}
+            transition={{ duration: 0.5, repeat: Infinity }}
+          />
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ───── Floating particles component ───── */
+function FloatingParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {Array.from({ length: 20 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full"
+          style={{
+            background: i % 3 === 0 ? "#00e89d" : i % 3 === 1 ? "#0ea5e9" : "#a855f7",
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0, 0.6, 0],
+            scale: [0, 1.5, 0],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 4,
+            repeat: Infinity,
+            delay: Math.random() * 5,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 /* ───── Toolbox icons (real SVGs) ───── */
 const JSIcon = () => (
@@ -127,6 +264,7 @@ export default function ResumePage() {
           <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-[#00e89d]/5 blur-[120px]" />
           <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-[#0ea5e9]/5 blur-[120px]" />
         </div>
+        <FloatingParticles />
 
         <div className="relative max-w-5xl mx-auto px-12 sm:px-20 lg:px-36 py-16 sm:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -205,19 +343,61 @@ export default function ResumePage() {
               className="relative hidden lg:flex justify-center"
             >
               <div className="relative">
-                {/* Concentric circles */}
+                {/* Spinning concentric circles */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-[360px] h-[360px] rounded-full border border-[#0ea5e9]/15" />
+                  <motion.div
+                    className="w-[360px] h-[360px] rounded-full border-2 border-dashed border-[#0ea5e9]/20"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  />
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-[280px] h-[280px] rounded-full border border-[#0ea5e9]/20" />
+                  <motion.div
+                    className="w-[300px] h-[300px] rounded-full border border-[#00e89d]/15"
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                  />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div
+                    className="w-[340px] h-[340px] rounded-full"
+                    style={{
+                      background: "conic-gradient(from 0deg, transparent, rgba(0,232,157,0.15), transparent, rgba(14,165,233,0.15), transparent)",
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  />
                 </div>
 
-                {/* Photo */}
-                <img
-                  src="/web-image-2.JPG"
+                {/* Floating orbital dots */}
+                {[0, 1, 2, 3, 4, 5].map((i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-2.5 h-2.5 rounded-full"
+                    style={{
+                      background: i % 2 === 0 ? "#00e89d" : "#0ea5e9",
+                      top: `${50 + Math.sin((i * Math.PI) / 3) * 45}%`,
+                      left: `${50 + Math.cos((i * Math.PI) / 3) * 45}%`,
+                      boxShadow: `0 0 10px ${i % 2 === 0 ? "#00e89d" : "#0ea5e9"}`,
+                    }}
+                    animate={{
+                      opacity: [0.3, 1, 0.3],
+                      scale: [0.8, 1.4, 0.8],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: i * 0.5,
+                    }}
+                  />
+                ))}
+
+                {/* Photo with hover grayscale toggle */}
+                <motion.img
+                  src="/profile-banner-1.jpg"
                   alt="Kholofelo"
-                  className="w-64 h-64 rounded-full object-cover object-top relative z-10 border-4 border-[#0ea5e9]/20 grayscale"
+                  className="w-64 h-64 rounded-full object-cover object-top relative z-10 border-4 border-[#0ea5e9]/20 grayscale hover:grayscale-0 transition-all duration-700"
+                  whileHover={{ scale: 1.05 }}
                 />
 
                 {/* Floating badge — Web Developer */}
@@ -295,6 +475,46 @@ export default function ResumePage() {
           <h2 className="text-3xl sm:text-4xl font-black text-[#00e89d] mb-8">
             About Me
           </h2>
+
+          {/* Animated skill proficiency bars */}
+          <div className="mb-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              { name: "React / Next.js", level: 90, color: "#61dafb" },
+              { name: "Node.js / Express", level: 85, color: "#68a063" },
+              { name: "MongoDB", level: 80, color: "#00ed64" },
+              { name: "TypeScript", level: 75, color: "#3178c6" },
+              { name: "TailwindCSS", level: 92, color: "#38bdf8" },
+              { name: "JavaScript", level: 95, color: "#f7df1e" },
+            ].map((skill, i) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group"
+              >
+                <div className="flex justify-between mb-1.5">
+                  <span className="text-xs font-bold text-gray-300 group-hover:text-white transition-colors">{skill.name}</span>
+                  <span className="text-xs font-bold" style={{ color: skill.color }}>{skill.level}%</span>
+                </div>
+                <div className="h-2 rounded-full bg-[#0f1a30] overflow-hidden">
+                  <motion.div
+                    className="h-full rounded-full"
+                    style={{
+                      background: `linear-gradient(90deg, ${skill.color}80, ${skill.color})`,
+                      boxShadow: `0 0 12px ${skill.color}40`,
+                    }}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, delay: 0.3 + i * 0.1, ease: [0.23, 1, 0.32, 1] }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Bio text */}
             <div className="lg:col-span-1">
@@ -318,11 +538,19 @@ export default function ResumePage() {
                 Interests
               </h3>
               <div className="grid grid-cols-3 gap-4">
-                {interests.map((item) => (
-                  <div key={item.label} className="flex flex-col items-center gap-1.5">
+                {interests.map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.06, type: "spring", stiffness: 200 }}
+                    whileHover={{ scale: 1.3, rotate: [0, -10, 10, 0] }}
+                    className="flex flex-col items-center gap-1.5 cursor-pointer"
+                  >
                     <span className="text-2xl">{item.icon}</span>
                     <span className="text-[10px] text-gray-500">{item.label}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -333,11 +561,21 @@ export default function ResumePage() {
                 Toolbox
               </h3>
               <div className="grid grid-cols-3 gap-4">
-                {toolbox.map((tool) => (
-                  <div key={tool.label} className="flex flex-col items-center gap-1.5">
-                    {tool.icon}
-                    <span className="text-[10px] text-gray-500">{tool.label}</span>
-                  </div>
+                {toolbox.map((tool, i) => (
+                  <motion.div
+                    key={tool.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    whileHover={{ scale: 1.15, y: -5 }}
+                    className="flex flex-col items-center gap-1.5 cursor-pointer group"
+                  >
+                    <div className="group-hover:drop-shadow-[0_0_12px_rgba(0,232,157,0.5)] transition-all duration-300">
+                      {tool.icon}
+                    </div>
+                    <span className="text-[10px] text-gray-500 group-hover:text-[#00e89d] transition-colors">{tool.label}</span>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -345,8 +583,48 @@ export default function ResumePage() {
         </AnimatedSection>
       </section>
 
+      {/* ───── Interactive Code Terminal ───── */}
+      <section className="max-w-5xl mx-auto px-12 sm:px-20 lg:px-36 mt-16">
+        <AnimatedSection>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-black text-white mb-4 flex items-center gap-3">
+                <Code2 size={28} className="text-[#00e89d]" />
+                Who Am I?
+              </h2>
+              <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                A developer who turns ideas into reality. I write clean, maintainable code
+                and build full-stack applications that users love.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {["Problem Solver", "Team Player", "Fast Learner", "Detail-Oriented"].map((trait, i) => (
+                  <motion.span
+                    key={trait}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, type: "spring" }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className="px-4 py-2 rounded-full text-xs font-bold border cursor-default"
+                    style={{
+                      borderColor: i % 2 === 0 ? "rgba(0,232,157,0.3)" : "rgba(14,165,233,0.3)",
+                      color: i % 2 === 0 ? "#00e89d" : "#0ea5e9",
+                      background: i % 2 === 0 ? "rgba(0,232,157,0.08)" : "rgba(14,165,233,0.08)",
+                    }}
+                  >
+                    {trait}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+            <TypingCode />
+          </div>
+        </AnimatedSection>
+      </section>
+
       {/* ───── Stats section (moox style) ───── */}
       <section className="mt-20 py-20 relative overflow-hidden bg-gradient-to-br from-[#00e89d]/15 via-[#0ea5e9]/10 to-[#a855f7]/15">
+        <FloatingParticles />
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] rounded-full bg-[#00e89d]/8 blur-[100px]" />
           <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full bg-[#a855f7]/8 blur-[100px]" />
@@ -366,39 +644,67 @@ export default function ResumePage() {
               </div>
 
               {/* Stat: South African */}
-              <div className="text-center">
+              <motion.div
+                className="text-center"
+                whileHover={{ scale: 1.08 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <p className="text-gray-500 text-sm mb-1">South African</p>
-                <p className="text-5xl sm:text-6xl font-black text-white leading-none">
+                <motion.p
+                  className="text-5xl sm:text-6xl font-black text-white leading-none"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, type: "spring" }}
+                >
                   20
                   <span className="text-xl text-gray-500 ml-1">yo</span>
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
               {/* Stat: First website */}
-              <div
+              <motion.div
                 className="rounded-2xl p-6 text-center"
                 style={{
                   background: "rgba(15, 23, 42, 0.6)",
                   border: "2px solid rgba(0, 232, 157, 0.25)",
                   backdropFilter: "blur(20px)",
                 }}
+                whileHover={{ scale: 1.05, borderColor: "rgba(0, 232, 157, 0.5)" }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 <p className="text-xs text-gray-500 mb-1">First website</p>
-                <p className="text-4xl sm:text-5xl font-black text-white leading-none mb-1">
+                <motion.p
+                  className="text-4xl sm:text-5xl font-black text-white leading-none mb-1"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1, type: "spring" }}
+                >
                   2
-                </p>
+                </motion.p>
                 <p className="text-[#00e89d] text-sm font-semibold">years ago</p>
-              </div>
+              </motion.div>
 
               {/* Stat: Professional */}
-              <div className="text-center">
+              <motion.div
+                className="text-center"
+                whileHover={{ scale: 1.08 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <p className="text-gray-500 text-sm mb-1">Professional for</p>
-                <p className="text-5xl sm:text-6xl font-black text-white leading-none">
+                <motion.p
+                  className="text-5xl sm:text-6xl font-black text-white leading-none"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2, type: "spring" }}
+                >
                   1
                   <span className="text-2xl text-gray-500 ml-1">+</span>
-                </p>
+                </motion.p>
                 <p className="text-[#0ea5e9] text-lg font-semibold">year</p>
-              </div>
+              </motion.div>
             </div>
           </AnimatedSection>
         </div>
@@ -412,14 +718,23 @@ export default function ResumePage() {
           </h2>
 
           <div className="relative pl-8 border-l-2 border-[#0ea5e9]/20">
-            <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-[#00e89d] border-3 border-[#060d18]" />
+            <motion.div
+              className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-[#00e89d] border-3 border-[#060d18]"
+              animate={{ boxShadow: ["0 0 0px #00e89d", "0 0 15px #00e89d", "0 0 0px #00e89d"] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
 
-            <div
+            <motion.div
               className="rounded-2xl p-7 sm:p-8"
               style={{
                 background: "rgba(15, 23, 42, 0.4)",
                 border: "1px solid rgba(14, 165, 233, 0.15)",
               }}
+              whileHover={{
+                borderColor: "rgba(14, 165, 233, 0.4)",
+                boxShadow: "0 0 30px rgba(14,165,233,0.1), 0 20px 60px rgba(0,0,0,0.3)",
+              }}
+              transition={{ duration: 0.3 }}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
                 <div>
@@ -449,7 +764,7 @@ export default function ResumePage() {
                   Full MERN stack: React, Node.js, Express, MongoDB with TailwindCSS
                 </li>
               </ul>
-            </div>
+            </motion.div>
           </div>
         </AnimatedSection>
       </section>
@@ -683,7 +998,7 @@ export default function ResumePage() {
               >
                 <div className="relative h-64 sm:h-80 overflow-hidden">
                   <img
-                    src="/profile-banner.jpg"
+                    src="/profile-banner-1.jpg"
                     alt="Portfolio Website"
                     className="w-full h-full object-cover object-center"
                   />
