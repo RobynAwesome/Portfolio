@@ -6,6 +6,16 @@
 
 ---
 
+## 🛠️ Tech Stack
+
+![React](https://img.shields.io/badge/React-18.2-61DAFB?style=flat&logo=react&logoColor=white&labelColor=0b1426)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat&logo=typescript&logoColor=white&labelColor=0b1426)
+![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=flat&logo=vite&logoColor=white&labelColor=0b1426)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.2-06B6D4?style=flat&logo=tailwindcss&logoColor=white&labelColor=0b1426)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.38-EF008F?style=flat&logo=framer&logoColor=white&labelColor=0b1426)
+
+---
+
 ## 🚀 *I develop with:*
 
 + **JavaScript & TypeScript** — *for confidence, clarity, and dynamic logic.*
