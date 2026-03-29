@@ -66,6 +66,7 @@ const skills = [
       "I code in modern ES2024+ JavaScript across all environments. I now use TypeScript for type-safe, maintainable codebases — a requirement for production-grade applications.",
     techs: ["TypeScript", "Node.js", "HTML5", "CSS3"],
     bg: "linear-gradient(135deg, #0c1a35 0%, #0f2240 50%, #0a1628 100%)",
+    accent: "#f7df1e",
   },
   {
     icon: <ReactIcon />,
@@ -75,6 +76,7 @@ const skills = [
       "Building component-driven UIs with React 18+, hooks, and the broader ecosystem. From SPAs to SSR with Next.js and Vite for blazing-fast development.",
     techs: ["React", "Next.js", "Vite", "Redux", "Framer Motion"],
     bg: "linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0c1a35 100%)",
+    accent: "#61dafb",
   },
   {
     icon: <ServerIcon />,
@@ -84,12 +86,10 @@ const skills = [
       "As a Full-Stack Developer, I build robust server-side architectures. From RESTful APIs to database design with MongoDB, I handle the complete backend pipeline.",
     techs: ["Node.js", "Express", "MongoDB", "REST APIs", "Firebase"],
     bg: "linear-gradient(135deg, #0c1a35 0%, #0a1e30 50%, #0f2240 100%)",
+    accent: "#00e89d",
   },
 ];
 
-const additionalSkills = [
-  "TailwindCSS", "Git & GitHub", "Figma", "Docker", "Vercel", "Agile/Scrum",
-];
 
 const githubRepos = [
   {
@@ -140,30 +140,33 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        {/* Tab switcher */}
+        {/* Tab switcher — sliding pill */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="flex justify-center mb-10"
         >
-          <div className="inline-flex rounded-full border border-[#1a2744] bg-[#0b1426]/80 p-1">
+          <div className="relative inline-flex rounded-full border border-[#1a2744] bg-[#0b1426]/80 p-1">
+            {/* Sliding pill indicator */}
+            <motion.div
+              className="absolute top-1 bottom-1 rounded-full bg-gradient-to-r from-[#0ea5e9]/20 to-[#00e89d]/20 border border-[#0ea5e9]/30"
+              animate={{ x: activeTab === "skills" ? 0 : "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              style={{ width: "calc(50% - 2px)" }}
+            />
             <button
               onClick={() => setActiveTab("skills")}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-                activeTab === "skills"
-                  ? "bg-gradient-to-r from-[#0ea5e9]/20 to-[#00e89d]/20 text-white border border-[#0ea5e9]/30"
-                  : "text-gray-500 hover:text-gray-300"
+              className={`relative z-10 px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-300 ${
+                activeTab === "skills" ? "text-white" : "text-gray-500 hover:text-gray-300"
               }`}
             >
               Tech Stack
             </button>
             <button
               onClick={() => setActiveTab("github")}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
-                activeTab === "github"
-                  ? "bg-gradient-to-r from-[#0ea5e9]/20 to-[#00e89d]/20 text-white border border-[#0ea5e9]/30"
-                  : "text-gray-500 hover:text-gray-300"
+              className={`relative z-10 px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-300 flex items-center gap-2 ${
+                activeTab === "github" ? "text-white" : "text-gray-500 hover:text-gray-300"
               }`}
             >
               <Github size={14} />
@@ -182,23 +185,48 @@ export default function Skills() {
                   initial={{ opacity: 0, y: 40 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: i * 0.15 }}
-                  className="group relative rounded-2xl border border-[#1a2744] overflow-hidden card-hover"
+                  whileHover={{
+                    y: -8,
+                    boxShadow: "0 0 40px rgba(0,232,157,0.20), 0 0 80px rgba(14,165,233,0.08)",
+                    borderColor: "rgba(0,232,157,0.45)",
+                  }}
+                  className="group relative rounded-2xl border border-[#1a2744] overflow-hidden"
                   style={{ background: skill.bg }}
                 >
+                  {/* Radial glow reveal on hover */}
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at 50% 0%, ${skill.accent}10, transparent 70%)`,
+                    }}
+                  />
+
                   {/* Watermark icon */}
                   <div className="absolute -bottom-4 -right-4 text-white pointer-events-none">
                     {skill.watermark}
                   </div>
 
-                  {/* Top accent line */}
-                  <div className="h-[2px] w-full bg-gradient-to-r from-[#0ea5e9] via-[#00e89d] to-[#0ea5e9]" />
+                  {/* Animated top accent line */}
+                  <motion.div
+                    className="h-[2px] w-full origin-left"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${skill.accent}, transparent)`,
+                    }}
+                    initial={{ scaleX: 0.3, opacity: 0.4 }}
+                    whileHover={{ scaleX: 1, opacity: 1 }}
+                    transition={{ duration: 0.4 }}
+                  />
 
                   <div className="relative p-6 sm:p-8 min-h-[320px] flex flex-col">
                     {/* Icon + Title */}
                     <div className="flex items-center gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/5 border border-white/10">
+                      <motion.div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/5 border border-white/10"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         {skill.icon}
-                      </div>
+                      </motion.div>
                       <h3 className="text-lg font-bold text-white">{skill.category}</h3>
                     </div>
 
@@ -223,27 +251,6 @@ export default function Skills() {
               ))}
             </div>
 
-            {/* Additional skills row */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3"
-            >
-              {additionalSkills.map((name, i) => (
-                <motion.div
-                  key={name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.3, delay: 0.6 + i * 0.05 }}
-                  className="px-4 py-3 rounded-xl border border-[#1a2744] bg-[#0c1a35] text-center hover:border-[#00e89d]/40 hover:bg-[#0f2240] transition-all duration-300"
-                >
-                  <span className="text-xs font-medium text-[#0ea5e9]">
-                    {name}
-                  </span>
-                </motion.div>
-              ))}
-            </motion.div>
           </>
         )}
 
