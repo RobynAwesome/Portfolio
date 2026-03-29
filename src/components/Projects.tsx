@@ -82,7 +82,8 @@ export default function Projects() {
                 key={project.title}
                 initial={{ opacity: 0, y: 40 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
+                transition={{ duration: 0.6, delay: 0.1 + i * 0.15 }}
+                whileHover={{ y: -8, scale: 1.02 }}
                 className="group relative rounded-2xl border border-[#1a2744] overflow-hidden card-hover bg-[#0f1a30]/50"
               >
                 {/* Gradient top accent */}
@@ -188,7 +189,8 @@ export default function Projects() {
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
+              transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
+              whileHover={{ y: -5, scale: 1.03 }}
               className="group rounded-xl border border-[#1a2744] p-5 sm:p-6 bg-[#0f1a30]/30 card-hover mb-6"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -224,16 +226,18 @@ export default function Projects() {
           transition={{ delay: 0.7 }}
           className="text-center mt-8"
         >
-          <a
+          <motion.a
             href="https://github.com/RobynAwesome"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#1a2744] text-sm font-semibold text-white hover:border-[#00e89d]/40 hover:bg-[#00e89d]/5 transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Github size={16} />
             View all projects on GitHub
             <ArrowUpRight size={14} />
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>

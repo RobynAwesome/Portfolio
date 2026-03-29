@@ -19,7 +19,9 @@ export default function Navbar() {
   useEffect(() => {
     const root = document.documentElement;
     if (theme === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
       root.className = prefersDark ? "dark" : "light";
     } else {
       root.className = theme;
@@ -27,11 +29,19 @@ export default function Navbar() {
   }, [theme]);
 
   const cycleTheme = () => {
-    setTheme((t) => (t === "dark" ? "light" : t === "light" ? "system" : "dark"));
+    setTheme((t) =>
+      t === "dark" ? "light" : t === "light" ? "system" : "dark",
+    );
   };
 
   const themeIcon =
-    theme === "dark" ? <Moon size={18} /> : theme === "light" ? <Sun size={18} /> : <Monitor size={18} />;
+    theme === "dark" ? (
+      <Moon size={18} />
+    ) : theme === "light" ? (
+      <Sun size={18} />
+    ) : (
+      <Monitor size={18} />
+    );
 
   return (
     <motion.nav
@@ -41,13 +51,9 @@ export default function Navbar() {
       className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl"
     >
       {/* Outer LED border */}
-      <div
-        className="rounded-[28px] p-[1px] led-border-outer"
-      >
+      <div className="rounded-[28px] p-[1px] led-border-outer">
         {/* Inner LED border */}
-        <div
-          className="rounded-[26px] p-[1px] led-border-inner"
-        >
+        <div className="rounded-[26px] p-[1px] led-border-inner">
           {/* Main navbar pill */}
           <div
             className={`rounded-[24px] transition-all duration-500 ${
@@ -70,7 +76,10 @@ export default function Navbar() {
                 <span className="font-bold text-base text-white group-hover:text-[#00e89d] transition-colors">
                   Kholofelo
                 </span>
-                <span className="relative flex h-2.5 w-2.5" title="Available for work">
+                <span
+                  className="relative flex h-2.5 w-2.5"
+                  title="Available for work"
+                >
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00e89d] opacity-75" />
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00e89d]" />
                 </span>
@@ -95,42 +104,52 @@ export default function Navbar() {
 
               {/* Right side — social, theme, CTA */}
               <div className="hidden md:flex items-center gap-1">
-                <a
-                  href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
+                <motion.a
+                  href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 text-gray-400 hover:text-white transition-colors"
                   aria-label="LinkedIn"
+                  whileHover={{ y: -2 }}
                 >
                   <Linkedin size={18} />
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="https://github.com/RobynAwesome"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 text-gray-400 hover:text-white transition-colors"
                   aria-label="GitHub"
+                  whileHover={{ y: -2 }}
                 >
                   <Github size={18} />
-                </a>
-                <button
+                </motion.a>
+                <motion.button
                   onClick={cycleTheme}
                   className="p-2 text-gray-400 hover:text-white transition-colors"
                   aria-label="Toggle theme"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   {themeIcon}
-                </button>
-                <Link
-                  to="/contact"
-                  className="ml-3 px-8 py-3 rounded-full text-lg font-bold bg-[#00e89d] text-[#060d18] hover:bg-[#34ffb0] transition-all duration-300 hover:scale-105 shadow-lg shadow-[#00e89d]/40 hover:shadow-xl hover:shadow-[#00e89d]/50"
-                >
-                  Let's Talk
-                </Link>
+                </motion.button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link
+                    to="/contact"
+                    className="ml-3 rounded-full bg-[#00e89d] px-8 py-3 text-lg font-bold text-[#060d18] shadow-lg shadow-[#00e89d]/40 transition-all duration-300 hover:bg-[#34ffb0] hover:shadow-xl hover:shadow-[#00e89d]/50"
+                  >
+                    Let's Talk
+                  </Link>
+                </motion.div>
               </div>
 
               {/* Mobile controls */}
               <div className="md:hidden flex items-center gap-2">
-                <button onClick={cycleTheme} className="p-2 text-gray-400" aria-label="Toggle theme">
+                <button
+                  onClick={cycleTheme}
+                  className="p-2 text-gray-400"
+                  aria-label="Toggle theme"
+                >
                   {themeIcon}
                 </button>
                 <button
@@ -174,22 +193,24 @@ export default function Navbar() {
 
                     {/* Social links */}
                     <div className="flex items-center gap-3 px-4 pt-3 mt-2 border-t border-[#1a2744]">
-                      <a
-                        href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
+                      <motion.a
+                        href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 text-gray-400 hover:text-white transition-colors"
+                        whileHover={{ y: -2 }}
                       >
                         <Linkedin size={18} />
-                      </a>
-                      <a
+                      </motion.a>
+                      <motion.a
                         href="https://github.com/RobynAwesome"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 text-gray-400 hover:text-white transition-colors"
+                        whileHover={{ y: -2 }}
                       >
                         <Github size={18} />
-                      </a>
+                      </motion.a>
                     </div>
 
                     <Link

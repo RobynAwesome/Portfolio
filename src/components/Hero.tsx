@@ -311,28 +311,35 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
               className="flex flex-col sm:flex-row items-start gap-3"
             >
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm bg-[#00e89d] text-[#060d18] hover:bg-[#34d399] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#00e89d]/20"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#00e89d] px-6 py-3 text-sm font-semibold text-[#060d18] transition-all duration-300 hover:bg-[#34d399] hover:shadow-lg hover:shadow-[#00e89d]/20"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-                Hire Me
-              </Link>
-              <button
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                  Hire Me
+                </Link>
+              </motion.div>
+              <motion.button
                 onClick={copyEmail}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm border border-[#1a2744] text-gray-300 hover:border-[#00e89d]/40 hover:text-white transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {copied ? (
                   <Check size={16} className="text-[#00e89d]" />
@@ -340,7 +347,7 @@ export default function Hero() {
                   <Copy size={16} />
                 )}
                 {copied ? "Copied!" : "Copy Email"}
-              </button>
+              </motion.button>
             </motion.div>
           </div>
 
