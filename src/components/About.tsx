@@ -6,7 +6,6 @@ export default function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Heavy scroll-based parallax for the phone image
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -20,30 +19,45 @@ export default function About() {
   );
 
   return (
-    <section id="about" className="relative overflow-hidden py-16 sm:py-20">
-      {" "}
-      {/* Background tilted 15deg to stand out */}
+    <section id="about" className="py-16 sm:py-20 relative overflow-hidden">
       {/* Background tilted 15deg to stand out */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[#00e89d]/30 via-[#0ea5e9]/35 to-[#00e89d]/25"
+        className="absolute inset-0"
         style={{
-          clipPath: "polygon(0 4%, 100% 0, 100% 96%, 0 100%)",
+          transform: "skewY(-15deg)",
+          transformOrigin: "top left",
+          top: "-20%",
+          bottom: "-20%",
         }}
       />
-      {/* Decorative gradient blobs */}
-      <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-[#00e89d]/20 blur-3xl" />
-      <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-[#0ea5e9]/20 blur-3xl" />
+      {/* Forward shadow to pop off the page — x5 3D effect with colored shadows x2 intensity */}
       <div
-        className="relative z-10 mx-auto max-w-5xl px-12 sm:px-20 lg:px-36"
+        className="absolute inset-0"
+        style={{
+          transform: "skewY(-15deg)",
+          transformOrigin: "top left",
+          top: "-20%",
+          bottom: "-20%",
+          boxShadow:
+            "0 200px 500px rgba(0,232,157,0.35), 0 -100px 300px rgba(14,165,233,0.3), 0 100px 250px rgba(0,0,0,0.7), 0 -50px 150px rgba(0,0,0,0.5), 0 300px 600px rgba(0,232,157,0.2), 0 -200px 400px rgba(14,165,233,0.15)",
+        }}
+      />
+
+      {/* Decorative gradient blobs */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#00e89d]/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0ea5e9]/20 rounded-full blur-3xl" />
+
+      <div
+        className="max-w-5xl mx-auto px-12 sm:px-20 lg:px-36 relative z-10"
         ref={ref}
       >
-        <div className="grid grid-cols-1 items-stretch gap-12 overflow-hidden lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch overflow-hidden">
           {/* Left -- Phone image with HEAVY parallax */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-            className="relative flex items-center self-stretch overflow-hidden perspective-[1200px]"
+            className="relative self-stretch flex items-center perspective-[1200px] overflow-hidden"
           >
             <motion.div
               className="relative h-full w-full"
@@ -77,7 +91,7 @@ export default function About() {
               I craft it.
             </h2>
 
-            <p className="mb-6 text-base leading-relaxed text-white sm:text-lg">
+            <p className="text-white text-base sm:text-lg leading-relaxed mb-6">
               I am a Computer Engineering student at Cape Peninsula University
               of Technology and a Freelance Web Developer specializing in the
               MERN stack. Working primarily with Node.js, MongoDB, JavaScript,
@@ -91,7 +105,7 @@ export default function About() {
 
             <Link
               to="/resume"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-[#060d18]/60 px-8 py-4 text-base font-bold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-[#00e89d]/60 hover:bg-[#060d18]/80"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold bg-[#060d18]/60 border-2 border-white/20 text-white hover:border-[#00e89d]/60 hover:bg-[#060d18]/80 backdrop-blur-sm transition-all duration-300 hover:scale-105"
             >
               More about me
             </Link>
