@@ -7,7 +7,7 @@ const projects = [
     title: "Bookit — 5's Arena",
     subtitle: "Full-Stack Booking Platform",
     description:
-      "Full-stack management and booking system for a 5-a-side football venue. Features real-time booking, team management, payment integration, and admin dashboard.",
+      "Hellenic FC needed a way to digitize their 5-a-side booking flow. I built a full-stack MERN platform with real-time booking, team management, payment integration, and an admin dashboard — replacing their manual spreadsheet system.",
     techs: ["React", "Node.js", "Express", "MongoDB", "CSS", "JavaScript"],
     github: "https://github.com/RobynAwesome/Bookit-5s-Arena",
     image: "/web-image-5s.png",
@@ -18,7 +18,7 @@ const projects = [
     title: "5's Arena Blog",
     subtitle: "Community Blog Platform",
     description:
-      "MERN stack community blog platform with full authentication, role-based access control (RBAC), image uploads, rich text editing, and responsive design.",
+      "5's Arena needed a community hub to drive engagement beyond the pitch. I built a MERN blog platform with full authentication, role-based access control, image uploads, and rich text editing — giving players a voice and building community.",
     techs: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],
     github: "https://github.com/RobynAwesome/5s-Arena-Blog",
     image: "/web-image-5s.png",
@@ -29,7 +29,7 @@ const projects = [
     title: "Portfolio Website",
     subtitle: "Personal Brand & Showcase",
     description:
-      "This portfolio website — a modern, animated, multi-page React application showcasing skills, projects, and experience with smooth Framer Motion transitions.",
+      "I needed a portfolio that matches the quality of the apps I build. This site is a multi-page React + TypeScript app with Framer Motion animations, dark/light mode, and a techy design — built to impress recruiters and clients alike.",
     techs: ["React", "TypeScript", "TailwindCSS", "Vite", "Framer Motion"],
     github: "https://github.com/RobynAwesome/Portfolio",
     image: "/profile-banner-1.jpg",

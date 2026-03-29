@@ -62,6 +62,8 @@ body {
 html.dark body {
   background-color: #060d18;
   color: #e2e8f0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* Light mode */
@@ -236,17 +238,7 @@ html.light ::-webkit-scrollbar-thumb {
   animation: shimmer 3s infinite;
 }
 
-/* LED border animation */
-@keyframes led-border-pulse {
-  0%, 100% {
-    box-shadow: 0 0 6px rgba(0,232,157,0.6), 0 0 12px rgba(0,232,157,0.2);
-    border-color: rgba(0,232,157,0.5);
-  }
-  50% {
-    box-shadow: 0 0 6px rgba(14,165,233,0.6), 0 0 12px rgba(14,165,233,0.2);
-    border-color: rgba(14,165,233,0.5);
-  }
-}
+/* (duplicate led-border-pulse removed — defined above) */
 
 @keyframes led-border-pulse-reverse {
   0%, 100% {
@@ -284,4 +276,17 @@ html.light ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.05) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+/* Dot grid utility (for section overlays) */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Focus visible ring for accessibility */
+*:focus-visible {
+  outline: 2px solid #00e89d;
+  outline-offset: 2px;
+  border-radius: 4px;
 }

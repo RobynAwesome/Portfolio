@@ -99,6 +99,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="p-1.5 rounded-md text-gray-600 hover:text-[#00e89d] transition-colors"
+              aria-label="GitHub"
             >
               <Github size={14} />
             </a>
@@ -107,12 +108,14 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="p-1.5 rounded-md text-gray-600 hover:text-[#00e89d] transition-colors"
+              aria-label="LinkedIn"
             >
               <Linkedin size={14} />
             </a>
             <a
               href="mailto:rkholofelo@gmail.com"
               className="p-1.5 rounded-md text-gray-600 hover:text-[#00e89d] transition-colors"
+              aria-label="Email"
             >
               <Mail size={14} />
             </a>

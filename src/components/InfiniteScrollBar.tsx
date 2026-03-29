@@ -27,6 +27,8 @@ export default function InfiniteScrollBar() {
 
   return (
     <section className="relative py-10 overflow-hidden border-y border-[#1a2744]">
+      {/* Dot grid overlay */}
+      <div className="absolute inset-0 dot-grid pointer-events-none" />
       {/* Gradient fade edges */}
       <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-[#060d18] to-transparent" />
       <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-[#060d18] to-transparent" />

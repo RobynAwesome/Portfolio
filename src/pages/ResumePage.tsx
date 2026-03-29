@@ -635,7 +635,7 @@ export default function ResumePage() {
               </motion.h1>
 
               <p className="mb-6 text-sm text-gray-500">
-                Freelance <span className="text-[#00e89d]">since 2026</span>
+                Freelance <span className="text-[#00e89d]">since 2024</span>
               </p>
 
               <h2 className="mb-1 text-4xl font-black text-[#00e89d] sm:text-5xl">
@@ -806,7 +806,7 @@ export default function ResumePage() {
                   <p className="text-xs font-bold text-[#00e89d]">
                     First Website
                   </p>
-                  <p className="text-[10px] text-gray-500">2024</p>
+                  <p className="text-[10px] text-gray-500">2022</p>
                 </motion.div>
 
                 {/* Floating badge — MERN Stack */}
