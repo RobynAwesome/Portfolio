@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, amount: 0.1 });
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [2500, -2500]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [25, -25]);
   const imageOpacity = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
@@ -20,7 +20,6 @@ export default function About() {
 
   return (
     <section id="about" className="py-16 sm:py-20 relative overflow-hidden">
-      {/* Background tilted 15deg to stand out */}
       <div
         className="absolute inset-0"
         style={{
@@ -30,7 +29,6 @@ export default function About() {
           bottom: "-20%",
         }}
       />
-      {/* Forward shadow to pop off the page — x5 3D effect with colored shadows x2 intensity */}
       <div
         className="absolute inset-0"
         style={{
@@ -43,7 +41,6 @@ export default function About() {
         }}
       />
 
-      {/* Decorative gradient blobs */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-[#00e89d]/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0ea5e9]/20 rounded-full blur-3xl" />
 
@@ -52,7 +49,7 @@ export default function About() {
         ref={ref}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch overflow-hidden">
-          {/* Left -- Phone image with HEAVY parallax */}
+          {/* Left — image with parallax */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -68,16 +65,14 @@ export default function About() {
                 alt="Web development project showcase"
                 className="h-full w-full rounded-3xl object-cover object-top shadow-2xl shadow-black/40"
                 style={{
-                  maskImage:
-                    "linear-gradient(to bottom, black 80%, transparent 100%)",
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, black 80%, transparent 100%)",
+                  maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+                  WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
                 }}
               />
             </motion.div>
           </motion.div>
 
-          {/* Right -- Text content */}
+          {/* Right — text */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}

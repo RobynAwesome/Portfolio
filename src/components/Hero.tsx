@@ -1,5 +1,5 @@
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Copy, Check, ArrowRight } from "lucide-react";
 
@@ -9,8 +9,6 @@ const fadeUp = {
 };
 
 export default function Hero() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
   const [copied, setCopied] = useState(false);
   const [imgError, setImgError] = useState(false);
 
@@ -38,26 +36,19 @@ export default function Hero() {
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-[#0b1a36] to-[#060d18]" />
         )}
-
-        {/* Right-edge blend into dark bg */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#060d18]" />
-        {/* Bottom blend (mobile) */}
         <div className="absolute inset-0 lg:hidden bg-gradient-to-b from-transparent via-transparent to-[#060d18]" />
-        {/* Subtle top darkening so navbar reads */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#060d18]/60 to-transparent" />
       </div>
 
       {/* ── TEXT — Right panel ── */}
       <div className="relative z-10 flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-14 xl:px-20 2xl:px-28 pt-8 pb-20 lg:pt-28 lg:pb-16 bg-[#060d18]">
-
-        {/* Ambient glow behind text */}
         <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full opacity-20 blur-[100px] pointer-events-none"
           style={{ background: "radial-gradient(circle, #0ea5e9, transparent)" }} />
         <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full opacity-15 blur-[80px] pointer-events-none"
           style={{ background: "radial-gradient(circle, #00e89d, transparent)" }} />
 
         <div className="relative max-w-xl xl:max-w-2xl">
-          {/* Eyebrow */}
           <motion.p
             {...fadeUp}
             transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
@@ -67,7 +58,6 @@ export default function Hero() {
             Full-Stack MERN Developer
           </motion.p>
 
-          {/* Name */}
           <motion.h1
             {...fadeUp}
             transition={{ duration: 0.85, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
@@ -99,7 +89,6 @@ export default function Hero() {
             Rababalela<span className="text-[#00e89d]">.</span>
           </motion.h1>
 
-          {/* Divider */}
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
@@ -108,7 +97,6 @@ export default function Hero() {
             style={{ background: "linear-gradient(90deg, #00e89d, #0ea5e9)" }}
           />
 
-          {/* Description */}
           <motion.p
             {...fadeUp}
             transition={{ duration: 0.8, delay: 0.28, ease: [0.23, 1, 0.32, 1] }}
@@ -119,7 +107,6 @@ export default function Hero() {
             from RESTful APIs to polished, animated frontends.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.8, delay: 0.36, ease: [0.23, 1, 0.32, 1] }}
@@ -158,7 +145,6 @@ export default function Hero() {
             </button>
           </motion.div>
 
-          {/* Stats row */}
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.8, delay: 0.44, ease: [0.23, 1, 0.32, 1] }}
@@ -182,7 +168,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 right-10 hidden lg:flex flex-col items-center gap-2"
         animate={{ opacity: [0.3, 0.7, 0.3] }}

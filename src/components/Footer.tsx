@@ -26,13 +26,10 @@ const profileLinks = [
 export default function Footer() {
   return (
     <footer className="relative border-t border-[#1a2744]/50 pt-16 pb-28">
-      {/* Top glow */}
       <div className="absolute top-0 left-1/2 h-px w-64 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#0ea5e9]/30 to-transparent" />
 
       <div className="mx-auto max-w-6xl px-12 sm:px-20 lg:px-36">
-        {/* Top section — brand + nav */}
         <div className="mb-12 flex flex-col justify-between gap-10 md:flex-row">
-          {/* Brand */}
           <div className="max-w-xs">
             <div className="mb-3 flex items-center gap-2.5">
               <img
@@ -48,9 +45,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links columns */}
           <div className="flex gap-16">
-            {/* Navigation */}
             <div>
               <h4 className="mb-3 text-[10px] font-semibold tracking-[0.2em] text-gray-500 uppercase">
                 Navigate
@@ -69,14 +64,13 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Profiles */}
             <div>
               <h4 className="mb-3 text-[10px] font-semibold tracking-[0.2em] text-gray-500 uppercase">
                 Profiles
               </h4>
               <div className="flex flex-col gap-2">
                 {profileLinks.map((link) => (
-                  <a
+                  
                     key={link.label}
                     href={link.href}
                     target="_blank"
@@ -92,10 +86,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
         <div className="mb-6 h-px w-full bg-[#1a2744]/40" />
 
-        {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
           <p className="text-[10px] text-gray-600">
             &copy; 2026 Kholofelo Robyn Rababalela
