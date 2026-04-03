@@ -1,14 +1,14 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import FooterNav from "./components/FooterNav";
 import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import ResumePage from "./pages/ResumePage";
-import ProjectsPage from "./pages/ProjectsPage";
-import OpenSourcePage from "./pages/OpenSourcePage";
-import ContactPage from "./pages/ContactPage";
-import ScrollToTop from "./components/ScrollToTop";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const ResumePage = lazy(() => import("./pages/ResumePage"));
+const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
+const OpenSourcePage = lazy(() => import("./pages/OpenSourcePage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -23,13 +23,15 @@ export default function App() {
     <>
       <ScrollToTop />
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/resume" element={<ResumePage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/open-source" element={<OpenSourcePage />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/open-source" element={<OpenSourcePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </Suspense>
       <Footer />
       <FooterNav />
     </>
