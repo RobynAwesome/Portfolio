@@ -1,48 +1,27 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React core — changes rarely, long-lived cache
+          "vendor-react": ["react", "react-dom"],
+
+          // Router — separate from react core
+          "vendor-router": ["react-router-dom"],
+
+          // Framer Motion — largest dep, isolate so it caches independently
+          "vendor-motion": ["framer-motion"],
+
+          // Icons — lucide ships individual files, still worth isolating
+          "vendor-icons": ["lucide-react"],
+        },
+      },
     },
-    {
-      "source": "/favicon.ico",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
-        }
-      ]
-    }
-  ]
-}
+    // Warn when any chunk exceeds 200kb (down from Vite's 500kb default)
+    chunkSizeWarningLimit: 200,
+  },
+});
