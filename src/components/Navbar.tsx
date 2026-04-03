@@ -63,10 +63,8 @@ export default function Navbar() {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 50);
-      // Only hide on homepage
       if (isHomepage) setHidden(y < 80);
     };
-    // init state
     setScrolled(window.scrollY > 50);
     setHidden(isHomepage && window.scrollY < 80);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -80,35 +78,12 @@ export default function Navbar() {
   useEffect(() => {
     const root = document.documentElement;
     if (theme === "system") {
-<<<<<<< HEAD
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      root.className = prefersDark ? "dark" : "light";
-=======
       root.className = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
     } else {
       root.className = theme;
     }
   }, [theme]);
 
-<<<<<<< HEAD
-  const cycleTheme = () => {
-    setTheme((t) =>
-      t === "dark" ? "light" : t === "light" ? "system" : "dark",
-    );
-  };
-
-  const themeIcon =
-    theme === "dark" ? (
-      <Moon size={18} />
-    ) : theme === "light" ? (
-      <Sun size={18} />
-    ) : (
-      <Monitor size={18} />
-    );
-=======
   const cycleTheme = () =>
     setTheme((t) => (t === "dark" ? "light" : t === "light" ? "system" : "dark"));
 
@@ -116,7 +91,6 @@ export default function Navbar() {
     theme === "dark" ? <Moon size={16} /> :
     theme === "light" ? <Sun size={16} /> :
     <Monitor size={16} />;
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
 
   return (
     <motion.nav
@@ -125,13 +99,6 @@ export default function Navbar() {
       transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
       className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl xl:max-w-7xl"
     >
-<<<<<<< HEAD
-      {/* Outer LED border */}
-      <div className="rounded-[28px] p-[1px] led-border-outer">
-        {/* Inner LED border */}
-        <div className="rounded-[26px] p-[1px] led-border-inner">
-          {/* Main navbar pill */}
-=======
       <div
         className={`rounded-[28px] p-[1px] transition-all duration-500 ${
           scrolled ? "led-border-outer" : ""
@@ -142,7 +109,6 @@ export default function Navbar() {
             scrolled ? "led-border-inner" : ""
           }`}
         >
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
           <div
             className="rounded-[24px] transition-all duration-500"
             style={{
@@ -173,39 +139,6 @@ export default function Navbar() {
                 <span className="font-bold text-sm xl:text-base text-white group-hover:text-[#00e89d] transition-colors hidden sm:block">
                   Kholofelo
                 </span>
-<<<<<<< HEAD
-                <span
-                  className="relative flex h-2.5 w-2.5"
-                  title="Available for work"
-                >
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00e89d] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00e89d]" />
-                </span>
-              </Link>
-
-              {/* Center — Nav links */}
-              <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
-                {[
-                  { to: "/", label: "Home" },
-                  { to: "/resume", label: "Resume" },
-                  { to: "/contact", label: "Contact" },
-                ].map((link) => (
-                  <Link
-                    key={link.to}
-                    onClick={() => window.scrollTo(0, 0)}
-                    to={link.to}
-                    className="px-4 py-2 text-sm font-semibold text-gray-400 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-
-              {/* Right side — social, theme, CTA */}
-              <div className="hidden md:flex items-center gap-1">
-                <motion.a
-                  href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
-=======
               </Link>
 
               {/* Center nav — desktop */}
@@ -219,7 +152,7 @@ export default function Navbar() {
                       to={link.to}
                       className="group relative flex items-center gap-2 px-3 xl:px-4 py-2 rounded-xl transition-all duration-200"
                     >
-                      {/* Hover / active pill background */}
+                      {/* Active pill background */}
                       {active && (
                         <motion.div
                           layoutId="nav-active-pill"
@@ -231,7 +164,6 @@ export default function Navbar() {
                       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                         style={{ background: "rgba(255,255,255,0.04)" }} />
 
-                      {/* Icon with roll on click */}
                       <NavIcon icon={Icon} active={active} />
 
                       <span className={`relative text-xs xl:text-sm font-semibold transition-colors duration-200 ${
@@ -247,79 +179,41 @@ export default function Navbar() {
               {/* Right controls */}
               <div className="hidden md:flex items-center gap-1 flex-shrink-0">
                 <a
-                  href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
+                  href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all"
                   aria-label="LinkedIn"
-                  whileHover={{ y: -2 }}
                 >
-<<<<<<< HEAD
-                  <Linkedin size={18} />
-                </motion.a>
-                <motion.a
-=======
                   <Linkedin size={16} />
                 </a>
                 <a
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
                   href="https://github.com/RobynAwesome"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all"
                   aria-label="GitHub"
-                  whileHover={{ y: -2 }}
                 >
-<<<<<<< HEAD
-                  <Github size={18} />
-                </motion.a>
-                <motion.button
-=======
                   <Github size={16} />
                 </a>
                 <button
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
                   onClick={cycleTheme}
                   className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all"
                   aria-label="Toggle theme"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.9 }}
                 >
                   {themeIcon}
-<<<<<<< HEAD
-                </motion.button>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-=======
                 </button>
                 <Link
                   to="/contact"
                   className="ml-2 px-5 xl:px-6 py-2 rounded-full text-xs xl:text-sm font-bold bg-[#00e89d] text-[#060d18] hover:bg-[#34ffb0] transition-all duration-300 hover:scale-105 shadow-lg shadow-[#00e89d]/25 hover:shadow-xl hover:shadow-[#00e89d]/35"
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
                 >
-                  <Link
-                    to="/contact"
-                    className="ml-3 rounded-full bg-[#00e89d] px-8 py-3 text-lg font-bold text-[#060d18] shadow-lg shadow-[#00e89d]/40 transition-all duration-300 hover:bg-[#34ffb0] hover:shadow-xl hover:shadow-[#00e89d]/50"
-                  >
-                    Let's Talk
-                  </Link>
-                </motion.div>
+                  Hire Me
+                </Link>
               </div>
 
               {/* Mobile controls */}
-<<<<<<< HEAD
-              <div className="md:hidden flex items-center gap-2">
-                <button
-                  onClick={cycleTheme}
-                  className="p-2 text-gray-400"
-                  aria-label="Toggle theme"
-                >
-=======
               <div className="md:hidden flex items-center gap-1">
                 <button onClick={cycleTheme} className="p-2 text-gray-400 hover:text-white" aria-label="Toggle theme">
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
                   {themeIcon}
                 </button>
                 <button
@@ -352,48 +246,6 @@ export default function Navbar() {
                   transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
                   className="overflow-hidden border-t border-white/5"
                 >
-<<<<<<< HEAD
-                  <div className="px-5 py-5 flex flex-col gap-1">
-                    {/* Page navigation links */}
-                    {[
-                      { to: "/", label: "Home" },
-                      { to: "/resume", label: "Resume" },
-                      { to: "/projects", label: "Projects" },
-                      { to: "/open-source", label: "Open Source" },
-                      { to: "/contact", label: "Contact" },
-                    ].map((link) => (
-                      <Link
-                        key={link.to}
-                        onClick={() => window.scrollTo(0, 0)}
-                        to={link.to}
-                        onClick={() => setMenuOpen(false)}
-                        className="px-4 py-3 text-base font-semibold text-gray-300 hover:text-[#00e89d] hover:bg-white/5 rounded-xl transition-all duration-200"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-
-                    {/* Social links */}
-                    <div className="flex items-center gap-3 px-4 pt-3 mt-2 border-t border-[#1a2744]">
-                      <motion.a
-                        href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 text-gray-400 hover:text-white transition-colors"
-                        whileHover={{ y: -2 }}
-                      >
-                        <Linkedin size={18} />
-                      </motion.a>
-                      <motion.a
-                        href="https://github.com/RobynAwesome"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 text-gray-400 hover:text-white transition-colors"
-                        whileHover={{ y: -2 }}
-                      >
-                        <Github size={18} />
-                      </motion.a>
-=======
                   <div className="px-4 py-4 flex flex-col gap-1">
                     {navLinks.map((link) => {
                       const active = isActive(link.to);
@@ -416,7 +268,7 @@ export default function Navbar() {
                     })}
 
                     <div className="flex items-center gap-2 px-4 pt-3 mt-1 border-t border-white/5">
-                      <a href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/" target="_blank" rel="noopener noreferrer"
+                      <a href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/" target="_blank" rel="noopener noreferrer"
                         className="p-2 text-gray-400 hover:text-white transition-colors">
                         <Linkedin size={16} />
                       </a>
@@ -424,7 +276,6 @@ export default function Navbar() {
                         className="p-2 text-gray-400 hover:text-white transition-colors">
                         <Github size={16} />
                       </a>
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
                     </div>
 
                     <Link
@@ -432,7 +283,7 @@ export default function Navbar() {
                       onClick={() => setMenuOpen(false)}
                       className="mx-2 mt-2 py-3 rounded-full text-sm font-bold bg-[#00e89d] text-[#060d18] text-center transition-all duration-300 shadow-lg shadow-[#00e89d]/25"
                     >
-                      Let's Talk
+                      Hire Me
                     </Link>
                   </div>
                 </motion.div>

@@ -64,16 +64,8 @@ const skills = [
     description:
       "I code in modern ES2024+ JavaScript across all environments. I now use TypeScript for type-safe, maintainable codebases — a requirement for production-grade applications.",
     techs: ["TypeScript", "Node.js", "HTML5", "CSS3"],
-<<<<<<< HEAD
-    bg: "linear-gradient(135deg, #0c1a35 0%, #0f2240 50%, #0a1628 100%)", // Dark blue gradient
-    accentColor: "#f7df1e", // JS/TS yellow
-    shadowColor1: "rgba(247, 223, 30, 0.20)",
-    shadowColor2: "rgba(14, 165, 233, 0.08)",
-    borderColor: "rgba(247, 223, 30, 0.45)",
-=======
     bg: "linear-gradient(135deg, #0c1a35 0%, #0f2240 50%, #0a1628 100%)",
     accent: "#f7df1e",
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
   },
   {
     icon: <ReactIcon />,
@@ -82,16 +74,8 @@ const skills = [
     description:
       "Building component-driven UIs with React 18+, hooks, and the broader ecosystem. From SPAs to SSR with Next.js and Vite for blazing-fast development.",
     techs: ["React", "Next.js", "Vite", "Redux", "Framer Motion"],
-<<<<<<< HEAD
-    bg: "linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0c1a35 100%)", // Dark blue gradient
-    accentColor: "#61dafb", // React blue
-    shadowColor1: "rgba(97, 218, 251, 0.20)",
-    shadowColor2: "rgba(0, 232, 157, 0.08)",
-    borderColor: "rgba(97, 218, 251, 0.45)",
-=======
     bg: "linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0c1a35 100%)",
     accent: "#61dafb",
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
   },
   {
     icon: <ServerIcon />,
@@ -100,23 +84,11 @@ const skills = [
     description:
       "As a Full-Stack Developer, I build robust server-side architectures. From RESTful APIs to database design with MongoDB, I handle the complete backend pipeline.",
     techs: ["Node.js", "Express", "MongoDB", "REST APIs", "Firebase"],
-<<<<<<< HEAD
-    bg: "linear-gradient(135deg, #0c1a35 0%, #0a1e30 50%, #0f2240 100%)", // Dark blue gradient
-    accentColor: "#00e89d", // Backend green
-    shadowColor1: "rgba(0, 232, 157, 0.20)",
-    shadowColor2: "rgba(14, 165, 233, 0.08)",
-    borderColor: "rgba(0, 232, 157, 0.45)",
-  },
-];
-
-=======
     bg: "linear-gradient(135deg, #0c1a35 0%, #0a1e30 50%, #0f2240 100%)",
     accent: "#00e89d",
   },
 ];
 
-
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
 const githubRepos = [
   {
     name: "Bookit-5s-Arena",
@@ -210,24 +182,14 @@ export default function Skills() {
                   key={skill.category}
                   initial={{ opacity: 0, y: 40 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-<<<<<<< HEAD
-                  transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
-                  className="group card-hover relative overflow-hidden rounded-2xl border border-[#1a2744]" // Added 'group' class
-=======
                   transition={{ duration: 0.6, delay: i * 0.15 }}
                   whileHover={{
                     y: -8,
-                    boxShadow: "0 0 40px rgba(0,232,157,0.20), 0 0 80px rgba(14,165,233,0.08)",
-                    borderColor: "rgba(0,232,157,0.45)",
+                    boxShadow: `0 0 40px ${skill.accent}33, 0 0 80px ${skill.accent}14`,
+                    borderColor: `${skill.accent}72`,
                   }}
                   className="group relative rounded-2xl border border-[#1a2744] overflow-hidden"
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
                   style={{ background: skill.bg }}
-                  whileHover={{
-                    y: -8,
-                    boxShadow: `0 0 40px ${skill.shadowColor1}, 0 0 80px ${skill.shadowColor2}`,
-                    borderColor: skill.borderColor,
-                  }}
                 >
                   {/* Radial glow reveal on hover */}
                   <div
@@ -242,55 +204,29 @@ export default function Skills() {
                     {skill.watermark}
                   </div>
 
-<<<<<<< HEAD
-                  {/* Animated Top accent line */}
-                  <motion.div
-                    className="absolute top-0 right-0 left-0 h-[2px] origin-left"
-                    style={{ background: `linear-gradient(90deg, transparent, ${skill.accentColor}, transparent)` }}
-=======
                   {/* Animated top accent line */}
                   <motion.div
                     className="h-[2px] w-full origin-left"
                     style={{
                       background: `linear-gradient(90deg, transparent, ${skill.accent}, transparent)`,
                     }}
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
                     initial={{ scaleX: 0.3, opacity: 0.4 }}
                     whileHover={{ scaleX: 1, opacity: 1 }}
                     transition={{ duration: 0.4 }}
                   />
 
-                  {/* Radial glow reveal on hover */}
-                  <div
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                    style={{ background: `radial-gradient(circle at 50% 0%, ${skill.accentColor}10, transparent 70%)` }}
-                  />
                   <div className="relative flex min-h-[320px] flex-col p-6 sm:p-8">
                     {/* Icon + Title */}
-<<<<<<< HEAD
-                    <div className="mb-5 flex items-center gap-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-=======
                     <div className="flex items-center gap-3 mb-5">
                       <motion.div
                         className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/5 border border-white/10"
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.6 }}
                       >
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
                         {skill.icon}
                       </motion.div>
                       <h3 className="text-lg font-bold text-white">{skill.category}</h3>
-                    </motion.div>
-
-                    {/* Icon rotation on hover */}
-                    <motion.div
-                      className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      {skill.icon}
-                    </motion.div>
+                    </div>
 
                     {/* Description */}
                     <p className="mb-6 flex-1 text-sm leading-relaxed text-gray-400">
@@ -312,10 +248,6 @@ export default function Skills() {
                 </motion.div>
               ))}
             </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
           </>
         )}
 

@@ -106,13 +106,9 @@ export default function Footer() {
               href="https://github.com/RobynAwesome"
               target="_blank"
               rel="noopener noreferrer"
-<<<<<<< HEAD
-              className="rounded-md p-1.5 text-gray-600 transition-colors hover:text-[#00e89d]"
-              whileHover={{ scale: 1.2, y: -2 }}
-=======
               className="p-1.5 rounded-md text-gray-600 hover:text-[#00e89d] transition-colors"
               aria-label="GitHub"
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
+              whileHover={{ scale: 1.2, y: -2 }}
             >
               <Github size={14} />
             </motion.a>
@@ -120,25 +116,17 @@ export default function Footer() {
               href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
               target="_blank"
               rel="noopener noreferrer"
-<<<<<<< HEAD
-              className="rounded-md p-1.5 text-gray-600 transition-colors hover:text-[#00e89d]"
-              whileHover={{ scale: 1.2, y: -2 }}
-=======
               className="p-1.5 rounded-md text-gray-600 hover:text-[#00e89d] transition-colors"
               aria-label="LinkedIn"
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
+              whileHover={{ scale: 1.2, y: -2 }}
             >
               <Linkedin size={14} />
             </motion.a>
             <motion.a
               href="mailto:rkholofelo@gmail.com"
-<<<<<<< HEAD
-              className="rounded-md p-1.5 text-gray-600 transition-colors hover:text-[#00e89d]"
-              whileHover={{ scale: 1.2, y: -2 }}
-=======
               className="p-1.5 rounded-md text-gray-600 hover:text-[#00e89d] transition-colors"
               aria-label="Email"
->>>>>>> c8e7d9826b7b03d8dab5e4b3b61d0ff789d75d57
+              whileHover={{ scale: 1.2, y: -2 }}
             >
               <Mail size={14} />
             </motion.a>
