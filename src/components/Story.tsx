@@ -72,7 +72,7 @@ export default function Story() {
           <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 max-w-2xl">
             My journey into tech started with a simple question — how do websites work?
             That curiosity led me from HTML basics to mastering the full MERN stack.
-            Today, as a Computer Engineering student and Freelance Web Developer, I build
+            Today, as a BEng Tech Computer Engineering student and Freelance Web Developer, I build
             technology that fosters community engagement and creates meaningful connections.
           </p>
 
@@ -139,7 +139,7 @@ export default function Story() {
           className="mt-10 text-center"
         >
           <a
-            href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
+            href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#0ea5e9] hover:text-[#0ea5e9]/70 transition-colors"

@@ -82,13 +82,30 @@ const achievements = [
   },
 ];
 
+const hackerRankBadges = [
+  {
+    title: "Days of Code",
+    description: "Consistent daily coding streak on HackerRank",
+    icon: Code2,
+    color: "#00e89d",
+    gradient: "from-[#00e89d]/20 to-[#00e89d]/5",
+  },
+  {
+    title: "Days of JS",
+    description: "Daily JavaScript challenge streak",
+    icon: Zap,
+    color: "#f7df1e",
+    gradient: "from-[#f7df1e]/20 to-[#f7df1e]/5",
+  },
+];
+
 const hackerRankSkills = [
-  { name: "Problem Solving", level: "Verified", color: "#00e89d" },
-  { name: "JavaScript", level: "Verified", color: "#f7df1e" },
-  { name: "React", level: "Verified", color: "#61dafb" },
-  { name: "Node.js", level: "Verified", color: "#00e89d" },
-  { name: "CSS", level: "Verified", color: "#0ea5e9" },
-  { name: "SQL", level: "Verified", color: "#a855f7" },
+  { name: "Frontend Dev (React)", level: "Role Cert", color: "#61dafb" },
+  { name: "React (Basic)", level: "Verified", color: "#61dafb" },
+  { name: "Node.js (Basic)", level: "Verified", color: "#00e89d" },
+  { name: "CSS (Basic)", level: "Verified", color: "#0ea5e9" },
+  { name: "Java (Basic)", level: "Verified", color: "#f97316" },
+  { name: "JavaScript", level: "Intermediate", color: "#f7df1e" },
 ];
 
 function SectionBlock({
@@ -272,6 +289,48 @@ export default function OpenSourcePage() {
                     className="w-18 h-18 rounded-2xl mx-auto flex items-center justify-center mb-5"
                     style={{ backgroundColor: `${item.color}20`, width: "72px", height: "72px" }}
                   >
+                    <item.icon size={32} style={{ color: item.color }} />
+                  </div>
+                  <h3 className="text-white font-black text-xl mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-400">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </SectionBlock>
+
+        {/* HackerRank Badges */}
+        <SectionBlock delay={0.1}>
+          <h2 className="text-2xl sm:text-3xl font-black text-white mb-10 flex items-center gap-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#00e89d]/20 flex items-center justify-center">
+              <Award size={22} className="text-[#00e89d]" />
+            </div>
+            HackerRank Badges
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {hackerRankBadges.map((item, i) => (
+              <motion.div
+                key={item.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                whileHover={{ y: -6, scale: 1.03 }}
+                className={`group relative overflow-hidden p-8 rounded-3xl border-2 bg-gradient-to-br ${item.gradient} text-center transition-all duration-500 hover:shadow-2xl`}
+                style={{ borderColor: `${item.color}40` }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = `${item.color}70`;
+                  e.currentTarget.style.boxShadow = `0 12px 50px ${item.color}20`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = `${item.color}40`;
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity" style={{ backgroundColor: item.color }} />
+                <div className="relative">
+                  <div className="w-18 h-18 rounded-2xl mx-auto flex items-center justify-center mb-5" style={{ backgroundColor: `${item.color}20`, width: "72px", height: "72px" }}>
                     <item.icon size={32} style={{ color: item.color }} />
                   </div>
                   <h3 className="text-white font-black text-xl mb-2">{item.title}</h3>

@@ -432,7 +432,7 @@ export default function ResumePage() {
                 GitHub
               </a>
               <a
-                href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
+                href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/10 text-gray-300 hover:border-[#0ea5e9]/40 hover:text-white transition-all duration-300"
@@ -480,7 +480,7 @@ export default function ResumePage() {
               <SectionHeading color="#00e89d" icon={<Code2 size={22} />}>About Me</SectionHeading>
               <p className="text-sm leading-relaxed text-gray-400 mb-4">
                 I'm Kholofelo Robyn Rababalela — a Full-Stack MERN developer and
-                Computer Engineering student at Cape Peninsula University of Technology.
+                BEng Tech Computer Engineering student at Cape Peninsula University of Technology.
                 I specialize in building scalable backend architectures, polished
                 frontends, and intuitive user experiences.
               </p>
@@ -720,7 +720,7 @@ export default function ResumePage() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {[
               { label: "GitHub", href: "https://github.com/RobynAwesome", icon: <Github size={18} />, color: "#fff" },
-              { label: "LinkedIn", href: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/", icon: <Linkedin size={18} />, color: "#0ea5e9" },
+              { label: "LinkedIn", href: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/", icon: <Linkedin size={18} />, color: "#0ea5e9" },
               { label: "HackerRank", href: "https://www.hackerrank.com/profile/rkholofelo", icon: <Code2 size={18} />, color: "#00e89d" },
               { label: "ORCID", href: "https://orcid.org/0009-0000-3995-6147", icon: <GraduationCap size={18} />, color: "#a3e635" },
               { label: "PayPal", href: "https://paypal.me/osheenviews", icon: <ExternalLink size={18} />, color: "#0ea5e9" },

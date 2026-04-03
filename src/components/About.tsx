@@ -92,9 +92,9 @@ export default function About() {
             </h2>
 
             <p className="text-white text-base sm:text-lg leading-relaxed mb-6">
-              I am a Computer Engineering student at Cape Peninsula University
-              of Technology and a Freelance Web Developer specializing in the
-              MERN stack. Working primarily with Node.js, MongoDB, JavaScript,
+              I am a Bachelor of Eng Tech in Computer Engineering (Student) at
+              Cape Peninsula University of Technology and a Freelance Web
+              Developer specializing in the MERN stack. Working primarily with Node.js, MongoDB, JavaScript,
               HTML, and CSS, my focus is on building scalable backend
               architectures, gorgeous frontends and intuitive, user-centered
               designs. Since January 2026, I have been building a comprehensive

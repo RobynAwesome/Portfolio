@@ -8,7 +8,6 @@ import ResumePage from "./pages/ResumePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import OpenSourcePage from "./pages/OpenSourcePage";
 import ContactPage from "./pages/ContactPage";
-import ScrollToTop from "./components/ScrollToTop";
 
 function ScrollToTop() {
   const { pathname } = useLocation();

@@ -110,7 +110,7 @@ export default function Contact() {
                 <ArrowUpRight size={14} />
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
+                href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-[#060d18]/30 text-[#060d18] font-semibold text-sm hover:bg-[#060d18]/10 transition-colors"

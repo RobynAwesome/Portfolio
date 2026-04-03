@@ -15,6 +15,7 @@ export default function Hero() {
   const [imgError, setImgError] = useState(false);
 
   const copyEmail = () => {
+    navigator.clipboard.writeText("rkholofelo@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

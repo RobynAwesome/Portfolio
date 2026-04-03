@@ -13,7 +13,7 @@ const navLinks = [
 const profileLinks = [
   { href: "https://github.com/RobynAwesome/", label: "GitHub" },
   {
-    href: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/",
+    href: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/",
     label: "LinkedIn",
   },
   {
@@ -113,7 +113,7 @@ export default function Footer() {
               <Github size={14} />
             </motion.a>
             <motion.a
-              href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b7/"
+              href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-1.5 rounded-md text-gray-600 hover:text-[#00e89d] transition-colors"

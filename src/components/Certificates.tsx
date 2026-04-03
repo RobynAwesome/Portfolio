@@ -5,26 +5,90 @@ import { Award, ExternalLink, ArrowUpRight } from "lucide-react";
 const certificates = [
   {
     title: "AI Fluency: Framework & Foundations",
-    issuer: "Anthropic Education",
+    issuer: "Anthropic",
     date: "March 2026",
     link: "https://verify.skilljar.com/c/eg2hpc738332",
-    description: "Learn to collaborate with AI systems effectively, efficiently, ethically, and safely.",
+    description: "Completed Anthropic's AI Fluency course covering frameworks for effective, efficient, ethical, and safe AI interaction.",
     highlight: true,
   },
   {
-    title: "HackerRank Skill Certificate",
+    title: "Introduction to Model Context Protocol",
+    issuer: "Anthropic",
+    date: "March 2026",
+    link: "https://verify.skilljar.com/c/t32humid3i99",
+    description: "Comprehensive coverage of MCP — building servers and clients with the Python SDK using tools, resources, and prompts.",
+    highlight: true,
+  },
+  {
+    title: "Frontend Developer (React)",
     issuer: "HackerRank",
-    date: "2026",
+    date: "March 2026",
     link: "https://www.hackerrank.com/certificates/eb2baf4f04c3",
-    description: "Verified technical skill certification from HackerRank platform.",
+    description: "Role certification demonstrating proficiency in React, JavaScript, HTML, CSS, and testing. Building responsive UIs and managing state.",
     highlight: true,
   },
   {
-    title: "HackerRank Profile — Level 5",
+    title: "Artificial Intelligence for Cybersecurity",
+    issuer: "LinkedIn Learning",
+    date: "March 2026",
+    link: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/details/certifications/",
+    description: "Applying AI to cybersecurity: ML, discriminative vs generative AI, and solving cybersecurity problems with AI.",
+    highlight: false,
+  },
+  {
+    title: "Azure Cloud Fundamentals: Explore Cloud Services",
+    issuer: "LinkedIn Learning",
+    date: "March 2026",
+    link: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/details/certifications/",
+    description: "Core Azure services, identity, governance, cloud security, management tools, and cost management.",
+    highlight: false,
+  },
+  {
+    title: "Understanding Generative AI in Cloud Computing",
+    issuer: "LinkedIn Learning",
+    date: "March 2026",
+    link: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/details/certifications/",
+    description: "AI agents and generative AI services in cloud computing environments.",
+    highlight: false,
+  },
+  {
+    title: "What is Generative AI?",
+    issuer: "LinkedIn Learning",
+    date: "March 2026",
+    link: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/details/certifications/",
+    description: "Foundations of generative AI and its impact across industries.",
+    highlight: false,
+  },
+  {
+    title: "React (Basic)",
     issuer: "HackerRank",
-    date: "2026",
-    link: "https://www.hackerrank.com/profile/rkholofelo",
-    description: "Active profile with verified skills in NodeJs, React, JavaScript, CSS, and MERN Stack.",
+    date: "March 2026",
+    link: "https://www.hackerrank.com/certificates/b52e37357999",
+    description: "Basic Routing, Rendering Elements, State Management, Event Handling, ES6, and Form Validation.",
+    highlight: false,
+  },
+  {
+    title: "Node.js (Basic)",
+    issuer: "HackerRank",
+    date: "March 2026",
+    link: "https://www.hackerrank.com/certificates/bc9391871061",
+    description: "Package management, Callbacks, Event Loop, Event Emitter, Buffers, Streams, and File Systems.",
+    highlight: false,
+  },
+  {
+    title: "Java (Basic)",
+    issuer: "HackerRank",
+    date: "March 2026",
+    link: "https://www.hackerrank.com/certificates/400feb96b063",
+    description: "Java classes, data structures, inheritance, and exception handling.",
+    highlight: false,
+  },
+  {
+    title: "CSS (Basic)",
+    issuer: "HackerRank",
+    date: "March 2026",
+    link: "https://www.hackerrank.com/certificates/2fcac2281716",
+    description: "Cascading and Inheritance, text styling, layouts, boxing, TailwindCSS.",
     highlight: false,
   },
   {
@@ -53,7 +117,7 @@ export default function Certificates() {
         </div>
 
         {/* Highlighted certificates */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {certificates
             .filter((c) => c.highlight)
             .map((cert, i) => (
@@ -108,7 +172,7 @@ export default function Certificates() {
                 key={cert.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+                transition={{ duration: 0.4, delay: 0.3 + i * 0.07 }}
                 className="group flex items-center gap-4 p-4 sm:p-5 rounded-xl border border-[#1a2744] bg-[#0f1a30]/30 hover:border-[#00e89d]/20 transition-all duration-300"
               >
                 <div className="shrink-0 p-2.5 rounded-lg bg-[#0ea5e9]/10 border border-[#1a2744]">
