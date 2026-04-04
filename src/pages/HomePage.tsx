@@ -242,8 +242,21 @@ const TECHS = [
 function TechTicker() {
   const doubled = [...TECHS, ...TECHS];
   return (
-    <section className="relative py-10 overflow-hidden border-y border-[#1a2744]">
-      <div className="absolute inset-0 dot-grid pointer-events-none" />
+    <section
+      className="relative py-10 overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #060d18 0%, #070f1c 50%, #060d18 100%)",
+        borderTop: "1px solid rgba(0,232,157,0.12)",
+        borderBottom: "1px solid rgba(14,165,233,0.12)",
+        clipPath: "polygon(0 8%, 100% 0%, 100% 92%, 0 100%)",
+        margin: "0 0 -24px 0",
+        paddingTop: "56px",
+        paddingBottom: "56px",
+      }}
+    >
+      {/* Mesh gradient */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 20% 50%, rgba(0,232,157,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(14,165,233,0.06) 0%, transparent 60%)" }} />
+      <div className="absolute inset-0 dot-grid pointer-events-none opacity-40" />
       <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-[#060d18] to-transparent" />
       <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-[#060d18] to-transparent" />
       <motion.div className="flex gap-6 mb-5" animate={{ x: ["0%", "-50%"] }} transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 30, ease: "linear" } }}>
@@ -456,7 +469,12 @@ function SkillsSection() {
   ];
 
   return (
-    <section id="skills" className="relative py-24 sm:py-32">
+    <section id="skills" className="relative py-24 sm:py-32 overflow-hidden" style={{ background: "linear-gradient(160deg, #060d18 0%, #07101f 40%, #060e1b 100%)" }}>
+      {/* Diagonal line pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "repeating-linear-gradient(45deg, #00e89d 0px, #00e89d 1px, transparent 1px, transparent 24px)", backgroundSize: "24px 24px" }} />
+      {/* Blobs */}
+      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(14,165,233,0.07), transparent)" }} />
+      <div className="absolute bottom-1/4 right-0 w-[350px] h-[350px] rounded-full blur-[100px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,232,157,0.06), transparent)" }} />
       <div className="mx-auto max-w-5xl px-12 sm:px-20 lg:px-36">
         <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
           <h2 className="mb-4 text-center text-2xl leading-tight font-black sm:text-3xl md:text-4xl">Full-Stack <span className="gradient-text">Architect.</span></h2>
@@ -584,8 +602,10 @@ function AiSection() {
 
   return (
     <section className="relative overflow-hidden py-24 sm:py-32" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#060d18] via-[#0b1426] to-[#060d18]" />
-      <div className="dot-grid pointer-events-none absolute inset-0" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(165deg, #060d18 0%, #080f1e 30%, #040b18 60%, #060d18 100%)" }} />
+      {/* Mesh gradients */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 30%, rgba(168,85,247,0.08) 0%, transparent 55%), radial-gradient(ellipse at 90% 70%, rgba(0,232,157,0.06) 0%, transparent 55%), radial-gradient(ellipse at 50% 50%, rgba(14,165,233,0.04) 0%, transparent 65%)" }} />
+      <div className="dot-grid pointer-events-none absolute inset-0 opacity-25" />
       <div className="relative mx-auto max-w-5xl px-12 sm:px-20 lg:px-36">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7 }}>
