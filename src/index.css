@@ -290,3 +290,83 @@ html.light ::-webkit-scrollbar-thumb {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ──────────────────────────────────────────────────────────
+   LIGHT MODE — Text visibility fix
+   Appended to existing index.css
+────────────────────────────────────────────────────────── */
+
+/* CSS variables that flip based on theme */
+html.dark {
+  --heading-color: #ffffff;
+  --body-color: rgb(156 163 175);
+  --subtext-color: rgb(107 114 128);
+}
+
+html.light {
+  --heading-color: #0f172a;
+  --body-color: #334155;
+  --subtext-color: #475569;
+}
+
+/* Light mode body background — already set in existing CSS, supplement: */
+html.light body {
+  color: #0f172a;
+  background-color: #f0fdf4;
+}
+
+/* Ensure gradient-text stays readable in light mode */
+html.light .gradient-text {
+  /* gradient with transparent fill still works, no override needed */
+}
+
+/* Nav links that used white/opacity — force visible in light mode */
+html.light nav .text-gray-400,
+html.light nav .text-gray-500 {
+  color: #475569 !important;
+}
+
+html.light nav .text-white {
+  color: #0f172a !important;
+}
+
+/* Footer text */
+html.light footer p,
+html.light footer span,
+html.light footer a {
+  color: #64748b;
+}
+
+/* Cards in light mode */
+html.light .border-\[\#1a2744\] {
+  border-color: #e2e8f0 !important;
+}
+
+html.light .bg-\[\#0b1426\]\/60,
+html.light .bg-\[\#0b1426\]\/80 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .text-gray-400 {
+  color: #475569 !important;
+}
+
+html.light .text-gray-500 {
+  color: #64748b !important;
+}
+
+html.light .text-gray-600 {
+  color: #94a3b8 !important;
+}
+
+/* Hero section bg in light mode */
+html.light .bg-\[\#060d18\] {
+  background-color: #f8fafc !important;
+}
+
+/* Ticker border */
+html.light .border-\[\#1a2744\] {
+  border-color: #e2e8f0 !important;
+}
+
+/* About section text — uses CSS vars so already handled above */

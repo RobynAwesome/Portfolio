@@ -22,6 +22,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <ScrollToTopButton />
       <Navbar />
       <Suspense fallback={null}>
         <Routes>
