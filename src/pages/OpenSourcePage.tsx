@@ -1,11 +1,10 @@
-import { motion, useInView, AnimatePresence, type Variants } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   Github, GitPullRequest, GitMerge, Star, ExternalLink,
-  Award, Code2, Users, Zap, Shield, ArrowUpRight,
-  Heart, Cpu, Globe, BookOpen, Layout, Sparkles, Terminal,
+  Code2, Users, Zap, ArrowUpRight,
+  Cpu, Globe, BookOpen, Layout, Sparkles,
 } from "lucide-react";
-import Certificates from "../components/Certificates";
 
 type ViewMode = "terminal" | "blueprint" | "arcade" | "brutalist";
 
@@ -51,43 +50,45 @@ const hackerRankSkills = [
   { name: "JavaScript", level: "Intermediate", color: "#f7df1e" },
 ];
 
+const TERMINAL_LINES = [
+  "$ whoami",
+  "  kholofelo.robyn.rababalela — full-stack dev, CPUT '27",
+  "$ ls -la ~/open-source/",
+  "  drwxr-xr-x  Bookit-5s-Arena      [React · Node · MongoDB]",
+  "  drwxr-xr-x  5s-Arena-Blog        [React · Node · MongoDB]",
+  "  drwxr-xr-x  Portfolio            [React · TypeScript · Vite]",
+  "  drwxr-xr-x  Introduction-to-MCP  [Python · MCP SDK]",
+  "  drwxr-xr-x  Harvest-4-All        [JavaScript · REST API]",
+  "  drwxr-xr-x  KasiLink             [HTML · CSS · JS]",
+  "  drwxr-xr-x  Cape-Campass         [HTML · CSS · JS]",
+  "  drwxr-xr-x  Portfolio-MBR        [React · TypeScript]",
+  "$ cat ~/achievements.txt",
+  "  [✓] Pull Shark         — PRs merged",
+  "  [✓] YOLO               — shipped fearlessly",
+  "  [✓] Pair Extraordinaire — co-authored commits",
+  "$ curl https://hackerrank.com/rkholofelo | grep verified",
+  "  Frontend Dev (React)   :: Role Certification",
+  "  React (Basic)          :: Verified",
+  "  Node.js (Basic)        :: Verified",
+  "  JavaScript             :: Intermediate",
+  "$ echo 'Open to work ✓'",
+  "  Open to work ✓",
+  "$ _",
+];
+
 /* ────────────────────────────────────────
    TERMINAL MODE
 ──────────────────────────────────────── */
 function TerminalView() {
   const [lines, setLines] = useState<string[]>([]);
-  const allLines = [
-    "$ whoami",
-    "  kholofelo.robyn.rababalela — full-stack dev, CPUT '27",
-    "$ ls -la ~/open-source/",
-    "  drwxr-xr-x  Bookit-5s-Arena      [React · Node · MongoDB]",
-    "  drwxr-xr-x  5s-Arena-Blog        [React · Node · MongoDB]",
-    "  drwxr-xr-x  Portfolio            [React · TypeScript · Vite]",
-    "  drwxr-xr-x  Introduction-to-MCP  [Python · MCP SDK]",
-    "  drwxr-xr-x  Harvest-4-All        [JavaScript · REST API]",
-    "  drwxr-xr-x  KasiLink             [HTML · CSS · JS]",
-    "  drwxr-xr-x  Cape-Campass         [HTML · CSS · JS]",
-    "  drwxr-xr-x  Portfolio-MBR        [React · TypeScript]",
-    "$ cat ~/achievements.txt",
-    "  [✓] Pull Shark         — PRs merged",
-    "  [✓] YOLO               — shipped fearlessly",
-    "  [✓] Pair Extraordinaire — co-authored commits",
-    "$ curl https://hackerrank.com/rkholofelo | grep verified",
-    "  Frontend Dev (React)   :: Role Certification",
-    "  React (Basic)          :: Verified",
-    "  Node.js (Basic)        :: Verified",
-    "  JavaScript             :: Intermediate",
-    "$ echo 'Open to work ✓'",
-    "  Open to work ✓",
-    "$ _",
-  ];
 
   useEffect(() => {
     let i = 0;
     const t = setInterval(() => {
-      setLines((prev) => [...prev, allLines[i]]);
+      if (i >= TERMINAL_LINES.length) { clearInterval(t); return; }
+      setLines((prev) => [...prev, TERMINAL_LINES[i]]);
       i++;
-      if (i >= allLines.length) clearInterval(t);
+      if (i >= TERMINAL_LINES.length) clearInterval(t);
     }, 120);
     return () => clearInterval(t);
   }, []);
@@ -112,14 +113,14 @@ function TerminalView() {
                 transition={{ duration: 0.1 }}
                 className="text-sm leading-7"
                 style={{
-                  color: line.startsWith("$") ? "#00ff41" : line.startsWith("  [✓]") ? "#00e89d" : line.startsWith("  drwxr") ? "#4ec9b0" : "#d4d4d4",
-                  fontWeight: line.startsWith("$") ? "bold" : "normal",
+                  color: !line ? "#d4d4d4" : line.startsWith("$") ? "#00ff41" : line.startsWith("  [✓]") ? "#00e89d" : line.startsWith("  drwxr") ? "#4ec9b0" : "#d4d4d4",
+                  fontWeight: line?.startsWith("$") ? "bold" : "normal",
                 }}
               >
                 {line}
               </motion.div>
             ))}
-            {lines.length === allLines.length && (
+            {lines.length === TERMINAL_LINES.length && (
               <motion.span
                 animate={{ opacity: [1, 0, 1] }}
                 transition={{ repeat: Infinity, duration: 1 }}
@@ -363,7 +364,7 @@ function ArcadeView() {
             ✦ HIGH SCORE TABLE ✦
           </p>
           <div className="grid grid-cols-3 gap-6">
-            {achievements.map((a, i) => (
+            {achievements.map((a) => (
               <div key={a.title} className="text-center">
                 <a.icon size={32} className="mx-auto mb-3" style={{ color: "#f7df1e", filter: "drop-shadow(0 0 8px #f7df1e)" }} />
                 <p className="text-sm font-black" style={{ color: "#fff" }}>{a.title}</p>
@@ -379,7 +380,7 @@ function ArcadeView() {
             ⚡ POWER-UPS COLLECTED
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {hackerRankSkills.map((s, i) => (
+            {hackerRankSkills.map((s) => (
               <motion.div
                 key={s.name}
                 whileHover={{ scale: 1.1 }}
