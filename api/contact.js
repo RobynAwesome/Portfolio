@@ -1,6 +1,7 @@
 // POST /api/contact
-// Sends an email via Resend when RESEND_API_KEY is set,
-// falls back to a logged success so the UI never hard-fails.
+// Sends an email via Resend when RESEND_API_KEY is set.
+// If delivery is not configured, returns a clear error instead of
+// pretending the message was sent.
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -29,9 +30,10 @@ export default async function handler(req, res) {
   const fromEmail = process.env.CONTACT_FROM_EMAIL || "noreply@kholofelorababalela.vercel.app";
 
   if (!apiKey) {
-    // No API key — log and return success so site still works in dev
-    console.log("[contact] no RESEND_API_KEY — message from:", email, "|", subject);
-    return res.status(200).json({ ok: true });
+    return res.status(503).json({
+      ok: false,
+      error: "Contact delivery is not configured yet. Please email rkholofelo@gmail.com directly.",
+    });
   }
 
   try {

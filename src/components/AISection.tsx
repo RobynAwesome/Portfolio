@@ -5,29 +5,6 @@ export default function AISection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const circlesConfig = [
-    {
-      colors: ["#00e89d", "#0ea5e9"],
-      radiusRatio: 0.8,
-      deformationRatio: 0.2,
-      duration: 4000,
-    },
-    {
-      colors: ["#6366f1", "#00e89d"],
-      radiusRatio: 0.6,
-      deformationRatio: 0.3,
-      duration: 5000,
-      opacity: 0.8,
-    },
-    {
-      colors: ["#0ea5e9", "#6366f1"],
-      radiusRatio: 0.4,
-      deformationRatio: 0.4,
-      duration: 6000,
-      opacity: 0.6,
-    },
-  ];
-
   return (
     <section className="relative overflow-hidden py-24 sm:py-32" ref={ref}>
       {/* Dark bg with subtle gradient overlay */}
@@ -50,23 +27,26 @@ export default function AISection() {
               <span className="gradient-text-green">Development.</span>
             </h2>
             <p className="mb-8 text-lg leading-relaxed text-gray-400">
-              Artificial Intelligence is reshaping how we build software, and
-              I'm embracing it fully. By integrating tools like Claude, GitHub
-              Copilot, and cutting-edge LLMs into my workflow, I'm able to
-              prototype faster, debug smarter, and write cleaner code. This
-              isn't about replacing the craft of development — it's about
-              elevating it. AI allows me to focus on what truly matters: the
-              details that transform a good app into a great one. The precision,
-              the polish, the seamless user experience. Human creativity
-              amplified by machine intelligence — that's the future I'm building
-              toward.
+              I don't just use AI tools — I build the infrastructure that makes
+              them trustworthy.{" "}
+              <span className="text-white font-medium">Kopano Context</span> is
+              my open-source multi-agent orchestration framework: it coordinates
+              Claude, Gemini, Grok, and 100+ other LLMs through a Smart
+              Moderator AI, logs every decision to a persistent Data Lake for
+              full auditability, and broadcasts live agent reasoning to{" "}
+              <span className="text-white font-medium">Kopano Studio</span>. The
+              Kopano SafeSkill trust layer scans for prompt injection, data
+              exfiltration, and backdoors before any agent runs. Audit twice.
+              No black boxes.
             </p>
             <motion.a
-              href="#"
+              href="https://github.com/RobynAwesome/Introduction-to-MCP"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 font-semibold text-[#00e89d] transition-colors duration-300 hover:text-[#34d399]"
               whileHover={{ x: 4 }}
             >
-              View orch on GitHub
+              View Kopano Context on GitHub
               <svg
                 className="h-[18px] w-[18px] transition-transform group-hover:translate-x-1"
                 fill="none"
@@ -82,10 +62,13 @@ export default function AISection() {
             {/* Feature badges */}
             <div className="flex flex-wrap gap-3">
               <span className="rounded-full border border-[#0ea5e9]/20 bg-[#0ea5e9]/5 px-3 py-1.5 text-xs font-medium text-[#0ea5e9]">
-                Claude · GPT · Gemini
+                Claude · Gemini · Grok
+              </span>
+              <span className="rounded-full border border-[#F5A623]/20 bg-[#F5A623]/5 px-3 py-1.5 text-xs font-medium text-[#F5A623]">
+                Kopano Context
               </span>
               <span className="rounded-full border border-[#00e89d]/20 bg-[#00e89d]/5 px-3 py-1.5 text-xs font-medium text-[#00e89d]">
-                CLI-powered
+                SafeSkill Verified
               </span>
               <span className="rounded-full border border-[#6366f1]/20 bg-[#6366f1]/5 px-3 py-1.5 text-xs font-medium text-[#6366f1]">
                 MCP Protocol

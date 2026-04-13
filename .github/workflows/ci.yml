@@ -26,6 +26,9 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
+      - name: Lint
+        run: npm run lint
+
       - name: Build
         run: npm run build
 
@@ -33,11 +36,11 @@ jobs:
         run: |
           files=(
             "dist/index.html"
-            "public/cv/computer-eng-student.pdf"
-            "public/cv/fullstack-developer.pdf"
-            "public/cv/web-developer.pdf"
-            "public/cv/software-developer.pdf"
-            "public/cv/frontend-backend-developer.pdf"
+            "api/cv-files/computer-eng-student.pdf"
+            "api/cv-files/fullstack-developer.pdf"
+            "api/cv-files/web-developer.pdf"
+            "api/cv-files/software-developer.pdf"
+            "api/cv-files/frontend-backend-developer.pdf"
             "public/og-image.jpg"
             "public/favicon.ico"
           )

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 
 const items = [
   { text: "React", color: "#61dafb", desc: "UI component library" },

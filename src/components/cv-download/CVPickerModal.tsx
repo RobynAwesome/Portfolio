@@ -5,7 +5,6 @@ import RoleSelector from "./RoleSelector";
 import FormatSelector from "./FormatSelector";
 import RecruiterForm from "./RecruiterForm";
 import { CV_ROLES } from "../../data/cvConfig";
-import { useRecruiterStore } from "../../hooks/useRecruiterStore";
 
 interface CVPickerModalProps {
   isOpen: boolean;
@@ -18,7 +17,6 @@ export default function CVPickerModal({ isOpen, onClose }: CVPickerModalProps) {
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [selectedFormat, setSelectedFormat] = useState<"pdf" | "docx" | null>(null);
-  const { save } = useRecruiterStore();
 
   const reset = () => {
     setStep(1);
@@ -41,7 +39,7 @@ export default function CVPickerModal({ isOpen, onClose }: CVPickerModalProps) {
     setStep(3);
   };
 
-  const handleFormSubmit = (data: {
+  const handleFormSubmit = async (data: {
     firstName: string;
     lastName: string;
     email: string;
@@ -50,21 +48,30 @@ export default function CVPickerModal({ isOpen, onClose }: CVPickerModalProps) {
     const role = CV_ROLES.find((r) => r.id === selectedRole);
     if (!role || !selectedFormat) return;
 
-    save({
-      ...data,
-      downloadedRole: role.label,
-      downloadedFormat: selectedFormat,
-      timestamp: new Date().toISOString(),
+    const response = await fetch("/api/cv-download", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...data,
+        roleId: role.id,
+        format: selectedFormat,
+      }),
     });
 
-    // Trigger download
-    const url = role.files[selectedFormat];
+    if (!response.ok) {
+      const payload = await response.json().catch(() => null);
+      throw new Error(payload?.error || "Download failed.");
+    }
+
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
     a.download = `Kholofelo_Robyn_CV_${role.label.replace(/[^a-zA-Z0-9]/g, "_")}.${selectedFormat}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
     setStep(4);
     setTimeout(handleClose, 2000);

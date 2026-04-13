@@ -1,8 +1,23 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github, ArrowUpRight, Star, GitFork } from "lucide-react";
+import { ExternalLink, Github, ArrowUpRight, Star } from "lucide-react";
 
 const projects = [
+  {
+    title: "Kopano Context",
+    problem:
+      "Most AI orchestration tools lock developers into a single provider and offer no audit trail, making multi-agent AI workflows opaque, fragile, and impossible to trust in production.",
+    solution:
+      "Built a full multi-agent orchestration framework implementing the Model Context Protocol (MCP). Kopano Context coordinates agents from Anthropic, Google, xAI, and 100+ providers through a Smart Moderator AI, with a persistent SQLite Data Lake for full audit history, a real-time React dashboard (Kopano Studio), and a WhatsApp broadcast gateway.",
+    impact:
+      "Shortlisted for SA Startup Week Hack Day (April 2026). SafeSkill verified trust layer. Positions as the enterprise-grade, audit-first orchestration engine for multi-agent AI in Africa.",
+    techs: ["Python", "FastAPI", "TypeScript", "React", "SQLite", "LiteLLM", "MCP", "WebSocket"],
+    github: "https://github.com/RobynAwesome/Introduction-to-MCP",
+    live: null,
+    stars: 8,
+    featured: true,
+    gradient: "from-[#F5A623] via-[#00E676] to-[#0ea5e9]",
+  },
   {
     title: "Bookit — 5's Arena",
     problem:

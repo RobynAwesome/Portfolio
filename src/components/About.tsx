@@ -87,17 +87,23 @@ export default function About() {
               I craft it.
             </h2>
 
-            <p className="text-white text-base sm:text-lg leading-relaxed mb-6">
+            <p className="text-white text-base sm:text-lg leading-relaxed mb-4">
               I am a Bachelor of Eng Tech in Computer Engineering (Student) at
               Cape Peninsula University of Technology and a Freelance Web
               Developer specializing in the MERN stack. Working primarily with
               Node.js, MongoDB, JavaScript, HTML, and CSS, my focus is on
               building scalable backend architectures, gorgeous frontends and
-              intuitive, user-centered designs. Since January 2026, I have been
-              building a comprehensive digital platform for 5's Arena associated
-              with Hellenic Football club, developing a custom full-stack
-              solution that features a community blog and an integrated booking
-              system.
+              intuitive, user-centered designs.
+            </p>
+            <p className="text-white text-base sm:text-lg leading-relaxed mb-6">
+              I am also the creator of{" "}
+              <span className="text-[#F5A623] font-semibold">Kopano Context</span>{" "}
+              — an open-source multi-agent AI orchestration framework (MCP) built
+              for enterprise trust and South African impact. Kopano Context powers
+              the AI layer inside{" "}
+              <span className="text-[#00e89d] font-semibold">KasiLink</span>, a
+              township gig-economy marketplace, and is shortlisted for SA Startup
+              Week Hack Day 2026.
             </p>
 
             <Link

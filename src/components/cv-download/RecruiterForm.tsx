@@ -8,7 +8,7 @@ interface RecruiterFormProps {
     lastName: string;
     email: string;
     companyName: string;
-  }) => void;
+  }) => Promise<void>;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,6 +22,7 @@ export default function RecruiterForm({ onSubmit }: RecruiterFormProps) {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -33,13 +34,19 @@ export default function RecruiterForm({ onSubmit }: RecruiterFormProps) {
     return e;
   };
 
-  const handleSubmit = (ev: React.FormEvent) => {
+  const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length > 0) return;
     setSubmitting(true);
-    onSubmit(form);
+    setSubmitError("");
+    try {
+      await onSubmit(form);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Download failed.");
+      setSubmitting(false);
+    }
   };
 
   const update = (field: string, value: string) => {
@@ -68,10 +75,11 @@ export default function RecruiterForm({ onSubmit }: RecruiterFormProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06, duration: 0.4 }}
           >
-            <label className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-1.5">
+            <label htmlFor={f.key} className="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-1.5">
               {f.label}
             </label>
             <input
+              id={f.key}
               type={f.type}
               placeholder={f.placeholder}
               value={form[f.key as keyof typeof form]}
@@ -97,6 +105,10 @@ export default function RecruiterForm({ onSubmit }: RecruiterFormProps) {
             )}
           </motion.div>
         ))}
+
+        {submitError && (
+          <p className="text-sm text-red-400">{submitError}</p>
+        )}
 
         <motion.button
           type="submit"
