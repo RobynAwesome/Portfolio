@@ -16,8 +16,10 @@ export default function CVDownloadButton({
   if (variant === "floating") {
     return (
       <motion.button
+        type="button"
         onClick={onClick}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 rounded-full text-xs font-bold shadow-2xl"
+        aria-label="Open CV download options"
+        className="fixed bottom-4 right-4 z-50 flex max-w-[calc(100vw-2rem)] items-center gap-2 rounded-full px-4 py-3 text-[11px] font-bold shadow-2xl sm:bottom-6 sm:right-6 sm:px-5 sm:text-xs"
         style={{
           background: "linear-gradient(135deg, #00e89d, #34d399)",
           color: "#060d18",
@@ -37,7 +39,9 @@ export default function CVDownloadButton({
 
   return (
     <motion.button
+      type="button"
       onClick={onClick}
+      aria-label="Open CV download options"
       className="mt-3 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 w-full justify-center"
       style={{
         background: hovered

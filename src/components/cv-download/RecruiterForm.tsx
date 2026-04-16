@@ -55,10 +55,10 @@ export default function RecruiterForm({ onSubmit }: RecruiterFormProps) {
   };
 
   const fields = [
-    { key: "firstName", label: "First Name", placeholder: "Jane", type: "text" },
-    { key: "lastName", label: "Last Name", placeholder: "Smith", type: "text" },
-    { key: "email", label: "Work Email", placeholder: "jane@company.com", type: "email" },
-    { key: "companyName", label: "Company", placeholder: "Acme Corp", type: "text" },
+    { key: "firstName", label: "First Name", placeholder: "Jane…", type: "text", autoComplete: "given-name" },
+    { key: "lastName", label: "Last Name", placeholder: "Smith…", type: "text", autoComplete: "family-name" },
+    { key: "email", label: "Work Email", placeholder: "jane@company.com…", type: "email", autoComplete: "email" },
+    { key: "companyName", label: "Company", placeholder: "Acme Corp…", type: "text", autoComplete: "organization" },
   ];
 
   return (
@@ -80,10 +80,15 @@ export default function RecruiterForm({ onSubmit }: RecruiterFormProps) {
             </label>
             <input
               id={f.key}
+              name={f.key}
               type={f.type}
               placeholder={f.placeholder}
+              autoComplete={f.autoComplete}
+              spellCheck={f.type === "email" ? false : undefined}
               value={form[f.key as keyof typeof form]}
               onChange={(e) => update(f.key, e.target.value)}
+              aria-invalid={Boolean(errors[f.key])}
+              aria-describedby={errors[f.key] ? `${f.key}-error` : undefined}
               className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-gray-600 outline-none transition-colors duration-200"
               style={{
                 background: "rgba(255,255,255,0.05)",
@@ -101,13 +106,13 @@ export default function RecruiterForm({ onSubmit }: RecruiterFormProps) {
               }
             />
             {errors[f.key] && (
-              <p className="text-red-400 text-xs mt-1">{errors[f.key]}</p>
+              <p id={`${f.key}-error`} className="text-red-400 text-xs mt-1">{errors[f.key]}</p>
             )}
           </motion.div>
         ))}
 
         {submitError && (
-          <p className="text-sm text-red-400">{submitError}</p>
+          <p className="text-sm text-red-400" aria-live="polite">{submitError}</p>
         )}
 
         <motion.button
@@ -128,7 +133,7 @@ export default function RecruiterForm({ onSubmit }: RecruiterFormProps) {
           ) : (
             <Download size={16} />
           )}
-          {submitting ? "Preparing..." : "Download CV"}
+          {submitting ? "Preparing…" : "Download CV"}
         </motion.button>
       </form>
     </div>

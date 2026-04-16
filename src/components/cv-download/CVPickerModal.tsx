@@ -122,9 +122,11 @@ export default function CVPickerModal({ isOpen, onClose }: CVPickerModalProps) {
               <div className="flex items-center gap-3">
                 {step > 1 && step < 4 && (
                   <motion.button
+                    type="button"
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     onClick={handleBack}
+                    aria-label="Go back"
                     className="p-1.5 rounded-lg hover:bg-white/5 transition-colors"
                   >
                     <ArrowLeft size={16} className="text-gray-400" />
@@ -147,7 +149,9 @@ export default function CVPickerModal({ isOpen, onClose }: CVPickerModalProps) {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={handleClose}
+                aria-label="Close CV picker"
                 className="p-1.5 rounded-lg hover:bg-white/5 transition-colors"
               >
                 <X size={16} className="text-gray-400" />

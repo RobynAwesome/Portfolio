@@ -45,9 +45,9 @@ const certRows = [
   { title: "AI Fluency: Framework & Foundations", issuer: "Anthropic", date: "Mar 2026", link: "https://verify.skilljar.com/c/eg2hpc738332" },
   { title: "Introduction to Model Context Protocol", issuer: "Anthropic", date: "Mar 2026", link: "https://verify.skilljar.com/c/t32humid3i99" },
   { title: "Frontend Developer (React)", issuer: "HackerRank", date: "Mar 2026", link: "https://www.hackerrank.com/certificates/eb2baf4f04c3" },
-  { title: "AI for Cybersecurity", issuer: "LinkedIn Learning", date: "Mar 2026", link: "#" },
-  { title: "Azure Cloud Fundamentals", issuer: "LinkedIn Learning", date: "Mar 2026", link: "#" },
-  { title: "Generative AI in Cloud Computing", issuer: "LinkedIn Learning", date: "Mar 2026", link: "#" },
+  { title: "AI for Cybersecurity", issuer: "LinkedIn Learning", date: "Mar 2026", link: "" },
+  { title: "Azure Cloud Fundamentals", issuer: "LinkedIn Learning", date: "Mar 2026", link: "" },
+  { title: "Generative AI in Cloud Computing", issuer: "LinkedIn Learning", date: "Mar 2026", link: "" },
   { title: "React (Basic)", issuer: "HackerRank", date: "Mar 2026", link: "https://www.hackerrank.com/certificates/b52e37357999" },
   { title: "Node.js (Basic)", issuer: "HackerRank", date: "Mar 2026", link: "https://www.hackerrank.com/certificates/bc9391871061" },
   { title: "Java (Basic)", issuer: "HackerRank", date: "Mar 2026", link: "https://www.hackerrank.com/certificates/400feb96b063" },
@@ -112,15 +112,15 @@ export default function ResumePage() {
 
   return (
     <main
-      className="min-h-screen pt-20 pb-28 relative"
+      className="relative min-h-screen overflow-x-clip pt-20 pb-28"
       style={{ background: "#060d18" }}
     >
       {/* Dot grid background */}
       <div className="absolute inset-0 dot-grid pointer-events-none opacity-30" />
 
       {/* Ambient blobs */}
-      <div className="absolute top-32 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] opacity-10 pointer-events-none" style={{ background: "radial-gradient(circle, #00e89d, transparent)" }} />
-      <div className="absolute bottom-32 right-1/4 w-[400px] h-[400px] rounded-full blur-[120px] opacity-8 pointer-events-none" style={{ background: "radial-gradient(circle, #a855f7, transparent)" }} />
+      <div className="pointer-events-none absolute top-28 left-1/2 hidden h-[420px] w-[420px] -translate-x-[35%] rounded-full opacity-10 blur-[120px] sm:block" style={{ background: "radial-gradient(circle, #00e89d, transparent)" }} />
+      <div className="pointer-events-none absolute bottom-24 right-1/2 hidden h-[360px] w-[360px] translate-x-[45%] rounded-full opacity-8 blur-[120px] sm:block" style={{ background: "radial-gradient(circle, #a855f7, transparent)" }} />
 
       {/* ── Document panel ── */}
       <motion.div
@@ -128,10 +128,10 @@ export default function ResumePage() {
         initial={{ opacity: 0, y: 40 }}
         animate={panelInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9, ease: [0.23, 1, 0.32, 1] }}
-        className="relative max-w-4xl mx-auto px-4 sm:px-8"
+        className="relative mx-auto max-w-4xl px-3 sm:px-8"
       >
         <div
-          className="relative rounded-3xl overflow-hidden"
+          className="relative overflow-hidden rounded-[24px] sm:rounded-3xl"
           style={{
             background: "rgba(8,14,28,0.85)",
             backdropFilter: "blur(20px)",
@@ -142,10 +142,10 @@ export default function ResumePage() {
           {/* Top accent line */}
           <div className="h-[2px] w-full" style={{ background: "linear-gradient(90deg, transparent, #00e89d, #0ea5e9, transparent)" }} />
 
-          <div className="p-8 sm:p-12 lg:p-16">
+          <div className="p-6 sm:p-10 lg:p-16">
 
             {/* ── Header: photo right, name+info left ── */}
-            <div className="flex flex-col sm:flex-row items-start gap-8 mb-10 pb-10" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+            <div className="mb-8 flex flex-col items-start gap-6 pb-8 sm:mb-10 sm:flex-row sm:gap-8 sm:pb-10" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               {/* Left: Name + title + contacts */}
               <div className="flex-1 min-w-0">
                 <motion.p
@@ -163,14 +163,14 @@ export default function ResumePage() {
                 >
                   <h1
                     className="font-black leading-[0.9] tracking-tight text-white"
-                    style={{ fontSize: "clamp(2.2rem, 5vw, 5.5rem)", fontFamily: "'Playfair Display', Georgia, serif" }}
+                    style={{ fontSize: "clamp(2.25rem, 10vw, 5.5rem)", fontFamily: "'Playfair Display', Georgia, serif" }}
                   >
                     Kholofelo
                   </h1>
                   <h1
                     className="font-black leading-[0.9] tracking-tight pb-1 mb-1"
                     style={{
-                      fontSize: "clamp(2.2rem, 5vw, 5.5rem)",
+                      fontSize: "clamp(2.25rem, 10vw, 5.5rem)",
                       fontFamily: "'Playfair Display', Georgia, serif",
                       background: "linear-gradient(135deg, #00e89d 0%, #0ea5e9 60%)",
                       WebkitBackgroundClip: "text",
@@ -182,7 +182,7 @@ export default function ResumePage() {
                   </h1>
                   <h1
                     className="font-black leading-[0.9] tracking-tight text-white mb-5"
-                    style={{ fontSize: "clamp(2.2rem, 5vw, 5.5rem)", fontFamily: "'Playfair Display', Georgia, serif" }}
+                    style={{ fontSize: "clamp(2.25rem, 10vw, 5.5rem)", fontFamily: "'Playfair Display', Georgia, serif" }}
                   >
                     Rababalela<span className="text-[#00e89d]">.</span>
                   </h1>
@@ -221,7 +221,7 @@ export default function ResumePage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={panelInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.3 }}
-                  className="flex flex-wrap gap-3"
+                  className="grid min-w-0 gap-2 sm:flex sm:flex-wrap sm:gap-3"
                 >
                   {[
                     { icon: Mail, label: "rkholofelo@gmail.com", href: "mailto:rkholofelo@gmail.com" },
@@ -233,10 +233,10 @@ export default function ResumePage() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#00e89d] transition-colors group"
+                      className="group inline-flex min-w-0 items-center gap-1.5 rounded-lg border border-white/5 px-3 py-2 text-xs text-gray-400 transition-colors hover:text-[#00e89d] sm:border-0 sm:px-0 sm:py-0"
                     >
-                      <Icon size={12} className="group-hover:text-[#00e89d] transition-colors" />
-                      {label}
+                      <Icon size={12} className="flex-shrink-0 transition-colors group-hover:text-[#00e89d]" />
+                      <span className="min-w-0 break-all sm:break-normal">{label}</span>
                     </a>
                   ))}
                 </motion.div>
@@ -247,13 +247,21 @@ export default function ResumePage() {
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={panelInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.15, duration: 0.7 }}
-                className="flex-shrink-0"
+                className="flex-shrink-0 self-start"
               >
                 <div
                   className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-3xl overflow-hidden"
                   style={{ border: "2px solid rgba(0,232,157,0.3)", boxShadow: "0 0 40px rgba(0,232,157,0.15)" }}
                 >
-                  <img src="/profile.jpg" alt="Kholofelo Robyn" className="w-full h-full object-cover" style={{ objectPosition: "center 15%" }} />
+                  <img
+                    src="/profile.jpg"
+                    alt="Kholofelo Robyn"
+                    width={144}
+                    height={144}
+                    fetchPriority="high"
+                    className="h-full w-full object-cover"
+                    style={{ objectPosition: "center 15%" }}
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#060d18]/30 to-transparent" />
                 </div>
 
@@ -270,7 +278,7 @@ export default function ResumePage() {
               className="mb-12"
             >
               <SectionTitle icon={Code2} label="Summary" />
-              <p className="text-gray-300 text-sm leading-relaxed max-w-2xl">
+              <p className="max-w-2xl text-sm leading-relaxed text-gray-300">
                 I am a <span className="text-white font-semibold">Full-Stack MERN Developer</span> and{" "}
                 <span className="text-white font-semibold">Bachelor of Eng Tech in Computer Engineering (Student)</span>{" "}
                 at Cape Peninsula University of Technology, Cape Town. I build scalable, production-grade web applications —
@@ -299,9 +307,9 @@ export default function ResumePage() {
                   </div>
                   <ul className="space-y-1.5 mt-3">
                     {exp.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                      <li key={i} className="flex min-w-0 items-start gap-2 text-sm text-gray-400">
                         <ChevronRight size={13} className="text-[#00e89d] mt-0.5 flex-shrink-0" />
-                        {b}
+                        <span className="break-words">{b}</span>
                       </li>
                     ))}
                   </ul>
@@ -363,16 +371,28 @@ export default function ResumePage() {
               <SectionTitle icon={Award} label="Certificates & Learning" />
               <div className="divide-y" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
                 {certRows.map((cert) => (
-                  <div key={cert.title} className="flex items-center justify-between py-3 gap-4">
+                  <div key={cert.title} className="flex flex-col items-start gap-2 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm text-white font-semibold truncate">{cert.title}</p>
+                      <p className="break-words text-sm font-semibold text-white">{cert.title}</p>
                       <p className="text-xs text-gray-500">{cert.issuer}</p>
                     </div>
-                    <div className="flex items-center gap-3 flex-shrink-0">
+                    <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:flex-shrink-0 sm:justify-start">
                       <span className="font-mono text-[10px] text-gray-600">{cert.date}</span>
-                      <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#00e89d] transition-colors">
-                        <ExternalLink size={12} />
-                      </a>
+                      {cert.link ? (
+                        <a
+                          href={cert.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Open certificate for ${cert.title}`}
+                          className="text-gray-600 transition-colors hover:text-[#00e89d]"
+                        >
+                          <ExternalLink size={12} />
+                        </a>
+                      ) : (
+                        <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-gray-600">
+                          Internal
+                        </span>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -389,9 +409,9 @@ export default function ResumePage() {
               <SectionTitle icon={Code2} label="Key Projects" />
               <div className="space-y-3">
                 {projects.map((p) => (
-                  <div key={p.title} className="flex items-center justify-between gap-4">
-                    <p className="text-sm text-white font-semibold">{p.title}</p>
-                    <div className="flex items-center gap-3 flex-shrink-0">
+                  <div key={p.title} className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                    <p className="w-full break-words text-sm font-semibold text-white">{p.title}</p>
+                    <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto sm:flex-shrink-0">
                       <a href={p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-gray-500 hover:text-white transition-colors">
                         <Github size={11} /> Code
                       </a>

@@ -13,6 +13,23 @@ status: active
 
 ---
 
+### 2026-04-16 | Codex | RESUME MOBILE AUDIT + CV FLOW HARDENING
+
+**Delivered this session:**
+- Resume page mobile overflow fixed on `src/pages/ResumePage.tsx`
+- Decorative background blobs constrained so they no longer widen the viewport on phones
+- Resume contact links, certificate rows, and project rows now wrap/stack correctly on narrow screens
+- Floating CV button resized for mobile viewport safety
+- CV picker controls now have explicit labels; recruiter form inputs now include `name`, `autocomplete`, and inline error wiring
+- Placeholder certificate links no longer point to dead `#` anchors
+
+**Verification:**
+- `npm run check` ✅
+- Local mobile screenshot retaken after patch ✅
+- Ready to ship to Vercel / git deploy
+
+---
+
 ### 2026-04-12 | Claude (Lead) | SESSION COMPLETE — FIXES DELIVERED
 
 **Delivered this session:**
