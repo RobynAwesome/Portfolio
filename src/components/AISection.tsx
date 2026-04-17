@@ -1,5 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { aiProduct } from "../data/portfolioContent";
 
 export default function AISection() {
   const ref = useRef(null);
@@ -20,47 +22,70 @@ export default function AISection() {
             transition={{ duration: 0.7 }}
           >
             <p className="mb-3 text-xs font-semibold tracking-widest text-[#0ea5e9] uppercase">
-              Next-Gen Workflow
+              AI Product
             </p>
             <h2 className="mb-6 text-4xl font-black sm:text-5xl md:text-6xl">
-              <span className="gradient-text">AI-Augmented</span>{" "}
-              <span className="gradient-text-green">Development.</span>
+              <span className="gradient-text">Kopano</span>{" "}
+              <span className="gradient-text-green">Context.</span>
             </h2>
             <p className="mb-8 text-lg leading-relaxed text-gray-400">
-              I don't just use AI tools — I build the infrastructure that makes
-              them trustworthy.{" "}
-              <span className="text-white font-medium">Kopano Context</span> is
-              my open-source multi-agent orchestration framework: it coordinates
-              Claude, Gemini, Grok, and 100+ other LLMs through a Smart
-              Moderator AI, logs every decision to a persistent Data Lake for
-              full auditability, and broadcasts live agent reasoning to{" "}
-              <span className="text-white font-medium">Kopano Studio</span>. The
-              Kopano SafeSkill trust layer scans for prompt injection, data
-              exfiltration, and backdoors before any agent runs. Audit twice.
-              No black boxes.
+              {aiProduct.problem} On the homepage I want this to read as a teaser,
+              not the full breakdown, so the architecture, evals, failure modes,
+              and measurable results live on the projects page where they belong.
             </p>
-            <motion.a
-              href="https://github.com/RobynAwesome/Introduction-to-MCP"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 font-semibold text-[#00e89d] transition-colors duration-300 hover:text-[#34d399]"
-              whileHover={{ x: 4 }}
+            <motion.div
+              className="mb-8 flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.15 }}
             >
-              View Kopano Context on GitHub
-              <svg
-                className="h-[18px] w-[18px] transition-transform group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <Link
+                to="/projects"
+                className="group inline-flex items-center gap-2 font-semibold text-[#00e89d] transition-colors duration-300 hover:text-[#34d399]"
               >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </motion.a>
+                Open the full KC breakdown
+                <svg
+                  className="h-[18px] w-[18px] transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <motion.a
+                href="https://github.com/RobynAwesome/Introduction-to-MCP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-semibold text-[#0ea5e9] transition-colors duration-300 hover:text-[#38bdf8]"
+                whileHover={{ x: 4 }}
+              >
+                View repository
+              </motion.a>
+            </motion.div>
+            <motion.div
+              className="grid gap-3 sm:grid-cols-2"
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {aiProduct.measurableResults.slice(0, 4).map((result) => (
+                <div
+                  key={result.label}
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
+                >
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500">
+                    {result.label}
+                  </p>
+                  <p className="mt-2 text-lg font-black text-white">{result.value}</p>
+                </div>
+              ))}
+            </motion.div>
             {/* Feature badges */}
-            <div className="flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <span className="rounded-full border border-[#0ea5e9]/20 bg-[#0ea5e9]/5 px-3 py-1.5 text-xs font-medium text-[#0ea5e9]">
                 Claude · Gemini · Grok
               </span>

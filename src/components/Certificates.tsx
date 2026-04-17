@@ -1,6 +1,11 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Award, ExternalLink, ChevronLeft, ChevronRight, GraduationCap } from "lucide-react";
+import {
+  courseworkCredentials,
+  publicBadges,
+  verifiedCredentials,
+} from "../data/portfolioContent";
 
 /* ── Brand icon components ── */
 function AnthropicIcon({ size = 22 }: { size?: number }) {
@@ -54,83 +59,20 @@ const ISSUER_META: Record<string, { color: string; bg: string; Icon: React.FC<{ 
 };
 
 const certificates = [
-  {
-    title: "AI Fluency: Framework & Foundations",
-    issuer: "Anthropic",
-    date: "March 2026",
-    link: "https://verify.skilljar.com/c/eg2hpc738332",
-    description: "Anthropic's AI Fluency course — frameworks for effective, ethical, and safe AI interaction.",
-  },
-  {
-    title: "Introduction to Model Context Protocol",
-    issuer: "Anthropic",
-    date: "March 2026",
-    link: "https://verify.skilljar.com/c/t32humid3i99",
-    description: "Building MCP servers and clients with the Python SDK using tools, resources, and prompts.",
-  },
-  {
-    title: "Frontend Developer (React)",
-    issuer: "HackerRank",
-    date: "March 2026",
-    link: "https://www.hackerrank.com/certificates/eb2baf4f04c3",
-    description: "Role certification — React, JavaScript, HTML, CSS, and testing. Building responsive UIs.",
-  },
-  {
-    title: "AI for Cybersecurity",
-    issuer: "LinkedIn Learning",
-    date: "March 2026",
+  ...verifiedCredentials.map((credential) => ({
+    title: credential.title,
+    issuer: credential.issuer,
+    date: credential.date,
+    link: credential.href ?? "#",
+    description: credential.note ?? `${credential.issuer} credential.`,
+  })),
+  ...courseworkCredentials.map((credential) => ({
+    title: credential.title,
+    issuer: credential.issuer,
+    date: credential.date,
     link: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/details/certifications/",
-    description: "Applying ML and generative AI to cybersecurity problems.",
-  },
-  {
-    title: "Azure Cloud Fundamentals",
-    issuer: "LinkedIn Learning",
-    date: "March 2026",
-    link: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/details/certifications/",
-    description: "Core Azure services, identity, governance, cloud security, and cost management.",
-  },
-  {
-    title: "Generative AI in Cloud Computing",
-    issuer: "LinkedIn Learning",
-    date: "March 2026",
-    link: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/details/certifications/",
-    description: "AI agents and generative AI services in cloud environments.",
-  },
-  {
-    title: "What is Generative AI?",
-    issuer: "LinkedIn Learning",
-    date: "March 2026",
-    link: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/details/certifications/",
-    description: "Foundations of generative AI and its industry impact.",
-  },
-  {
-    title: "React (Basic)",
-    issuer: "HackerRank",
-    date: "March 2026",
-    link: "https://www.hackerrank.com/certificates/b52e37357999",
-    description: "Routing, rendering, state management, event handling, ES6.",
-  },
-  {
-    title: "Node.js (Basic)",
-    issuer: "HackerRank",
-    date: "March 2026",
-    link: "https://www.hackerrank.com/certificates/bc9391871061",
-    description: "Package management, callbacks, event loop, buffers, streams, file systems.",
-  },
-  {
-    title: "Java (Basic)",
-    issuer: "HackerRank",
-    date: "March 2026",
-    link: "https://www.hackerrank.com/certificates/400feb96b063",
-    description: "Java classes, data structures, inheritance, exception handling.",
-  },
-  {
-    title: "CSS (Basic)",
-    issuer: "HackerRank",
-    date: "March 2026",
-    link: "https://www.hackerrank.com/certificates/2fcac2281716",
-    description: "Cascading, inheritance, text styling, layouts, boxing.",
-  },
+    description: credential.note ?? `${credential.issuer} coursework.`,
+  })),
   {
     title: "BEng Tech — Computer Engineering",
     issuer: "Cape Peninsula University of Technology",
@@ -338,7 +280,7 @@ export default function Certificates() {
         <div className="p-4 border-b border-[#1a2744] flex items-center justify-between">
           <span className="text-sm font-semibold text-white">HackerRank Certificate Preview</span>
           <a
-            href="https://www.hackerrank.com/certificates/eb2baf4f04c3"
+            href={publicBadges[0]?.href}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-[#00e89d] hover:text-[#34d399] transition-colors flex items-center gap-1"

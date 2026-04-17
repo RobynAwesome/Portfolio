@@ -7,6 +7,7 @@ const navLinks = [
   { to: "/resume", label: "Resume" },
   { to: "/projects", label: "Projects" },
   { to: "/open-source", label: "Open Source" },
+  { to: "/roadmap", label: "Roadmap" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -41,7 +42,7 @@ export default function Footer() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#00e89d]" />
             </div>
             <p className="text-xs leading-relaxed text-gray-600">
-              Full-Stack MERN Developer based in Cape Town, South Africa.
+              Junior software engineer based in Cape Town, building production web systems and AI tooling.
             </p>
           </div>
 
@@ -126,7 +127,7 @@ export default function Footer() {
 
           <p className="flex items-center gap-1 text-[10px] text-gray-600">
             Built with <Heart size={8} className="text-red-500" /> React &
-            TailwindCSS
+            TypeScript
           </p>
         </div>
       </div>

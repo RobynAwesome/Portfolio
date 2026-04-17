@@ -10,7 +10,7 @@ const contributions = [
   },
   {
     name: "5s-Arena-Blog",
-    description: "MERN stack blog with authentication, RBAC, image uploads & infinite scroll.",
+    description: "Role-aware blog system with authentication, RBAC, image uploads, and infinite scroll.",
     highlight: "4 stars",
   },
   {
@@ -92,7 +92,7 @@ export default function OpenSource() {
 
             {/* GitHub Achievements */}
             <div className="flex flex-wrap gap-3 mb-8">
-              {["Pull Shark", "YOLO", "Pair Extraordinaire"].map((badge) => (
+              {["Pull Shark", "Quickdraw", "Pair Extraordinaire"].map((badge) => (
                 <span
                   key={badge}
                   className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#00e89d]/20 text-[#00e89d] bg-[#00e89d]/5"

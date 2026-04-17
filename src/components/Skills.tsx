@@ -60,30 +60,30 @@ const skills = [
   {
     icon: <JSIcon />,
     watermark: <JSWatermark />,
-    category: "JavaScript & TypeScript",
+    category: "Interfaces & Motion",
     description:
-      "I code in modern ES2024+ JavaScript across all environments. I now use TypeScript for type-safe, maintainable codebases — a requirement for production-grade applications.",
-    techs: ["TypeScript", "Node.js", "HTML5", "CSS3"],
+      "I care about interface feel as much as function: expressive motion, strong typography, clear hierarchy, and responsive systems that still behave under real content.",
+    techs: ["React", "TypeScript", "TailwindCSS", "Framer Motion", "Figma"],
     bg: "linear-gradient(135deg, #0c1a35 0%, #0f2240 50%, #0a1628 100%)",
     accent: "#f7df1e",
   },
   {
     icon: <ReactIcon />,
     watermark: <ReactWatermark />,
-    category: "React Ecosystem",
+    category: "Product Systems",
     description:
-      "Building component-driven UIs with React 18+, hooks, and the broader ecosystem. From SPAs to SSR with Next.js and Vite for blazing-fast development.",
-    techs: ["React", "Next.js", "Vite", "Redux", "Framer Motion"],
+      "The strongest thread in my public work is product flow: bookings, admin tooling, customer surfaces, and the connections between frontend choices and operational reality.",
+    techs: ["Next.js", "Node.js", "MongoDB", "Auth", "Payments"],
     bg: "linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0c1a35 100%)",
     accent: "#61dafb",
   },
   {
     icon: <ServerIcon />,
     watermark: <ServerWatermark />,
-    category: "Backend & APIs",
+    category: "AI & Tooling",
     description:
-      "As a Full-Stack Developer, I build robust server-side architectures. From RESTful APIs to database design with MongoDB, I handle the complete backend pipeline.",
-    techs: ["Node.js", "Express", "MongoDB", "REST APIs", "Firebase"],
+      "Kopano Context pulled me deeper into routing, replay logs, trust gates, tool orchestration, and AI runtime design. I treat prompting as one layer, not the whole product.",
+    techs: ["Python", "FastAPI", "SQLite", "LiteLLM", "MCP"],
     bg: "linear-gradient(135deg, #0c1a35 0%, #0a1e30 50%, #0f2240 100%)",
     accent: "#00e89d",
   },
@@ -106,10 +106,17 @@ const githubRepos = [
   },
   {
     name: "Portfolio",
-    description: "Personal portfolio built with React + Vite + TailwindCSS",
+    description: "Current portfolio system with structured content, motion, and deployment checks",
     lang: "TypeScript",
     langColor: "#3178c6",
     url: "https://github.com/RobynAwesome/Portfolio",
+  },
+  {
+    name: "Introduction-to-MCP",
+    description: "Kopano Context runtime, schematics vault, orchestration tooling, and tests",
+    lang: "Python",
+    langColor: "#3776ab",
+    url: "https://github.com/RobynAwesome/Introduction-to-MCP",
   },
 ];
 
@@ -128,13 +135,12 @@ export default function Skills() {
           transition={{ duration: 0.7 }}
         >
           <h2 className="mb-4 text-center text-2xl leading-tight font-black sm:text-3xl md:text-4xl">
-            Full-Stack <span className="gradient-text">Architect.</span>
+            Visual craft with a <span className="gradient-text">real build spine.</span>
           </h2>
           <p className="mx-auto mb-10 max-w-2xl text-center text-base leading-relaxed text-gray-400 sm:text-lg">
-            My experience across the entire MERN stack gives me confidence in the
-            technologies & tools I use. Whether you need help bootstrapping your project
-            or building production-grade features, I bring both frontend finesse and
-            backend backbone.
+            The stack matters less than the way it comes together. This is the toolkit
+            behind the interfaces, product flows, and AI systems that show up across
+            the rest of the portfolio.
           </p>
         </motion.div>
 
@@ -159,7 +165,7 @@ export default function Skills() {
                 activeTab === "skills" ? "text-white" : "text-gray-500 hover:text-gray-300"
               }`}
             >
-              Tech Stack
+              Toolkit
             </button>
             <button
               onClick={() => setActiveTab("github")}
@@ -273,7 +279,7 @@ export default function Skills() {
                       PRO
                     </span>
                   </div>
-                  <p className="text-sm text-gray-400">Full-Stack MERN Developer | Cape Town, South Africa</p>
+                  <p className="text-sm text-gray-400">Freelance Web Developer · AI Infrastructure Builder · Cape Town</p>
                 </div>
                 <a
                   href="https://github.com/RobynAwesome/"
@@ -288,7 +294,7 @@ export default function Skills() {
             </div>
 
             {/* Repo cards */}
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
               {githubRepos.map((repo, i) => (
                 <motion.a
                   key={repo.name}

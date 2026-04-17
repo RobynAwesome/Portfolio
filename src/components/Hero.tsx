@@ -1,223 +1,206 @@
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, BriefcaseBusiness, FileText } from "lucide-react";
+import type { ReactNode } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Copy, Check, ArrowRight, Eye, Download } from "lucide-react";
+import { profile } from "../data/portfolioContent";
 
-const fadeUp = {
-  initial: { opacity: 0, y: 32, filter: "blur(8px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+const easeCurve = [0.22, 1, 0.36, 1] as const;
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 22 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: easeCurve },
+  },
 };
 
 export default function Hero() {
-  const [copied, setCopied] = useState(false);
-  const [imgError, setImgError] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const photoY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const [imgError, setImgError] = useState(false);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText("rkholofelo@gmail.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const portraitY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const glowY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
 
   return (
     <section
-      id="hero"
       ref={heroRef}
-      className="relative min-h-screen overflow-hidden flex flex-col lg:flex-row"
+      className="relative overflow-hidden px-6 pb-16 pt-28 sm:px-8 sm:pb-24 sm:pt-32 lg:px-12 lg:pb-28 lg:pt-36"
     >
-      {/* ── PHOTO — Full-bleed left panel ── */}
-      <div className="relative w-full h-[60vh] lg:h-auto lg:w-[48%] xl:w-[46%] 2xl:w-[44%] flex-shrink-0 overflow-hidden">
-        {/* Parallax image wrapper */}
-        <motion.div
-          className="absolute inset-0 w-full"
-          style={{ y: photoY, height: "120%", top: "-10%" }}
-        >
-          {!imgError ? (
-            <img
-              src="/profile.jpg"
-              alt="Kholofelo Robyn Rababalela"
-              onError={() => setImgError(true)}
-              className="w-full h-full object-cover hero-profile-img"
-              style={{ objectPosition: "center 15%" }}
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-[#0b1a36] to-[#060d18]" />
-          )}
-        </motion.div>
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{ y: glowY }}
+      >
+        <div className="absolute left-[-10%] top-[10%] h-64 w-64 rounded-full bg-[#00e89d]/10 blur-3xl sm:h-80 sm:w-80" />
+        <div className="absolute right-[-8%] top-[18%] h-72 w-72 rounded-full bg-[#0ea5e9]/14 blur-3xl sm:h-[26rem] sm:w-[26rem]" />
+        <div className="absolute bottom-[4%] left-[28%] h-56 w-56 rounded-full bg-white/5 blur-3xl" />
+      </motion.div>
 
-        {/* Film grain overlay — editorial quality */}
-        <div
-          className="absolute inset-0 pointer-events-none z-10"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")`,
-            opacity: 0.35,
-            mixBlendMode: "overlay",
+      <div className="absolute inset-0 opacity-40">
+        <motion.div
+          className="absolute inset-x-0 top-[8%] h-px bg-gradient-to-r from-transparent via-white/18 to-transparent"
+          animate={{ opacity: [0.25, 0.6, 0.25], scaleX: [0.96, 1, 0.96] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-[12%] top-[22%] h-28 w-28 rounded-full border border-white/10"
+          animate={{ rotate: 360, scale: [1, 1.06, 1] }}
+          transition={{
+            rotate: { duration: 24, repeat: Infinity, ease: "linear" },
+            scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
           }}
         />
-
-        {/* Multi-stop right fade — blends into dark panel */}
-        <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to right, transparent 30%, rgba(6,13,24,0.3) 55%, rgba(6,13,24,0.75) 72%, #060d18 92%)" }} />
-
-        {/* Mobile bottom fade */}
-        <div className="absolute inset-0 lg:hidden z-10" style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(6,13,24,0.6) 70%, #060d18 95%)" }} />
-
-        {/* Top vignette */}
-        <div className="absolute top-0 left-0 right-0 h-40 z-10" style={{ background: "linear-gradient(to bottom, rgba(6,13,24,0.55), transparent)" }} />
-
-        {/* Green light leak — where photo meets text panel */}
-        <div className="absolute top-0 right-0 bottom-0 w-28 z-10 pointer-events-none" style={{ background: "linear-gradient(to left, transparent, rgba(0,232,157,0.04) 60%, transparent)" }} />
-
-        {/* Bottom soft arc (subtle) */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 z-10 lg:hidden" style={{ background: "radial-gradient(ellipse at 50% 100%, rgba(6,13,24,0.9) 0%, transparent 70%)" }} />
       </div>
 
-      {/* ── TEXT — Right panel ── */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-14 xl:px-20 2xl:px-28 pt-8 pb-20 lg:pt-28 lg:pb-16 bg-[#060d18]">
-        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full opacity-20 blur-[100px] pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0ea5e9, transparent)" }} />
-        <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full opacity-15 blur-[80px] pointer-events-none"
-          style={{ background: "radial-gradient(circle, #00e89d, transparent)" }} />
-
-        <div className="relative max-w-xl xl:max-w-2xl">
-          <motion.p
-            {...fadeUp}
-            transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-            className="font-mono text-[#00e89d] text-xs sm:text-sm tracking-[0.25em] uppercase mb-6 flex items-center gap-3"
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:gap-12">
+        <motion.div
+          initial={{ opacity: 0, x: -36, scale: 0.96 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 0.9, ease: easeCurve }}
+          className="relative order-2 mx-auto w-full max-w-[30rem] lg:order-1 lg:max-w-none"
+        >
+          <motion.div
+            style={{ y: portraitY }}
+            className="relative overflow-hidden rounded-[8px] border border-white/10 bg-[#0b1426]"
           >
-            <span className="w-8 h-[1px] bg-[#00e89d] inline-block" />
-            Full-Stack MERN Developer
+            {!imgError ? (
+              <img
+                src="/profile.jpg"
+                alt="Kholofelo Robyn Rababalela"
+                onError={() => setImgError(true)}
+                className="aspect-[4/5] w-full object-cover"
+                style={{ objectPosition: "center 18%" }}
+              />
+            ) : (
+              <div className="aspect-[4/5] w-full bg-[linear-gradient(145deg,#10203d,#060d18)]" />
+            )}
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,13,24,0.04),rgba(6,13,24,0.18))]" />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.35 }}
+            className="absolute -bottom-5 right-4 max-w-[16rem] rounded-[8px] border border-white/10 bg-[#091325]/88 px-4 py-3 backdrop-blur-xl"
+          >
+            <p className="text-[11px] uppercase tracking-[0.22em] text-[#00e89d]">
+              Current Focus
+            </p>
+            <p className="mt-2 text-sm font-semibold text-white">
+              Shipping web products and AI tooling that can be audited, tested, and handed over cleanly.
+            </p>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="order-1 lg:order-2"
+        >
+          <motion.p
+            variants={itemVariants}
+            className="text-xs font-semibold uppercase tracking-[0.24em] text-[#00e89d]"
+          >
+            Cape Town-based product engineer
           </motion.p>
 
           <motion.h1
-            {...fadeUp}
-            transition={{ duration: 0.85, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
-            className="font-black leading-[0.88] tracking-tight text-white mb-1"
-            style={{ fontSize: "clamp(2.8rem, 6vw, 6.5rem)" }}
+            variants={itemVariants}
+            className="mt-5 max-w-4xl text-[clamp(2.9rem,6vw,6rem)] font-black leading-[0.92] text-white"
           >
-            Kholofelo
+            I build hiring-ready proof through shipped products and AI systems.
           </motion.h1>
-          <motion.h1
-            {...fadeUp}
-            transition={{ duration: 0.85, delay: 0.12, ease: [0.23, 1, 0.32, 1] }}
-            className="font-black leading-[0.88] tracking-tight pb-1 mb-1"
-            style={{
-              fontSize: "clamp(2.8rem, 6vw, 6.5rem)",
-              background: "linear-gradient(135deg, #00e89d 0%, #0ea5e9 60%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Robyn
-          </motion.h1>
-          <motion.h1
-            {...fadeUp}
-            transition={{ duration: 0.85, delay: 0.16, ease: [0.23, 1, 0.32, 1] }}
-            className="font-black leading-[0.88] tracking-tight text-white mb-8"
-            style={{ fontSize: "clamp(2.8rem, 6vw, 6.5rem)" }}
-          >
-            Rababalela<span className="text-[#00e89d]">.</span>
-          </motion.h1>
-
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.22, ease: [0.23, 1, 0.32, 1] }}
-            className="origin-left h-[1px] w-16 mb-8"
-            style={{ background: "linear-gradient(90deg, #00e89d, #0ea5e9)" }}
-          />
 
           <motion.p
-            {...fadeUp}
-            transition={{ duration: 0.8, delay: 0.28, ease: [0.23, 1, 0.32, 1] }}
-            className="text-gray-400 text-base sm:text-lg leading-relaxed mb-10 max-w-md"
+            variants={itemVariants}
+            className="mt-6 max-w-2xl text-base leading-7 text-gray-300 sm:text-lg"
           >
-            I build scalable, production-grade web applications with the{" "}
-            <span className="text-white font-semibold">MERN stack</span> —
-            from RESTful APIs to polished, animated frontends.
+            {profile.name} is a freelance web developer and AI infrastructure builder creating booking flows,
+            product systems, and multi-agent tooling with visible quality habits.
           </motion.p>
 
           <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.8, delay: 0.36, ease: [0.23, 1, 0.32, 1] }}
-            className="flex flex-wrap items-start gap-3 mb-14"
+            variants={itemVariants}
+            className="mt-8 flex flex-wrap gap-3"
           >
-            <Link
+            <HeroButton
               to="/contact"
-              className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-bold text-sm text-[#060d18] transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-[#00e89d]/25 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00e89d]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#060d18]"
-              style={{ background: "linear-gradient(135deg, #00e89d, #34d399)" }}
-            >
-              Hire Me
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
+              label="Hire Me"
+              icon={<ArrowRight size={16} />}
+              primary
+            />
+            <HeroButton
               to="/projects"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-sm border border-white/10 text-gray-300 hover:border-[#0ea5e9]/40 hover:text-white transition-all duration-200"
-            >
-              <Eye size={16} />
-              View Work
-            </Link>
-            <Link
+              label="Projects"
+              icon={<BriefcaseBusiness size={16} />}
+            />
+            <HeroButton
               to="/resume"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-sm border border-white/10 text-gray-300 hover:border-[#00e89d]/40 hover:text-white transition-all duration-200"
-            >
-              <Download size={16} />
-              Download CV
-            </Link>
-            <button
-              onClick={copyEmail}
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-sm border border-white/10 text-gray-300 hover:border-[#00e89d]/40 hover:text-white transition-all duration-200"
-            >
-              <AnimatePresence mode="wait">
-                {copied ? (
-                  <motion.span key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="text-[#00e89d]">
-                    <Check size={16} />
-                  </motion.span>
-                ) : (
-                  <motion.span key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }}>
-                    <Copy size={16} />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-              {copied ? "Copied!" : "Copy Email"}
-            </button>
+              label="Resume"
+              icon={<FileText size={16} />}
+            />
           </motion.div>
 
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.8, delay: 0.44, ease: [0.23, 1, 0.32, 1] }}
-            className="flex items-center gap-8 sm:gap-12"
+          <motion.p
+            variants={itemVariants}
+            className="mt-8 max-w-xl border-t border-white/8 pt-5 text-sm leading-7 text-gray-400"
           >
-            {[
-              { value: "MERN", label: "Core Stack" },
-              { value: "React", label: "Frontend" },
-              { value: "Node.js", label: "Backend" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="text-2xl sm:text-3xl font-black text-white leading-none mb-1">
-                  {stat.value}
-                </p>
-                <p className="text-[11px] text-gray-500 uppercase tracking-widest font-medium">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
+            Start with Bookit for shipped delivery, then move to Kopano Context for prompts, tools, evals,
+            failure modes, and trust controls.
+          </motion.p>
+        </motion.div>
       </div>
-
-      <motion.div
-        className="absolute bottom-8 right-10 hidden lg:flex flex-col items-center gap-2"
-        animate={{ opacity: [0.3, 0.7, 0.3] }}
-        transition={{ duration: 2.5, repeat: Infinity }}
-      >
-        <div className="w-[1px] h-10 bg-gradient-to-b from-[#00e89d] to-transparent" />
-        <span className="text-[10px] text-gray-600 uppercase tracking-[0.2em] font-mono" style={{ writingMode: "vertical-rl" }}>
-          scroll
-        </span>
-      </motion.div>
     </section>
+  );
+}
+
+function HeroButton({
+  to,
+  label,
+  icon,
+  primary = false,
+}: {
+  to: string;
+  label: string;
+  icon: ReactNode;
+  primary?: boolean;
+}) {
+  return (
+    <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+      <Link
+        to={to}
+        className={`group inline-flex items-center gap-2 rounded-[8px] px-5 py-3 text-sm font-semibold transition-colors duration-200 ${
+          primary
+            ? "bg-[#00e89d] text-[#06101d] hover:bg-[#34f0af]"
+            : "border border-white/12 bg-white/[0.03] text-white hover:border-white/24 hover:bg-white/[0.06]"
+        }`}
+      >
+        <span>{label}</span>
+        <motion.span
+          className="inline-flex"
+          whileHover={{ x: 3 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+        >
+          {icon}
+        </motion.span>
+      </Link>
+    </motion.div>
   );
 }

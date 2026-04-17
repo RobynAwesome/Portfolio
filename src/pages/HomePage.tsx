@@ -1,770 +1,187 @@
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import Hero from "../components/Hero";
 import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useSpring,
-  useInView,
-  type Variants,
-} from "framer-motion";
-import {
-  ArrowRight,
-  Copy,
-  Check,
-  ExternalLink,
-  Github,
-  Linkedin,
-} from "lucide-react";
-
-// ─── HERO SECTION ────────────────────────────────────────────────────────────
-
-function HeroSection() {
-  const [copied, setCopied] = useState(false);
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText("rkholofelo@gmail.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const stagger = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-  };
-
-  const EASE = [0.23, 1, 0.32, 1] as [number, number, number, number];
-  const slideUp: Variants = {
-    hidden: { opacity: 0, y: 60, filter: "blur(8px)" },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.85, ease: EASE },
-    },
-  };
-
-  return (
-    <section
-      id="hero"
-      className="relative min-h-screen overflow-hidden flex flex-col lg:flex-row"
-    >
-      {/* ── LEFT: Photo ── */}
-      <motion.div
-        className="relative w-full h-[60vh] lg:h-auto lg:w-[48%] xl:w-[46%] 2xl:w-[44%] flex-shrink-0 overflow-hidden"
-        initial={{ clipPath: "inset(0 100% 0 0)" }}
-        animate={{ clipPath: "inset(0 0% 0 0)" }}
-        transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
-      >
-        {/* Scan shimmer ✅ KEPT */}
-        <motion.div
-          className="absolute inset-0 z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to right, transparent 0%, rgba(0,232,157,0.18) 50%, transparent 100%)",
-          }}
-          initial={{ x: "-100%" }}
-          animate={{ x: "200%" }}
-          transition={{ duration: 1.3, ease: "easeInOut", delay: 0.6 }}
-        />
-        <img
-          src="/profile.jpg"
-          alt="Kholofelo Robyn Rababalela"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: "center 15%" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#060d18]" />
-        <div className="absolute inset-0 lg:hidden bg-gradient-to-b from-transparent via-transparent to-[#060d18]" />
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#060d18]/60 to-transparent" />
-      </motion.div>
-
-      {/* ── RIGHT: Content ── */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-14 xl:px-20 2xl:px-28 pt-8 pb-20 lg:pt-28 lg:pb-16 bg-[#060d18]">
-        <div
-          className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full opacity-20 blur-[100px] pointer-events-none"
-          style={{ background: "radial-gradient(circle, #0ea5e9, transparent)" }}
-        />
-        <div
-          className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full opacity-15 blur-[80px] pointer-events-none"
-          style={{ background: "radial-gradient(circle, #00e89d, transparent)" }}
-        />
-
-        <motion.div
-          className="relative max-w-xl xl:max-w-2xl"
-          variants={stagger}
-          initial="hidden"
-          animate="show"
-        >
-          {/* Eyebrow */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, x: -50, skewX: -6 },
-              show: { opacity: 1, x: 0, skewX: 0, transition: { duration: 0.7, ease: [0.23, 1, 0.32, 1] } },
-            }}
-            className="font-mono text-[#00e89d] text-xs sm:text-sm tracking-[0.25em] uppercase mb-6 flex items-center gap-3"
-          >
-            <motion.span className="inline-block h-[1px] bg-[#00e89d]" animate={{ width: ["2rem", "3rem", "2rem"], opacity: [1, 0.5, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
-            <motion.span animate={{ letterSpacing: ["0.25em", "0.35em", "0.25em"] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}>
-              Full-Stack MERN Developer
-            </motion.span>
-            <motion.span className="inline-block h-[1px] bg-[#00e89d]" animate={{ width: ["2rem", "3rem", "2rem"], opacity: [1, 0.5, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }} />
-          </motion.div>
-
-          {/* Kholofelo */}
-          <div className="overflow-hidden mb-1">
-            <motion.h1
-              className="font-black leading-[0.88] tracking-tight text-white"
-              style={{ fontSize: "clamp(2.8rem, 6vw, 6.5rem)" }}
-              initial={{ y: 100, opacity: 0, rotateX: -20 }}
-              animate={{ y: 0, opacity: 1, rotateX: 0 }}
-              transition={{ duration: 0.85, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ x: [0, -4, 6, -2, 0], transition: { duration: 0.45 } }}
-            >
-              Kholofelo
-            </motion.h1>
-          </div>
-
-          {/* Robyn — overflow-visible ✅ */}
-          <div className="overflow-visible pb-1 mb-1">
-            <motion.h1
-              className="font-black leading-[0.88] tracking-tight"
-              style={{
-                fontSize: "clamp(2.8rem, 6vw, 6.5rem)",
-                background: "linear-gradient(135deg, #00e89d 0%, #0ea5e9 60%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-              initial={{ y: 100, opacity: 0, rotateX: -20 }}
-              animate={{ y: 0, opacity: 1, rotateX: 0 }}
-              transition={{ duration: 0.85, delay: 0.13, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ x: [0, 10, -6, 4, 0], filter: ["brightness(1)", "brightness(1.4)", "brightness(1)"], transition: { duration: 0.55, ease: "easeInOut" } }}
-            >
-              Robyn
-            </motion.h1>
-          </div>
-
-          {/* Rababalela */}
-          <div className="overflow-hidden mb-8">
-            <motion.h1
-              className="font-black leading-[0.88] tracking-tight text-white"
-              style={{ fontSize: "clamp(2.8rem, 6vw, 6.5rem)" }}
-              initial={{ y: 100, opacity: 0, rotateX: -20 }}
-              animate={{ y: 0, opacity: 1, rotateX: 0 }}
-              transition={{ duration: 0.85, delay: 0.18, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ x: [0, 3, -3, 0], transition: { duration: 0.35 } }}
-            >
-              Rababalela
-              <motion.span className="text-[#00e89d]" animate={{ scale: [1, 1.8, 1], opacity: [1, 0.5, 1], textShadow: ["0 0 0px #00e89d", "0 0 20px #00e89d", "0 0 0px #00e89d"] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>.</motion.span>
-            </motion.h1>
-          </div>
-
-          {/* Divider */}
-          <motion.div initial={{ scaleX: 0, opacity: 0 }} animate={{ scaleX: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.25, ease: [0.23, 1, 0.32, 1] }} className="origin-left h-[1px] w-16 mb-8" style={{ background: "linear-gradient(90deg, #00e89d, #0ea5e9)" }} />
-
-          {/* Bio */}
-          <motion.p variants={slideUp} className="text-gray-400 text-base sm:text-lg leading-relaxed mb-10 max-w-md">
-            I build scalable, production-grade web applications with the{" "}
-            <motion.span className="text-white font-semibold" whileHover={{ color: "#00e89d" }}>MERN stack</motion.span>{" "}
-            — from RESTful APIs to polished, animated frontends.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.0 } } }} className="flex flex-col sm:flex-row items-start gap-4 mb-14">
-            <motion.div
-              variants={{ hidden: { opacity: 0, y: 40, scale: 0.85 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 200, damping: 16, delay: 0.38 } } }}
-              whileHover={{ scale: 1.07, boxShadow: "0 0 36px rgba(0,232,157,0.45), 0 0 12px rgba(0,232,157,0.3)" }}
-              whileTap={{ scale: 0.94 }}
-            >
-              <Link to="/contact" className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-bold text-sm text-[#060d18] transition-all duration-300 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00e89d]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#060d18]" style={{ background: "linear-gradient(135deg, #00e89d, #34d399)" }}>
-                Hire Me
-                <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}><ArrowRight size={16} /></motion.span>
-              </Link>
-            </motion.div>
-
-            <motion.button
-              onClick={copyEmail}
-              variants={{ hidden: { opacity: 0, y: 40, scale: 0.85 }, show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 200, damping: 16, delay: 0.48 } } }}
-              whileHover={{ scale: 1.05, borderColor: "rgba(0,232,157,0.5)", color: "#fff" }}
-              whileTap={{ scale: 0.94 }}
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-sm border border-white/10 text-gray-300 hover:border-[#00e89d]/40 hover:text-white transition-all duration-300"
-            >
-              <AnimatePresence mode="wait">
-                {copied ? (
-                  <motion.span key="check" initial={{ scale: 0, rotate: -90 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0 }} className="text-[#00e89d]"><Check size={16} /></motion.span>
-                ) : (
-                  <motion.span key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}><Copy size={16} /></motion.span>
-                )}
-              </AnimatePresence>
-              {copied ? "Copied!" : "Copy Email"}
-            </motion.button>
-          </motion.div>
-
-          {/* Mini stats */}
-          <motion.div variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0 } } }} className="flex items-center gap-8 sm:gap-12">
-            {[{ value: "MERN", label: "Core Stack" }, { value: "React", label: "Frontend" }, { value: "Node.js", label: "Backend" }].map((item, i) => (
-              <motion.div
-                key={item.label}
-                variants={{ hidden: { opacity: 0, y: 50, rotateY: -25, scale: 0.85 }, show: { opacity: 1, y: 0, rotateY: 0, scale: 1, transition: { type: "spring", stiffness: 160, damping: 16, delay: 0.6 + i * 0.12 } } }}
-                whileHover={{ y: -6, scale: 1.06, transition: { type: "spring", stiffness: 300, damping: 18 } }}
-                className="cursor-default"
-              >
-                <motion.p className="text-2xl sm:text-3xl font-black text-white leading-none mb-1" animate={{ opacity: [1, 0.7, 1] }} transition={{ duration: 2.5 + i * 0.4, repeat: Infinity, delay: i * 0.5 }}>{item.value}</motion.p>
-                <p className="text-[11px] text-gray-500 uppercase tracking-widest font-medium">{item.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div className="absolute bottom-8 right-10 hidden lg:flex flex-col items-center gap-2" animate={{ opacity: [0.3, 0.7, 0.3] }} transition={{ duration: 2.5, repeat: Infinity }}>
-          <div className="w-[1px] h-10 bg-gradient-to-b from-[#00e89d] to-transparent" />
-          <span className="text-[10px] text-gray-600 uppercase tracking-[0.2em] font-mono" style={{ writingMode: "vertical-rl" }}>scroll</span>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ─── TECH TICKER ─────────────────────────────────────────────────────────────
-
-const TECHS = [
-  { text: "React", color: "#61dafb" }, { text: "Node.js", color: "#00e89d" },
-  { text: "TypeScript", color: "#0ea5e9" }, { text: "MongoDB", color: "#00e89d" },
-  { text: "Express", color: "#00e89d" }, { text: "Next.js", color: "#ffffff" },
-  { text: "TailwindCSS", color: "#0ea5e9" }, { text: "Vite", color: "#a855f7" },
-  { text: "Framer Motion", color: "#a855f7" }, { text: "JavaScript", color: "#f7df1e" },
-  { text: "Docker", color: "#0ea5e9" }, { text: "Firebase", color: "#f97316" },
-  { text: "Git", color: "#f97316" }, { text: "Figma", color: "#a855f7" },
-  { text: "REST APIs", color: "#00e89d" }, { text: "Full-Stack", color: "#00e89d" },
-  { text: "MERN Stack", color: "#0ea5e9" }, { text: "Vercel", color: "#ffffff" },
-];
-
-function TechTicker() {
-  const doubled = [...TECHS, ...TECHS];
-  return (
-    <section
-      className="relative py-10 overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #060d18 0%, #070f1c 50%, #060d18 100%)",
-        borderTop: "1px solid rgba(0,232,157,0.12)",
-        borderBottom: "1px solid rgba(14,165,233,0.12)",
-        clipPath: "polygon(0 8%, 100% 0%, 100% 92%, 0 100%)",
-        margin: "0 0 -24px 0",
-        paddingTop: "56px",
-        paddingBottom: "56px",
-      }}
-    >
-      {/* Mesh gradient */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 20% 50%, rgba(0,232,157,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(14,165,233,0.06) 0%, transparent 60%)" }} />
-      <div className="absolute inset-0 dot-grid pointer-events-none opacity-40" />
-      <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-[#060d18] to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-[#060d18] to-transparent" />
-      <motion.div className="flex gap-6 mb-5" animate={{ x: ["0%", "-50%"] }} transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 30, ease: "linear" } }}>
-        {doubled.map((t, i) => (
-          <div key={`top-${i}`} className="flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-full border-2 whitespace-nowrap" style={{ borderColor: `${t.color}40`, backgroundColor: `${t.color}10` }}>
-            <span className="w-2.5 h-2.5 rounded-full shadow-lg" style={{ backgroundColor: t.color, boxShadow: `0 0 10px ${t.color}60` }} />
-            <span className="text-sm font-bold" style={{ color: t.color }}>{t.text}</span>
-          </div>
-        ))}
-      </motion.div>
-      <motion.div className="flex gap-6" animate={{ x: ["-50%", "0%"] }} transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 35, ease: "linear" } }}>
-        {[...doubled].reverse().map((t, i) => (
-          <div key={`bot-${i}`} className="flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-full border-2 whitespace-nowrap" style={{ borderColor: `${t.color}40`, backgroundColor: `${t.color}10` }}>
-            <span className="w-2.5 h-2.5 rounded-full shadow-lg" style={{ backgroundColor: t.color, boxShadow: `0 0 10px ${t.color}60` }} />
-            <span className="text-sm font-bold" style={{ color: t.color }}>{t.text}</span>
-          </div>
-        ))}
-      </motion.div>
-    </section>
-  );
-}
-
-// ─── PORTFOLIO PHONE PREVIEW ─────────────────────────────────────────────────
-// Miniature portfolio website rendered inside the phone screen.
-
-// LinkedIn mobile profile mockup — pixel-accurate to the real app
-function LinkedInPhoneScreen() {
-  return (
-    <div className="w-full h-full overflow-hidden" style={{ background: "#f3f2ef", fontFamily: "-apple-system, 'Helvetica Neue', sans-serif" }}>
-
-      {/* ── Status bar (white on LinkedIn blue) */}
-      <div className="flex items-center justify-between px-4 pt-2 pb-1" style={{ background: "#0A66C2" }}>
-        <span className="text-[9px] font-semibold text-white">9:41</span>
-        <div className="flex items-center gap-1">
-          {/* Signal */}
-          <svg width="11" height="8" viewBox="0 0 16 12" fill="white"><path d="M1 7h2v4H1zM5 5h2v6H5zM9 3h2v8H9zM13 0h2v11h-2z"/></svg>
-          {/* WiFi */}
-          <svg width="11" height="8" viewBox="0 0 16 12" fill="white"><path d="M0 4C2.5 1.5 6 0 8 0s5.5 1.5 8 4l-1.5 1.5C12.2 3.2 10 2 8 2S3.8 3.2 1.5 5.5z"/><path d="M3 7C4.5 5.5 6.2 5 8 5s3.5.5 5 2l-1.3 1.3C10.5 7.1 9.3 7 8 7s-2.5.1-3.7 1.3z"/><circle cx="8" cy="10.5" r="1.5"/></svg>
-          {/* Battery */}
-          <svg width="17" height="8" viewBox="0 0 25 12" fill="none" stroke="white" strokeWidth="1"><rect x="0.5" y="1" width="20" height="10" rx="2"/><rect x="2" y="3" width="14" height="6" rx="1" fill="white"/><rect x="21.5" y="4" width="2" height="4" rx="0.5" fill="white" opacity="0.5"/></svg>
-        </div>
-      </div>
-
-      {/* ── LinkedIn top nav bar */}
-      <div className="flex items-center justify-between px-3 py-2" style={{ background: "#0A66C2" }}>
-        {/* LinkedIn wordmark */}
-        <svg width="70" height="18" viewBox="0 0 90 22" fill="white">
-          <rect x="0" y="0" width="20" height="20" rx="3" fill="white"/>
-          <text x="3" y="15" fontSize="14" fontWeight="900" fill="#0A66C2">in</text>
-          <text x="25" y="15" fontSize="13" fontWeight="700" fill="white">LinkedIn</text>
-        </svg>
-        {/* Search icon */}
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-      </div>
-
-      {/* ── Scrollable profile content */}
-      <div className="overflow-hidden" style={{ height: "calc(100% - 62px)" }}>
-
-        {/* Profile card */}
-        <div style={{ background: "white", marginBottom: 8 }}>
-
-          {/* Banner */}
-          <div style={{ height: 52, background: "linear-gradient(135deg, #0d2137 0%, #0A66C2 50%, #00e89d 100%)", position: "relative" }}>
-            {/* Profile photo — overlaps banner */}
-            <div style={{ position: "absolute", bottom: -22, left: 12, width: 44, height: 44, borderRadius: "50%", border: "2.5px solid white", overflow: "hidden", background: "#e5e7eb" }}>
-              <img src="/web-image-2.JPG" alt="Kholofelo" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
-            </div>
-            {/* Open to work ring */}
-            <div style={{ position: "absolute", bottom: -24, left: 10, width: 48, height: 48, borderRadius: "50%", border: "2px solid #00e89d", opacity: 0.7 }} />
-          </div>
-
-          {/* Profile info */}
-          <div style={{ paddingTop: 28, paddingLeft: 12, paddingRight: 12, paddingBottom: 10 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#000", lineHeight: 1.2 }}>Kholofelo Robyn Rababalela</div>
-            <div style={{ fontSize: 9, color: "#444", marginTop: 2, lineHeight: 1.4 }}>BEng Tech Computer Engineering Student · Full-Stack MERN Developer</div>
-            <div style={{ fontSize: 8, color: "#0A66C2", marginTop: 3 }}>Cape Town, Western Cape · <span style={{ color: "#666" }}>500+ connections</span></div>
-
-            {/* Open to work badge */}
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 3, marginTop: 5, padding: "2px 6px", borderRadius: 10, border: "1px solid #00e89d", background: "rgba(0,232,157,0.06)" }}>
-              <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#00e89d" }} />
-              <span style={{ fontSize: 7, fontWeight: 600, color: "#057642" }}>Open to Work</span>
-            </div>
-
-            {/* Action buttons */}
-            <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-              <div style={{ flex: 1, padding: "5px 0", borderRadius: 14, background: "#0A66C2", textAlign: "center" }}>
-                <span style={{ fontSize: 9, fontWeight: 700, color: "white" }}>Message</span>
-              </div>
-              <div style={{ flex: 1, padding: "5px 0", borderRadius: 14, border: "1.5px solid #0A66C2", textAlign: "center" }}>
-                <span style={{ fontSize: 9, fontWeight: 700, color: "#0A66C2" }}>Connect</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* About card */}
-        <div style={{ background: "white", marginBottom: 8, padding: "10px 12px" }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: "#000", marginBottom: 4 }}>About</div>
-          <div style={{ fontSize: 8, color: "#444", lineHeight: 1.5 }}>
-            MERN stack developer & BEng Tech student at CPUT. Building scalable full-stack solutions — currently developing 5's Arena, a booking & blog platform for Hellenic FC since Jan 2026.
-          </div>
-        </div>
-
-        {/* Experience card */}
-        <div style={{ background: "white", marginBottom: 8, padding: "10px 12px" }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: "#000", marginBottom: 8 }}>Experience</div>
-
-          <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-            <div style={{ width: 26, height: 26, borderRadius: 4, background: "#0d2137", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ fontSize: 9, fontWeight: 900, color: "#00e89d" }}>5A</span>
-            </div>
-            <div>
-              <div style={{ fontSize: 9, fontWeight: 700, color: "#000", lineHeight: 1.2 }}>Full-Stack Developer</div>
-              <div style={{ fontSize: 8, color: "#444" }}>5's Arena · Freelance</div>
-              <div style={{ fontSize: 7, color: "#666" }}>Jan 2026 – Present · Cape Town</div>
-            </div>
-          </div>
-
-          <div style={{ display: "flex", gap: 8 }}>
-            <div style={{ width: 26, height: 26, borderRadius: 4, background: "#1e293b", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </div>
-            <div>
-              <div style={{ fontSize: 9, fontWeight: 700, color: "#000", lineHeight: 1.2 }}>Web Developer</div>
-              <div style={{ fontSize: 8, color: "#444" }}>Freelance · Self-employed</div>
-              <div style={{ fontSize: 7, color: "#666" }}>2024 – Present · Remote</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Skills card */}
-        <div style={{ background: "white", padding: "10px 12px" }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: "#000", marginBottom: 6 }}>Top Skills</div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-            {["React", "Node.js", "MongoDB", "TypeScript", "Express"].map(s => (
-              <span key={s} style={{ padding: "2px 7px", borderRadius: 10, background: "#e8f0fe", fontSize: 7, fontWeight: 600, color: "#0A66C2" }}>{s}</span>
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </div>
-  );
-}
-
-// ─── ABOUT SECTION ───────────────────────────────────────────────────────────
-
-function AboutSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const rawPhoneY = useTransform(scrollYProgress, [0, 1], [150, -250]);
-  const phoneY = useSpring(rawPhoneY, { stiffness: 70, damping: 18 });
-  const phoneOpacity = useTransform(scrollYProgress, [0, 0.12, 0.72, 1], [0, 1, 1, 0]);
-  const phoneScale = useTransform(scrollYProgress, [0, 0.12, 0.8, 1], [0.88, 1, 1, 0.9]);
-  const textY = useTransform(scrollYProgress, [0, 1], [30, -40]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.08, 0.8, 1], [0, 1, 1, 0]);
-
-  return (
-    <section id="about" className="relative py-16 sm:py-20 overflow-hidden" ref={ref}>
-      <div className="absolute inset-0" style={{ transform: "skewY(-15deg)", transformOrigin: "top left", top: "-20%", bottom: "-20%" }} />
-
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="blobFill" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00e89d" stopOpacity="0.14" />
-            <stop offset="40%" stopColor="#0ea5e9" stopOpacity="0.10" />
-            <stop offset="100%" stopColor="#6366f1" stopOpacity="0.06" />
-          </linearGradient>
-          <filter id="blobGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="8" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-        <motion.path d="M 1100 40 Q 1380 100 1400 350 Q 1420 600 1250 700 Q 1080 800 850 740 Q 620 680 580 520 Q 540 360 660 230 Q 780 100 1100 40 Z" fill="url(#blobFill)" initial={{ pathLength: 0, opacity: 0 }} animate={inView ? { pathLength: 1, opacity: 1 } : {}} transition={{ duration: 1.6, ease: "easeOut" }} />
-        <motion.path d="M 1100 40 Q 1380 100 1400 350 Q 1420 600 1250 700 Q 1080 800 850 740 Q 620 680 580 520 Q 540 360 660 230 Q 780 100 1100 40 Z" fill="none" stroke="#00e89d" strokeWidth="1.5" strokeOpacity="0.55" filter="url(#blobGlow)" initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}} transition={{ duration: 2.2, ease: "easeInOut", delay: 0.3 }} />
-        <motion.path d="M 1090 65 Q 1360 120 1375 360 Q 1390 590 1230 685 Q 1070 780 855 720 Q 640 660 606 508 Q 570 350 685 228 Q 800 110 1090 65 Z" fill="none" stroke="#0ea5e9" strokeWidth="0.8" strokeOpacity="0.3" strokeDasharray="6 4" initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}} transition={{ duration: 2.5, ease: "easeInOut", delay: 0.6 }} />
-        {Array.from({ length: 5 }).map((_, row) =>
-          Array.from({ length: 8 }).map((_, col) => (
-            <motion.circle key={`${row}-${col}`} cx={720 + col * 70} cy={160 + row * 90} r="1.8" fill="#00e89d" opacity="0.22" animate={{ opacity: [0.1, 0.35, 0.1] }} transition={{ duration: 2 + (row * 8 + col) * 0.07, repeat: Infinity, delay: (row * 8 + col) * 0.06 }} />
-          ))
-        )}
-      </svg>
-
-      <div className="absolute inset-0 pointer-events-none" style={{ transform: "skewY(-15deg)", transformOrigin: "top left", top: "-20%", bottom: "-20%", boxShadow: "0 200px 500px rgba(0,232,157,0.35), 0 -100px 300px rgba(14,165,233,0.3), 0 100px 250px rgba(0,0,0,0.7), 0 -50px 150px rgba(0,0,0,0.5), 0 300px 600px rgba(0,232,157,0.2), 0 -200px 400px rgba(14,165,233,0.15)" }} />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#00e89d]/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0ea5e9]/20 rounded-full blur-3xl" />
-
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-16 items-center">
-
-          {/* Left: Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
-            style={{ y: textY, opacity: textOpacity }}
-            className="relative z-10"
-          >
-            <h2 className="mb-2 text-3xl leading-tight tracking-tight font-black sm:text-4xl md:text-5xl lg:text-[3.4rem]" style={{ color: "var(--heading-color, white)", letterSpacing: "-0.02em", lineHeight: 1.1 }}>You dream it.</h2>
-            <h2 className="gradient-text mb-8 text-3xl leading-tight tracking-tight font-black sm:text-4xl md:text-5xl lg:text-[3.4rem]" style={{ letterSpacing: "-0.02em", lineHeight: 1.1 }}>I craft it.</h2>
-
-            <p className="text-base sm:text-lg leading-relaxed mb-4" style={{ color: "var(--body-color, rgb(156 163 175))" }}>
-              I'm a BEng Tech Computer Engineering student at Cape Peninsula University of Technology and a Freelance Web Developer specializing in the MERN stack.
-            </p>
-            <p className="text-base sm:text-lg leading-relaxed mb-4" style={{ color: "var(--body-color, rgb(156 163 175))" }}>
-              My focus is on building scalable backend architectures, gorgeous frontends, and intuitive user-centered designs using Node.js, MongoDB, React, and TypeScript.
-            </p>
-            <p className="text-base sm:text-lg leading-relaxed mb-8" style={{ color: "var(--body-color, rgb(156 163 175))" }}>
-              Since January 2026, I've been building a comprehensive digital platform for 5's Arena &amp; Hellenic FC — a full-stack solution featuring a community blog and integrated booking system.
-            </p>
-
-            <div className="h-px w-16 mb-8" style={{ background: "linear-gradient(90deg, #00e89d, #0ea5e9, transparent)" }} />
-
-            <motion.div className="flex flex-wrap gap-2 mb-8" initial="hidden" animate={inView ? "show" : "hidden"} variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07 } } }}>
-              {["Clean Architecture", "Smooth Animations", "Full-Stack", "API Design", "Mobile-First"].map((tag) => (
-                <motion.span key={tag} variants={{ hidden: { opacity: 0, scale: 0.8, y: 8 }, show: { opacity: 1, scale: 1, y: 0 } }} whileHover={{ scale: 1.07, borderColor: "#00e89d", color: "#00e89d" }} className="px-3 py-1 rounded-full text-xs font-medium border border-white/15 text-gray-400 cursor-default transition-colors">
-                  {tag}
-                </motion.span>
-              ))}
-            </motion.div>
-
-            <Link to="/resume" className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-bold bg-[#060d18]/60 border-2 border-white/20 text-white hover:border-[#00e89d]/60 hover:bg-[#060d18]/80 backdrop-blur-sm transition-all duration-200 hover:scale-105">
-              More about me
-            </Link>
-          </motion.div>
-
-          {/* Right: iPhone 15 Pro mockup */}
-          <div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
-            <motion.div
-              style={{ y: phoneY, opacity: phoneOpacity, scale: phoneScale }}
-              whileHover={{ rotateY: 0, scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              className="relative w-[220px] sm:w-[260px] lg:w-[290px]"
-            >
-              {/* Ambient glow from screen */}
-              <div className="absolute -inset-8 rounded-[60px] pointer-events-none" style={{ background: "radial-gradient(ellipse at center, rgba(0,232,157,0.15) 0%, rgba(14,165,233,0.08) 40%, transparent 70%)", filter: "blur(20px)" }} />
-
-              {/* iPhone outer frame — titanium style */}
-              <div className="relative rounded-[44px] p-[3px]" style={{ background: "linear-gradient(145deg, #4a4a4a 0%, #2a2a2a 30%, #1a1a1a 60%, #3a3a3a 100%)", boxShadow: "0 25px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.1)" }}>
-
-                {/* Side buttons — left */}
-                <div className="absolute -left-[2px] top-[72px] w-[3px] h-6 rounded-l-sm" style={{ background: "linear-gradient(180deg, #3a3a3a, #2a2a2a)" }} />
-                <div className="absolute -left-[2px] top-[108px] w-[3px] h-10 rounded-l-sm" style={{ background: "linear-gradient(180deg, #3a3a3a, #2a2a2a)" }} />
-                <div className="absolute -left-[2px] top-[156px] w-[3px] h-10 rounded-l-sm" style={{ background: "linear-gradient(180deg, #3a3a3a, #2a2a2a)" }} />
-                {/* Side button — right (power) */}
-                <div className="absolute -right-[2px] top-[120px] w-[3px] h-14 rounded-r-sm" style={{ background: "linear-gradient(180deg, #3a3a3a, #2a2a2a)" }} />
-
-                {/* Inner bezel */}
-                <div className="relative rounded-[41px] overflow-hidden" style={{ background: "#000", aspectRatio: "393/852" }}>
-
-                  {/* Dynamic Island */}
-                  <div className="absolute top-[10px] left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
-                    <div className="w-[90px] h-[25px] sm:w-[100px] sm:h-[28px] rounded-full bg-black flex items-center justify-center" style={{ boxShadow: "0 0 0 1px rgba(255,255,255,0.05)" }}>
-                      {/* Camera lens */}
-                      <div className="w-[8px] h-[8px] rounded-full ml-auto mr-3" style={{ background: "radial-gradient(circle at 35% 35%, #1a2744 0%, #0a0a0a 50%)", boxShadow: "0 0 2px rgba(0,232,157,0.3), inset 0 0 1px rgba(255,255,255,0.1)" }} />
-                    </div>
-                  </div>
-
-                  {/* LinkedIn mobile profile */}
-                  <div className="absolute inset-0">
-                    <LinkedInPhoneScreen />
-                  </div>
-
-                  {/* Screen glare/reflection overlay */}
-                  <div className="absolute inset-0 pointer-events-none z-10" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.02) 100%)" }} />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── SKILLS SECTION ──────────────────────────────────────────────────────────
-
-const SKILL_DATA = [
-  { category: "JavaScript & TypeScript", description: "I code in modern ES2024+ JavaScript across all environments. I now use TypeScript for type-safe, maintainable codebases — a requirement for production-grade applications.", techs: ["TypeScript", "Node.js", "HTML5", "CSS3"], bg: "linear-gradient(135deg, #0c1a35 0%, #0f2240 50%, #0a1628 100%)", accent: "#f7df1e" },
-  { category: "React Ecosystem", description: "Building component-driven UIs with React 18+, hooks, and the broader ecosystem. From SPAs to SSR with Next.js and Vite for blazing-fast development.", techs: ["React", "Next.js", "Vite", "Redux", "Framer Motion"], bg: "linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0c1a35 100%)", accent: "#61dafb" },
-  { category: "Backend & APIs", description: "As a Full-Stack Developer, I build robust server-side architectures. From RESTful APIs to database design with MongoDB, I handle the complete backend pipeline.", techs: ["Node.js", "Express", "MongoDB", "REST APIs", "Firebase"], bg: "linear-gradient(135deg, #0c1a35 0%, #0a1e30 50%, #0f2240 100%)", accent: "#00e89d" },
-];
-
-function SkillsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [tab, setTab] = useState<"skills" | "github">("skills");
-
-  const REPOS = [
-    { name: "Bookit-5s-Arena", description: "Full-stack booking system for 5's Arena football facility", lang: "JavaScript", langColor: "#f7df1e", url: "https://github.com/RobynAwesome/Bookit-5s-Arena" },
-    { name: "5s-Arena-Blog", description: "Community blog platform for 5's Arena", lang: "JavaScript", langColor: "#f7df1e", url: "https://github.com/RobynAwesome/5s-Arena-Blog" },
-    { name: "Portfolio", description: "Personal portfolio built with React + Vite + TailwindCSS", lang: "TypeScript", langColor: "#3178c6", url: "https://github.com/RobynAwesome/Portfolio" },
-  ];
-
-  return (
-    <section id="skills" className="relative py-24 sm:py-32 overflow-hidden" style={{ background: "linear-gradient(160deg, #060d18 0%, #07101f 40%, #060e1b 100%)" }}>
-      {/* Diagonal line pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "repeating-linear-gradient(45deg, #00e89d 0px, #00e89d 1px, transparent 1px, transparent 24px)", backgroundSize: "24px 24px" }} />
-      {/* Blobs */}
-      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(14,165,233,0.07), transparent)" }} />
-      <div className="absolute bottom-1/4 right-0 w-[350px] h-[350px] rounded-full blur-[100px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,232,157,0.06), transparent)" }} />
-      <div className="mx-auto max-w-5xl px-12 sm:px-20 lg:px-36">
-        <motion.div ref={ref} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }}>
-          <h2 className="mb-4 text-center text-2xl leading-tight font-black sm:text-3xl md:text-4xl">Full-Stack <span className="gradient-text">Architect.</span></h2>
-          <p className="mx-auto mb-10 max-w-2xl text-center text-base leading-relaxed text-gray-400 sm:text-lg">My experience across the entire MERN stack gives me confidence in the technologies & tools I use. Whether you need help bootstrapping your project or building production-grade features, I bring both frontend finesse and backend backbone.</p>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.1 }} className="mb-10 flex justify-center">
-          <div className="relative inline-flex rounded-full border border-[#1a2744] bg-[#0b1426]/80 p-1">
-            <motion.div className="absolute top-1 bottom-1 rounded-full bg-gradient-to-r from-[#0ea5e9]/20 to-[#00e89d]/20 border border-[#0ea5e9]/30" animate={{ x: tab === "skills" ? 0 : "100%" }} transition={{ type: "spring", stiffness: 300, damping: 30 }} style={{ width: "calc(50% - 2px)" }} />
-            <button onClick={() => setTab("skills")} className={`relative z-10 px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-300 ${tab === "skills" ? "text-white" : "text-gray-500 hover:text-gray-300"}`}>Tech Stack</button>
-            <button onClick={() => setTab("github")} className={`relative z-10 px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-300 flex items-center gap-2 ${tab === "github" ? "text-white" : "text-gray-500 hover:text-gray-300"}`}><Github size={14} />GitHub</button>
-          </div>
-        </motion.div>
-
-        {tab === "skills" && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {SKILL_DATA.map((s, i) => (
-              <motion.div key={s.category} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: i * 0.15 }} whileHover={{ y: -8, boxShadow: `0 0 40px ${s.accent}33, 0 0 80px ${s.accent}14`, borderColor: `${s.accent}72` }} className="group relative rounded-2xl border border-[#1a2744] overflow-hidden" style={{ background: s.bg }}>
-                <motion.div className="h-[2px] w-full origin-left" style={{ background: `linear-gradient(90deg, transparent, ${s.accent}, transparent)` }} initial={{ scaleX: 0.3, opacity: 0.4 }} whileHover={{ scaleX: 1, opacity: 1 }} transition={{ duration: 0.4 }} />
-                <div className="relative flex min-h-[320px] flex-col p-6 sm:p-8">
-                  <h3 className="text-lg font-bold text-white mb-4">{s.category}</h3>
-                  <p className="mb-6 flex-1 text-sm leading-relaxed text-gray-400">{s.description}</p>
-                  <div className="mt-auto flex flex-wrap gap-1.5 border-t border-white/5 pt-4">{s.techs.map((t) => (<span key={t} className="rounded-full bg-[#0ea5e9]/8 px-2 py-0.5 text-[10px] font-medium text-[#0ea5e9]/70">{t}</span>))}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {tab === "github" && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <div className="mb-6 overflow-hidden rounded-2xl border border-[#1a2744]" style={{ background: "linear-gradient(135deg, #0c1a35, #0f2240)" }}>
-              <div className="flex items-center gap-5 p-6 sm:p-8">
-                <img src="/web-image-2.JPG" alt="GitHub avatar" className="h-16 w-16 rounded-full border-2 border-[#0ea5e9]/30 object-cover object-top" />
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-1">RobynAwesome</h3>
-                  <p className="text-sm text-gray-400">Full-Stack MERN Developer | Cape Town, South Africa</p>
-                </div>
-                <a href="https://github.com/RobynAwesome/" target="_blank" rel="noopener noreferrer" className="ml-auto hidden items-center gap-2 rounded-lg border border-[#1a2744] px-4 py-2 text-sm font-medium text-gray-300 transition-all hover:border-[#00e89d]/40 hover:text-white sm:flex"><Github size={14} />View Profile</a>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {REPOS.map((repo, i) => (
-                <motion.a key={repo.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.1 }} whileHover={{ y: -5, scale: 1.03 }} href={repo.url} target="_blank" rel="noopener noreferrer" className="group rounded-xl border border-[#1a2744] p-5 transition-all duration-300 hover:border-[#0ea5e9]/40" style={{ background: "linear-gradient(135deg, #0c1a35, #0a1628)" }}>
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="text-sm font-bold text-[#0ea5e9] group-hover:text-[#00e89d] transition-colors">{repo.name}</span>
-                    <ExternalLink size={12} className="text-gray-600 group-hover:text-[#00e89d] transition-colors" />
-                  </div>
-                  <p className="text-xs text-gray-500 leading-relaxed mb-4">{repo.description}</p>
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: repo.langColor }} />
-                    <span className="text-xs text-gray-500">{repo.lang}</span>
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.7 }} className="mt-14 flex justify-center">
-          <motion.a href="/resume" className="inline-flex items-center gap-2 rounded-full border-2 border-[#00e89d]/40 px-8 py-4 text-base font-bold text-[#00e89d] transition-all duration-300 hover:border-[#00e89d]/60 hover:bg-[#00e89d]/10" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            Check my resume <ArrowRight size={20} />
-          </motion.a>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ─── JOURNEY SECTION ─────────────────────────────────────────────────────────
-
-const JOURNEY = [
-  { year: "2022", title: "The Spark", description: "Asked myself 'how do websites work?' — dove into HTML, CSS, and JavaScript. Built my first static pages and caught the coding bug.", color: "#0ea5e9" },
-  { year: "2023", title: "Going Full-Stack", description: "Learned React and Node.js. Built small CRUD apps and discovered the power of the MERN stack. Started studying Computer Engineering at CPUT.", color: "#00e89d" },
-  { year: "2024", title: "Leveling Up", description: "Mastered MongoDB, Express, and TypeScript. Explored Docker, Firebase, and modern tooling. Started freelancing and taking on real client work.", color: "#6366f1" },
-  { year: "2025–26", title: "Building for Production", description: "Shipped a full-stack booking system and community blog for 5's Arena / Hellenic FC. Integrated AI tools into my workflow to ship faster and write cleaner code.", color: "#00e89d" },
-];
-
-function JourneySection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <section className="relative py-20 sm:py-24 overflow-hidden">
-      <div className="absolute inset-0" style={{ clipPath: "polygon(0 4%, 100% 0, 100% 96%, 0 100%)", background: "linear-gradient(135deg, rgba(0,232,157,0.10) 0%, rgba(14,165,233,0.12) 50%, rgba(0,232,157,0.08) 100%)" }} />
-      <div className="absolute inset-0" style={{ clipPath: "polygon(0 4%, 100% 0, 100% 96%, 0 100%)", background: "rgba(6, 13, 24, 0.75)" }} />
-      <div className="relative max-w-5xl mx-auto px-12 sm:px-20 lg:px-36" ref={ref}>
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }} className="mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight mb-6 text-white">Passionate and <span className="gradient-text">Curious.</span></h2>
-          <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 max-w-2xl">My journey into tech started with a simple question — how do websites work? That curiosity led me from HTML basics to mastering the full MERN stack. Today, as a BEng Tech Computer Engineering student and Freelance Web Developer, I build technology that fosters community engagement and creates meaningful connections.</p>
-          <Link onClick={() => window.scrollTo(0, 0)} to="/resume" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-sm font-semibold text-white hover:bg-white/10 hover:border-[#00e89d]/40 transition-all duration-300">Discover my story <ArrowRight size={16} /></Link>
-        </motion.div>
-
-        <div className="relative">
-          <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#0ea5e9]/40 via-[#00e89d]/40 to-transparent" />
-          <div className="space-y-8">
-            {JOURNEY.map((item, i) => (
-              <motion.div key={item.year} initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }} className="relative pl-14 sm:pl-16">
-                <div className="absolute left-2.5 sm:left-4.5 top-1.5 w-3.5 h-3.5 rounded-full border-2" style={{ borderColor: item.color, backgroundColor: `${item.color}30`, boxShadow: `0 0 10px ${item.color}40` }} />
-                <div className="rounded-2xl border border-[#1a2744] bg-[#0b1426]/60 backdrop-blur-sm p-5 sm:p-6">
-                  <span className="text-xs font-bold tracking-widest uppercase" style={{ color: item.color }}>{item.year}</span>
-                  <h3 className="text-lg font-bold text-white mt-1 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.8 }} className="mt-10 text-center">
-          <a href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-[#0ea5e9] hover:text-[#0ea5e9]/70 transition-colors">
-            <Linkedin size={16} /> Follow my journey on LinkedIn
-          </a>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ─── AI SECTION ──────────────────────────────────────────────────────────────
-
-function AiSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <section className="relative overflow-hidden py-24 sm:py-32" ref={ref}>
-      <div className="absolute inset-0" style={{ background: "linear-gradient(165deg, #060d18 0%, #080f1e 30%, #040b18 60%, #060d18 100%)" }} />
-      {/* Mesh gradients */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 30%, rgba(168,85,247,0.08) 0%, transparent 55%), radial-gradient(ellipse at 90% 70%, rgba(0,232,157,0.06) 0%, transparent 55%), radial-gradient(ellipse at 50% 50%, rgba(14,165,233,0.04) 0%, transparent 65%)" }} />
-      <div className="dot-grid pointer-events-none absolute inset-0 opacity-25" />
-      <div className="relative mx-auto max-w-5xl px-12 sm:px-20 lg:px-36">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7 }}>
-            <p className="mb-3 text-xs font-semibold tracking-widest text-[#0ea5e9] uppercase">Next-Gen Workflow</p>
-            <h2 className="mb-6 text-4xl font-black sm:text-5xl md:text-6xl"><span className="gradient-text">AI-Augmented</span> <span className="gradient-text-green">Development.</span></h2>
-            <p className="mb-8 text-lg leading-relaxed text-gray-400">Artificial Intelligence is reshaping how we build software, and I'm embracing it fully. By integrating tools like Claude, GitHub Copilot, and cutting-edge LLMs into my workflow, I'm able to prototype faster, debug smarter, and write cleaner code. This isn't about replacing the craft of development — it's about elevating it.</p>
-            <div className="flex flex-wrap gap-3">
-              {["Claude · GPT · Gemini", "CLI-powered", "MCP Protocol"].map((tag, i) => (
-                <span key={tag} className={`rounded-full border px-3 py-1.5 text-xs font-medium ${i === 0 ? "border-[#0ea5e9]/20 bg-[#0ea5e9]/5 text-[#0ea5e9]" : i === 1 ? "border-[#00e89d]/20 bg-[#00e89d]/5 text-[#00e89d]" : "border-[#6366f1]/20 bg-[#6366f1]/5 text-[#6366f1]"}`}>{tag}</span>
-              ))}
-            </div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }} className="flex items-center justify-center">
-            <img src="/web-image-3.png" alt="AI Ring" className="animate-spin-slow h-[500px] w-[500px] drop-shadow-[0_0_60px_rgba(14,165,233,0.4)]" style={{ mixBlendMode: "screen" }} />
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── CTA SECTION ─────────────────────────────────────────────────────────────
-
-function CtaSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <section className="relative py-24 sm:py-32 overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-b from-[#060d18] via-[#060d18]/70 to-[#060d18]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#00e89d]/10 via-transparent to-[#0ea5e9]/10" />
-      <div className="absolute inset-0 dot-grid pointer-events-none" />
-      <div className="relative max-w-4xl mx-auto px-12 sm:px-20 lg:px-36">
-        <div className="rounded-3xl led-border-outer p-[1px]">
-          <div className="rounded-[22px] led-border-inner p-[1px]">
-            <div className="rounded-[20px] bg-[#0b1426]/80 backdrop-blur-sm p-10 sm:p-16 flex flex-col items-center text-center">
-              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={inView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.6 }} className="relative mb-8">
-                <div className="absolute inset-0 rounded-full bg-[#00e89d] blur-2xl scale-125 opacity-20" />
-                <div className="absolute inset-0 rounded-full bg-[#00e89d] scale-105" />
-                <img src="/web-image-2.JPG" alt="Kholofelo Robyn Rababalela" className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover object-top border-3 border-white" />
-              </motion.div>
-              <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }} className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4">
-                Let's Build Something <span className="gradient-text">Amazing</span>
-              </motion.h2>
-              <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3 }} className="text-gray-400 text-sm sm:text-base max-w-md mb-10">
-                Ready to bring your ideas to life? Let's collaborate and create something incredible together.
-              </motion.p>
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-col sm:flex-row items-center gap-4">
-                <Link to="/resume" className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold border border-white/20 text-white hover:border-white/40 hover:bg-white/5 backdrop-blur-sm transition-all duration-300">More about me <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></Link>
-                <Link to="/contact" className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold bg-gradient-to-r from-[#00e89d] to-[#34d399] text-[#060d18] hover:shadow-lg hover:shadow-[#00e89d]/20 transition-all duration-300">Hire me <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></Link>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── PAGE EXPORT ──────────────────────────────────────────────────────────────
+  aiProduct,
+  experience,
+  featuredCaseStudy,
+  profile,
+  publicLinks,
+  upcomingProject,
+} from "../data/portfolioContent";
+
+const easeCurve = [0.22, 1, 0.36, 1] as const;
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.25 },
+  transition: { duration: 0.65, ease: easeCurve },
+};
 
 export default function HomePage() {
   return (
-    <main>
-      <HeroSection />
-      <TechTicker />
-      <AboutSection />
-      <SkillsSection />
-      <JourneySection />
-      <AiSection />
-      <CtaSection />
+    <main className="overflow-x-hidden bg-[#060d18] text-white">
+      <Hero />
+
+      <section className="relative px-6 py-20 sm:px-8 sm:py-24 lg:px-12">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(0,232,157,0.08),transparent_28%)]" />
+        <div className="relative mx-auto max-w-7xl">
+          <motion.div {...reveal} className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#00e89d]">
+              Selected Work
+            </p>
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
+              The strongest proof lives where teams can inspect it quickly.
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-gray-400">
+              Bookit shows live delivery. Kopano Context shows AI systems thinking. Cars4Mars stays clearly upcoming.
+            </p>
+          </motion.div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+            <motion.article
+              {...reveal}
+              transition={{ ...reveal.transition, delay: 0.05 }}
+              className="rounded-[8px] border border-white/10 bg-white/[0.03] p-6 sm:p-8"
+            >
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full border border-[#00e89d]/20 bg-[#00e89d]/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-[#00e89d]">
+                  Flagship Delivery
+                </span>
+                <span className="text-[11px] uppercase tracking-[0.18em] text-gray-500">
+                  {featuredCaseStudy.strapline}
+                </span>
+              </div>
+              <h3 className="mt-5 text-3xl font-black text-white">{featuredCaseStudy.title}</h3>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-gray-300">
+                {featuredCaseStudy.summary}
+              </p>
+              <p className="mt-5 text-sm leading-7 text-gray-400">
+                Booking, payments, admin operations, and live venue support belong on the proof page, not the homepage.
+              </p>
+            </motion.article>
+
+            <div className="grid gap-6">
+              <motion.article
+                {...reveal}
+                transition={{ ...reveal.transition, delay: 0.1 }}
+                className="rounded-[8px] border border-white/10 bg-[#091326] p-6"
+              >
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#38bdf8]">AI Systems Flagship</p>
+                <h3 className="mt-4 text-2xl font-black text-white">{aiProduct.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-gray-300">
+                  Multi-agent orchestration with prompts, tools, evals, observability, and guardrails kept visible for technical review.
+                </p>
+              </motion.article>
+
+              <motion.article
+                {...reveal}
+                transition={{ ...reveal.transition, delay: 0.15 }}
+                className="rounded-[8px] border border-white/10 bg-white/[0.03] p-6"
+              >
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[#fbbf24]">Upcoming</p>
+                <h3 className="mt-4 text-2xl font-black text-white">{upcomingProject.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-gray-300">{upcomingProject.summary}</p>
+                <p className="mt-4 text-sm text-gray-400">
+                  This stays framed as next work, not shipped proof.
+                </p>
+              </motion.article>
+            </div>
+          </div>
+
+          <motion.div
+            {...reveal}
+            transition={{ ...reveal.transition, delay: 0.18 }}
+            className="mt-8 flex justify-start"
+          >
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#00e89d] transition-colors hover:text-[#34f0af]"
+            >
+              Open the full projects page
+              <ArrowRight size={16} />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/6 bg-[#07111f] px-6 py-20 sm:px-8 sm:py-24 lg:px-12">
+        <div className="mx-auto max-w-4xl">
+          <motion.div {...reveal}>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#00e89d]">
+              Backstory
+            </p>
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl">
+              I work best where ownership spans product decisions, frontend execution, and delivery discipline.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-gray-400">
+              {experience[0].summary}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                to="/resume"
+                className="inline-flex items-center gap-2 rounded-[8px] border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-[#00e89d]/30 hover:text-[#00e89d]"
+              >
+                Resume
+                <ArrowRight size={15} />
+              </Link>
+              <Link
+                to="/open-source"
+                className="inline-flex items-center gap-2 rounded-[8px] border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-[#00e89d]/30 hover:text-[#00e89d]"
+              >
+                Open Source
+                <ArrowRight size={15} />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-24 pt-20 sm:px-8 sm:pb-28 sm:pt-24 lg:px-12">
+        <motion.div
+          {...reveal}
+          className="mx-auto max-w-5xl rounded-[8px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.04),rgba(14,165,233,0.08),rgba(0,232,157,0.08))] px-6 py-10 text-center sm:px-10 sm:py-12"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#00e89d]">
+            Open to hiring conversations
+          </p>
+          <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl">
+            Hire someone whose best work is already inspectable.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-gray-300">
+            {profile.title}
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-[8px] bg-[#00e89d] px-5 py-3 text-sm font-bold text-[#06101d] transition-colors hover:bg-[#34f0af]"
+            >
+              Hire Me
+              <ArrowRight size={16} />
+            </Link>
+            <a
+              href={publicLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-[8px] border border-white/12 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-white/24 hover:bg-white/[0.05]"
+            >
+              LinkedIn
+              <ExternalLink size={15} />
+            </a>
+            <a
+              href={publicLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-[8px] border border-white/12 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-white/24 hover:bg-white/[0.05]"
+            >
+              GitHub
+              <ExternalLink size={15} />
+            </a>
+          </div>
+        </motion.div>
+      </section>
     </main>
   );
 }

@@ -10,9 +10,9 @@ const EASE = [0.23, 1, 0.32, 1] as const;
 export default function RoleSelector({ onSelect }: RoleSelectorProps) {
   return (
     <div>
-      <h3 className="text-lg font-bold text-white mb-1">Select Your Role</h3>
+      <h3 className="text-lg font-bold text-white mb-1">Select a CV Angle</h3>
       <p className="text-gray-400 text-sm mb-5">
-        Choose the CV tailored to the position you're hiring for
+        Choose the version that best matches the role you are hiring for
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {CV_ROLES.map((role, i) => {

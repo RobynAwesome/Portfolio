@@ -17,8 +17,12 @@ const items = [
   { text: "Git", color: "#f97316", desc: "Version control" },
   { text: "Figma", color: "#a855f7", desc: "UI/UX design tool" },
   { text: "REST APIs", color: "#00e89d", desc: "HTTP API architecture" },
-  { text: "Full-Stack", color: "#00e89d", desc: "End-to-end development" },
-  { text: "MERN Stack", color: "#0ea5e9", desc: "MongoDB · Express · React · Node" },
+  { text: "Product Systems", color: "#00e89d", desc: "End-to-end delivery thinking" },
+  { text: "MCP", color: "#0ea5e9", desc: "Model Context Protocol tooling" },
+  { text: "FastAPI", color: "#00e89d", desc: "Python app framework" },
+  { text: "SQLite", color: "#f7df1e", desc: "Persistent local data layer" },
+  { text: "Bookings", color: "#00e89d", desc: "Operational product workflows" },
+  { text: "AI Runtime", color: "#a855f7", desc: "Routing, tools, and evaluation surface" },
   { text: "Vercel", color: "#ffffff", desc: "Frontend deployment platform" },
 ];
 

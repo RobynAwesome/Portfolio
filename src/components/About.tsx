@@ -81,29 +81,26 @@ export default function About() {
             className="relative z-10"
           >
             <h2 className="mb-2 text-3xl leading-tight font-black text-white sm:text-4xl md:text-5xl">
-              You dream it.
+              From curiosity
             </h2>
             <h2 className="gradient-text mb-6 text-3xl leading-tight font-black sm:text-4xl md:text-5xl">
-              I craft it.
+              to systems people use.
             </h2>
 
             <p className="text-white text-base sm:text-lg leading-relaxed mb-4">
-              I am a Bachelor of Eng Tech in Computer Engineering (Student) at
-              Cape Peninsula University of Technology and a Freelance Web
-              Developer specializing in the MERN stack. Working primarily with
-              Node.js, MongoDB, JavaScript, HTML, and CSS, my focus is on
-              building scalable backend architectures, gorgeous frontends and
-              intuitive, user-centered designs.
+              I started with visual curiosity: how websites feel, why some
+              interfaces pull you in, and how a product can carry a story. That
+              led me into real build work, then into the deeper layer underneath
+              it: auth, state, booking logic, deployment, logs, and the tradeoffs
+              that decide whether software actually survives contact with users.
             </p>
             <p className="text-white text-base sm:text-lg leading-relaxed mb-6">
-              I am also the creator of{" "}
-              <span className="text-[#F5A623] font-semibold">Kopano Context</span>{" "}
-              — an open-source multi-agent AI orchestration framework (MCP) built
-              for enterprise trust and South African impact. Kopano Context powers
-              the AI layer inside{" "}
-              <span className="text-[#00e89d] font-semibold">KasiLink</span>, a
-              township gig-economy marketplace, and is shortlisted for SA Startup
-              Week Hack Day 2026.
+              I am now studying Computer Engineering at CPUT while building
+              client systems, product experiments, and{" "}
+              <span className="text-[#F5A623] font-semibold">Kopano Context</span>, a
+              multi-agent runtime that connects models, tools, and audit trails.
+              The result is a portfolio that still loves motion and design, but
+              is anchored by shipping work, not just styling.
             </p>
 
             <Link

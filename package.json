@@ -35,18 +35,18 @@
     "typescript": "^5.9.3",
     "vite": "^8.0.1"
   },
-  "description": "Full-Stack Developer",
+  "description": "Junior software engineer portfolio focused on production systems and AI tooling",
   "main": "index.html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RobynAwesome/Portfolio.git"
   },
   "keywords": [
-    "mongodb",
-    "express",
     "react",
-    "node",
-    "mern"
+    "typescript",
+    "portfolio",
+    "software-engineering",
+    "ai-tooling"
   ],
   "author": "Kholofelo Robyn Rababalela",
   "license": "ISC",

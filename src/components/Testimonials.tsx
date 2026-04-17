@@ -11,8 +11,8 @@ const testimonials = [
   },
   {
     quote:
-      "His ability to handle both frontend and backend with the MERN stack is impressive. He builds fast, clean, and scalable solutions.",
-    highlight: "MERN stack",
+      "His ability to handle both frontend and backend systems is impressive. He builds fast, clean, and scalable solutions.",
+    highlight: "frontend and backend systems",
     name: "Open Source Community",
     role: "GitHub Collaborators",
   },

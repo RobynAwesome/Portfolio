@@ -38,7 +38,7 @@ const projects = [
     problem:
       "The 5's Arena community needed a platform for sharing news, match highlights, and engaging in discussions, but existing solutions were generic and lacked specific features.",
     solution:
-      "Built a custom MERN stack blog with secure authentication, role-based access control, rich text editing for posts, image uploads, and infinite scroll with advanced filtering.",
+      "Built a custom blog system with secure authentication, role-based access control, rich text editing for posts, image uploads, and infinite scroll with advanced filtering.",
     impact:
       "Fostered a vibrant online community, increased user interaction by 40%, and provided a dedicated space for content sharing relevant to 5's Arena.",
     techs: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],

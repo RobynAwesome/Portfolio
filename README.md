@@ -1,12 +1,12 @@
 # Kholofelo Robyn Rababalela
 
-Portfolio source for [kholofelorababalela.vercel.app](https://kholofelorababalela.vercel.app), built with React, TypeScript, Vite, and Framer Motion.
+Portfolio source for [krrababalela.com](https://krrababalela.com), built with React, TypeScript, Vite, and Framer Motion.
 
 ## Focus
 
-- Full-stack MERN development
-- Animated, responsive frontend systems
-- Production-minded UI, routing, and API integration
+- Junior software engineering positioning
+- Production booking systems and portfolio case studies
+- AI tooling, engineering documentation, and deployment discipline
 
 ## Stack
 
@@ -34,7 +34,7 @@ npm run build
 
 ## Links
 
-- [Portfolio](https://kholofelorababalela.vercel.app)
+- [Portfolio](https://krrababalela.com)
 - [GitHub](https://github.com/RobynAwesome)
 - [LinkedIn](https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/)
 - [HackerRank](https://www.hackerrank.com/profile/rkholofelo)

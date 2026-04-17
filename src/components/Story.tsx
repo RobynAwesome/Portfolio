@@ -8,28 +8,28 @@ const milestones = [
     year: "2022",
     title: "The Spark",
     description:
-      "Asked myself 'how do websites work?' — dove into HTML, CSS, and JavaScript. Built my first static pages and caught the coding bug.",
+      "Started with curiosity about how websites feel and how people build them. Learned HTML, CSS, and JavaScript, and got pulled in by the mix of logic and visual storytelling.",
     color: "#0ea5e9",
   },
   {
     year: "2023",
-    title: "Going Full-Stack",
+    title: "Learning the System",
     description:
-      "Learned React and Node.js. Built small CRUD apps and discovered the power of the MERN stack. Started studying Computer Engineering at CPUT.",
+      "Moved from static pages into React, APIs, and state. Started Computer Engineering at CPUT and began thinking about software as systems, not just screens.",
     color: "#00e89d",
   },
   {
     year: "2024",
-    title: "Leveling Up",
+    title: "Client Work",
     description:
-      "Mastered MongoDB, Express, and TypeScript. Explored Docker, Firebase, and modern tooling. Started freelancing and taking on real client work.",
+      "Started freelancing, building client sites and product flows. This is where deployment, admin tooling, content systems, and delivery ownership became real.",
     color: "#6366f1",
   },
   {
     year: "2025–26",
-    title: "Building for Production",
+    title: "Production + AI",
     description:
-      "Shipped a full-stack booking system and community blog for 5's Arena / Hellenic FC. Integrated AI tools into my workflow to ship faster and write cleaner code.",
+      "Shipped Bookit and the 5's Arena content ecosystem, then pushed deeper into Kopano Context, multi-agent tooling, and the next build track around Cars4Mars and Kopano Labs.",
     color: "#00e89d",
   },
 ];
@@ -65,15 +65,15 @@ export default function Story() {
           className="mb-12"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight mb-6 text-white">
-            Passionate and{" "}
-            <span className="gradient-text">Curious.</span>
+            A story that starts with design
+            <span className="gradient-text"> and keeps going deeper.</span>
           </h2>
 
           <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 max-w-2xl">
-            My journey into tech started with a simple question — how do websites work?
-            That curiosity led me from HTML basics to mastering the full MERN stack.
-            Today, as a BEng Tech Computer Engineering student and Freelance Web Developer, I build
-            technology that fosters community engagement and creates meaningful connections.
+            I did not come into tech trying to sound like an infrastructure person.
+            I came in through curiosity, visuals, and interaction. The more I built,
+            the more I got pulled into the hidden layers that make software hold
+            together: product logic, operational discipline, and systems thinking.
           </p>
 
           <Link

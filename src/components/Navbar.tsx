@@ -1,20 +1,31 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
-  Home, FileText, FolderOpen, Globe, Mail,
-  Sun, Moon, Monitor, Menu, X, Zap, Skull,
+  FileText,
+  FolderOpen,
+  Globe,
+  Home,
+  Mail,
+  Map,
+  Menu,
+  Monitor,
+  Moon,
+  Sun,
+  X,
 } from "lucide-react";
+import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-type Theme = "dark" | "light" | "system" | "crazy" | "redMono";
+type Theme = "dark" | "light" | "system";
 
-const THEME_ORDER: Theme[] = ["dark", "light", "system", "crazy", "redMono"];
+const THEME_ORDER: Theme[] = ["dark", "light", "system"];
 
 const navLinks = [
   { to: "/", label: "Home", icon: Home },
   { to: "/resume", label: "Resume", icon: FileText },
   { to: "/projects", label: "Projects", icon: FolderOpen },
   { to: "/open-source", label: "Open Source", icon: Globe },
+  { to: "/roadmap", label: "Roadmap", icon: Map },
   { to: "/contact", label: "Contact", icon: Mail },
 ];
 
@@ -34,44 +45,13 @@ function LinkedInIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-function NavIcon({
-  icon: Icon,
-  active,
-  onClick,
-}: {
-  icon: typeof Home;
-  active: boolean;
-  onClick?: () => void;
-}) {
-  const [rolling, setRolling] = useState(false);
-  const handleClick = () => {
-    setRolling(true);
-    setTimeout(() => setRolling(false), 500);
-    onClick?.();
-  };
-  return (
-    <motion.div
-      onClick={handleClick}
-      className="cursor-pointer"
-      animate={rolling ? { rotate: 360 } : { rotate: 0 }}
-      transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
-    >
-      <Icon
-        size={16}
-        className={`transition-colors duration-200 ${active ? "text-[#00e89d]" : "text-gray-500 group-hover:text-white"}`}
-      />
-    </motion.div>
-  );
-}
-
 function ThemeIcon({ theme }: { theme: Theme }) {
-  const icons: Record<Theme, React.ReactNode> = {
+  const icons: Record<Theme, ReactNode> = {
     dark: <Moon size={16} />,
     light: <Sun size={16} />,
     system: <Monitor size={16} />,
-    crazy: <Zap size={16} className="text-[#00f5ff]" />,
-    redMono: <Skull size={16} className="text-[#ef4444]" />,
   };
+
   return <>{icons[theme]}</>;
 }
 
@@ -79,18 +59,18 @@ const THEME_LABELS: Record<Theme, string> = {
   dark: "Dark",
   light: "Light",
   system: "System",
-  crazy: "Crazy",
-  redMono: "Red",
 };
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
+
   if (theme === "system") {
-    const sys = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    root.className = sys;
-  } else {
-    root.className = theme;
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    root.className = systemTheme;
+    return;
   }
+
+  root.className = theme;
 }
 
 export default function Navbar() {
@@ -101,6 +81,7 @@ export default function Navbar() {
     const saved = localStorage.getItem("portfolio-theme") as Theme | null;
     return saved && THEME_ORDER.includes(saved) ? saved : "dark";
   });
+
   const location = useLocation();
   const isHomepage = location.pathname === "/";
 
@@ -111,15 +92,21 @@ export default function Navbar() {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 50);
-      if (isHomepage) setHidden(y < 80);
+      if (isHomepage) {
+        setHidden(y < 72);
+      }
     };
+
     setScrolled(window.scrollY > 50);
-    setHidden(isHomepage && window.scrollY < 80);
+    setHidden(isHomepage && window.scrollY < 72);
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHomepage]);
 
-  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     applyTheme(theme);
@@ -127,8 +114,8 @@ export default function Navbar() {
   }, [theme]);
 
   const cycleTheme = () => {
-    setTheme((t) => {
-      const idx = THEME_ORDER.indexOf(t);
+    setTheme((current) => {
+      const idx = THEME_ORDER.indexOf(current);
       return THEME_ORDER[(idx + 1) % THEME_ORDER.length];
     });
   };
@@ -138,12 +125,12 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: hidden ? -120 : 0, opacity: hidden ? 0 : 1 }}
       transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl xl:max-w-7xl"
+      className="fixed left-1/2 top-4 z-50 w-[95%] max-w-6xl -translate-x-1/2 xl:max-w-7xl"
     >
-      <div className={`rounded-[28px] p-[1px] transition-all duration-500 ${scrolled ? "led-border-outer" : ""}`}>
-        <div className={`rounded-[26px] p-[1px] transition-all duration-500 ${scrolled ? "led-border-inner" : ""}`}>
+      <div className={`rounded-[10px] p-[1px] transition-all duration-500 ${scrolled ? "led-border-outer" : ""}`}>
+        <div className={`rounded-[9px] p-[1px] transition-all duration-500 ${scrolled ? "led-border-inner" : ""}`}>
           <div
-            className="rounded-[24px] transition-all duration-500"
+            className="rounded-[8px] transition-all duration-500"
             style={{
               background: scrolled ? "rgba(11, 20, 38, 0.92)" : "rgba(11, 20, 38, 0.25)",
               backdropFilter: scrolled ? "blur(28px) saturate(200%)" : "blur(8px)",
@@ -151,48 +138,59 @@ export default function Navbar() {
               boxShadow: scrolled ? "0 8px 40px rgba(0,0,0,0.4)" : "none",
             }}
           >
-            <div className="px-5 xl:px-8 h-[60px] xl:h-[66px] flex items-center justify-between gap-4">
-
-              {/* Logo */}
-              <Link to="/" className="flex items-center gap-3 flex-shrink-0 group">
+            <div className="flex h-[60px] items-center justify-between gap-4 px-5 xl:h-[66px] xl:px-8">
+              <Link to="/" className="group flex flex-shrink-0 items-center gap-3">
                 <div className="relative">
                   <img
                     src="/web-image-2.JPG"
                     alt="Kholofelo"
-                    className="w-9 h-9 xl:w-10 xl:h-10 rounded-full object-cover border-2 border-[#00e89d]/60 group-hover:border-[#00e89d] transition-colors"
+                    className="h-9 w-9 rounded-full border-2 border-[#00e89d]/60 object-cover transition-colors group-hover:border-[#00e89d] xl:h-10 xl:w-10"
                     style={{ objectPosition: "center top" }}
                   />
                   <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00e89d] opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00e89d]" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00e89d] opacity-75" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#00e89d]" />
                   </span>
                 </div>
-                <span className="font-bold text-sm xl:text-base text-white group-hover:text-[#00e89d] transition-colors hidden sm:block">
-                  Kholofelo
-                </span>
+                <div className="hidden sm:block">
+                  <span className="text-sm font-bold text-white transition-colors group-hover:text-[#00e89d] xl:text-base">
+                    Kholofelo
+                  </span>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-gray-500">
+                    Product engineer
+                  </p>
+                </div>
               </Link>
 
-              {/* Center nav — desktop */}
-              <div className="hidden md:flex items-center gap-0.5 xl:gap-1 absolute left-1/2 -translate-x-1/2">
+              <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 md:flex xl:gap-1">
                 {navLinks.map((link) => {
                   const active = isActive(link.to);
                   const Icon = link.icon;
+
                   return (
                     <Link
                       key={link.to}
                       to={link.to}
-                      className="group relative flex items-center gap-2 px-3 xl:px-4 py-2 rounded-xl transition-all duration-200 hover:bg-white/[0.04]"
+                      className="group relative flex items-center gap-2 rounded-[8px] px-3 py-2 transition-all duration-200 hover:bg-white/[0.04] xl:px-4"
                     >
                       {active && (
                         <motion.div
                           layoutId="nav-active-pill"
-                          className="absolute inset-0 rounded-xl"
-                          style={{ background: "rgba(0,232,157,0.1)", border: "1px solid rgba(0,232,157,0.2)" }}
+                          className="absolute inset-0 rounded-[8px]"
+                          style={{
+                            background: "rgba(0,232,157,0.1)",
+                            border: "1px solid rgba(0,232,157,0.2)",
+                          }}
                           transition={{ type: "spring", stiffness: 400, damping: 30 }}
                         />
                       )}
-                      <NavIcon icon={Icon} active={active} />
-                      <span className={`relative text-xs xl:text-sm font-semibold transition-colors duration-200 ${active ? "text-[#00e89d]" : "text-gray-400 group-hover:text-white"}`}>
+                      <Icon
+                        size={16}
+                        className={`relative transition-colors duration-200 ${active ? "text-[#00e89d]" : "text-gray-500 group-hover:text-white"}`}
+                      />
+                      <span
+                        className={`relative text-xs font-semibold transition-colors duration-200 xl:text-sm ${active ? "text-[#00e89d]" : "text-gray-400 group-hover:text-white"}`}
+                      >
                         {link.label}
                       </span>
                     </Link>
@@ -200,51 +198,92 @@ export default function Navbar() {
                 })}
               </div>
 
-              {/* Right controls */}
-              <div className="hidden md:flex items-center gap-1 flex-shrink-0">
-                <a href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all" aria-label="LinkedIn">
+              <div className="hidden flex-shrink-0 items-center gap-1 md:flex">
+                <a
+                  href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-[8px] p-2 text-gray-500 transition-all hover:bg-white/5 hover:text-white"
+                  aria-label="LinkedIn"
+                >
                   <LinkedInIcon size={16} />
                 </a>
-                <a href="https://github.com/RobynAwesome" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all" aria-label="GitHub">
+                <a
+                  href="https://github.com/RobynAwesome"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-[8px] p-2 text-gray-500 transition-all hover:bg-white/5 hover:text-white"
+                  aria-label="GitHub"
+                >
                   <GitHubIcon size={16} />
                 </a>
-
-                {/* Theme toggle with label */}
                 <motion.button
                   onClick={cycleTheme}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all text-xs font-medium"
+                  className="flex items-center gap-1.5 rounded-[8px] px-2.5 py-1.5 text-xs font-medium text-gray-400 transition-all hover:bg-white/5 hover:text-white"
                   aria-label="Toggle theme"
                   whileTap={{ scale: 0.9 }}
                 >
                   <AnimatePresence mode="wait">
-                    <motion.span key={theme} initial={{ opacity: 0, rotate: -30, scale: 0.7 }} animate={{ opacity: 1, rotate: 0, scale: 1 }} exit={{ opacity: 0, rotate: 30, scale: 0.7 }} transition={{ duration: 0.18 }}>
+                    <motion.span
+                      key={theme}
+                      initial={{ opacity: 0, rotate: -20, scale: 0.8 }}
+                      animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                      exit={{ opacity: 0, rotate: 20, scale: 0.8 }}
+                      transition={{ duration: 0.18 }}
+                    >
                       <ThemeIcon theme={theme} />
                     </motion.span>
                   </AnimatePresence>
-                  <span className="hidden xl:inline text-[11px] text-gray-500">{THEME_LABELS[theme]}</span>
+                  <span className="hidden text-[11px] text-gray-500 xl:inline">
+                    {THEME_LABELS[theme]}
+                  </span>
                 </motion.button>
-
-                {/* Hire Me — improved */}
                 <HireMeButton />
               </div>
 
-              {/* Mobile controls */}
-              <div className="md:hidden flex items-center gap-1">
-                <motion.button onClick={cycleTheme} className="p-2 text-gray-400 hover:text-white" aria-label="Toggle theme" whileTap={{ scale: 0.85 }}>
+              <div className="flex items-center gap-1 md:hidden">
+                <motion.button
+                  onClick={cycleTheme}
+                  className="p-2 text-gray-400 hover:text-white"
+                  aria-label="Toggle theme"
+                  whileTap={{ scale: 0.85 }}
+                >
                   <AnimatePresence mode="wait">
-                    <motion.span key={theme} initial={{ opacity: 0, rotate: -20 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 20 }} transition={{ duration: 0.15 }}>
+                    <motion.span
+                      key={theme}
+                      initial={{ opacity: 0, rotate: -20 }}
+                      animate={{ opacity: 1, rotate: 0 }}
+                      exit={{ opacity: 0, rotate: 20 }}
+                      transition={{ duration: 0.15 }}
+                    >
                       <ThemeIcon theme={theme} />
                     </motion.span>
                   </AnimatePresence>
                 </motion.button>
-                <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 text-gray-400 hover:text-white" aria-label="Menu">
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="p-2 text-gray-400 hover:text-white"
+                  aria-label="Menu"
+                >
                   <AnimatePresence mode="wait">
                     {menuOpen ? (
-                      <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                      <motion.div
+                        key="x"
+                        initial={{ rotate: -90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: 90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <X size={20} />
                       </motion.div>
                     ) : (
-                      <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                      <motion.div
+                        key="menu"
+                        initial={{ rotate: 90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        exit={{ rotate: -90, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <Menu size={20} />
                       </motion.div>
                     )}
@@ -253,7 +292,6 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Mobile menu */}
             <AnimatePresence>
               {menuOpen && (
                 <motion.div
@@ -263,31 +301,46 @@ export default function Navbar() {
                   transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
                   className="overflow-hidden border-t border-white/5"
                 >
-                  <div className="px-4 py-4 flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 px-4 py-4">
                     {navLinks.map((link) => {
                       const active = isActive(link.to);
                       const Icon = link.icon;
+
                       return (
                         <Link
                           key={link.to}
                           to={link.to}
                           onClick={() => setMenuOpen(false)}
-                          className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${active ? "bg-[#00e89d]/10 text-[#00e89d] border border-[#00e89d]/20" : "text-gray-400 hover:text-white hover:bg-white/5"}`}
+                          className={`flex items-center gap-3 rounded-[8px] px-4 py-3 text-sm font-semibold transition-all duration-200 ${active ? "border border-[#00e89d]/20 bg-[#00e89d]/10 text-[#00e89d]" : "text-gray-400 hover:bg-white/5 hover:text-white"}`}
                         >
                           <Icon size={16} />
                           {link.label}
                         </Link>
                       );
                     })}
-                    <div className="flex items-center gap-2 px-4 pt-3 mt-1 border-t border-white/5">
-                      <a href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-white transition-colors">
+                    <div className="mt-1 flex items-center gap-2 border-t border-white/5 px-4 pt-3">
+                      <a
+                        href="https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-gray-400 transition-colors hover:text-white"
+                      >
                         <LinkedInIcon size={16} />
                       </a>
-                      <a href="https://github.com/RobynAwesome" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-white transition-colors">
+                      <a
+                        href="https://github.com/RobynAwesome"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-gray-400 transition-colors hover:text-white"
+                      >
                         <GitHubIcon size={16} />
                       </a>
                     </div>
-                    <Link to="/contact" onClick={() => setMenuOpen(false)} className="mx-2 mt-2 py-3 rounded-full text-sm font-bold bg-[#00e89d] text-[#060d18] text-center transition-all duration-300 shadow-lg shadow-[#00e89d]/25">
+                    <Link
+                      to="/contact"
+                      onClick={() => setMenuOpen(false)}
+                      className="mx-2 mt-2 rounded-[8px] bg-[#00e89d] py-3 text-center text-sm font-bold text-[#060d18] transition-all duration-300 shadow-lg shadow-[#00e89d]/25"
+                    >
                       Hire Me
                     </Link>
                   </div>
@@ -301,14 +354,13 @@ export default function Navbar() {
   );
 }
 
-/* ── Hire Me button — improved with animated gradient border + arrow ── */
 function HireMeButton() {
   const [hovered, setHovered] = useState(false);
 
   return (
     <Link
       to="/contact"
-      className="ml-2 relative overflow-hidden inline-flex items-center gap-2 px-5 xl:px-6 py-2 rounded-full text-xs xl:text-sm font-bold text-[#060d18] transition-all duration-200"
+      className="relative ml-2 inline-flex items-center gap-2 overflow-hidden rounded-[8px] px-5 py-2 text-xs font-bold text-[#060d18] transition-all duration-200 xl:px-6 xl:text-sm"
       style={{
         background: hovered
           ? "linear-gradient(135deg, #34ffb0, #00e89d)"
@@ -316,15 +368,14 @@ function HireMeButton() {
         boxShadow: hovered
           ? "0 0 28px rgba(0,232,157,0.55), 0 4px 20px rgba(0,232,157,0.35)"
           : "0 0 14px rgba(0,232,157,0.3), 0 2px 10px rgba(0,232,157,0.2)",
-        transform: hovered ? "scale(1.06)" : "scale(1)",
+        transform: hovered ? "scale(1.04)" : "scale(1)",
         transition: "all 0.2s cubic-bezier(0.23, 1, 0.32, 1)",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Shimmer sweep */}
       <span
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute inset-0"
         style={{
           background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%)",
           transform: hovered ? "translateX(100%)" : "translateX(-100%)",
@@ -332,7 +383,6 @@ function HireMeButton() {
         }}
       />
       Hire Me
-      {/* Arrow with spring slide */}
       <motion.span
         animate={{ x: hovered ? 3 : 0 }}
         transition={{ type: "spring", stiffness: 400, damping: 20 }}

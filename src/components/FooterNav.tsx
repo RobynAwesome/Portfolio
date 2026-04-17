@@ -1,34 +1,33 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-import { Home, FileText, FolderOpen, Globe, Mail, Menu, X } from "lucide-react";
+import { FileText, FolderOpen, Globe, Home, Mail, Map, Menu, X } from "lucide-react";
 
 const navItems = [
   { to: "/", label: "Home", icon: Home },
   { to: "/resume", label: "Resume", icon: FileText },
   { to: "/projects", label: "Projects", icon: FolderOpen },
   { to: "/open-source", label: "Open Source", icon: Globe },
+  { to: "/roadmap", label: "Roadmap", icon: Map },
   { to: "/contact", label: "Contact", icon: Mail },
 ];
 
 export default function FooterNav() {
   const location = useLocation();
   const [expanded, setExpanded] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   const isActive = (to: string) => {
     if (to === "/") return location.pathname === "/";
     return location.pathname.startsWith(to);
   };
 
-  // Show after scrolling past 150px
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 150);
+    const onScroll = () => setVisible(true);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close when navigating
   useEffect(() => {
     setExpanded(false);
   }, [location.pathname]);
@@ -36,28 +35,42 @@ export default function FooterNav() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
+        <motion.aside
           initial={{ x: 80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 80, opacity: 0 }}
           transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-          className="fixed right-5 top-1/2 -translate-y-1/2 z-40"
+          className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 xl:block"
         >
           <div
-            className="rounded-full overflow-hidden"
+            className="overflow-hidden rounded-[8px] border border-[#0ea5e9]/15 bg-[rgba(11,20,38,0.92)]"
             style={{
-              background: "rgba(11, 20, 38, 0.92)",
               backdropFilter: "blur(24px) saturate(180%)",
               WebkitBackdropFilter: "blur(24px) saturate(180%)",
-              border: "1px solid rgba(14, 165, 233, 0.15)",
-              boxShadow:
-                "0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(14,165,233,0.05)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(14,165,233,0.05)",
             }}
           >
-            {/* Toggle button */}
+            <div className="border-b border-white/6 px-3 py-3">
+              {!expanded ? (
+                <>
+                  <span className="pointer-events-none text-[10px] font-semibold uppercase tracking-[0.2em] text-[#00e89d]/80">
+                    Navigate
+                  </span>
+                  <p className="mt-1 text-xs text-gray-500">Fast route access</p>
+                </>
+              ) : (
+                <>
+                  <span className="pointer-events-none text-[10px] font-semibold uppercase tracking-[0.2em] text-[#00e89d]/80">
+                    Sections
+                  </span>
+                  <p className="mt-1 text-xs text-gray-500">Keep the main paths close.</p>
+                </>
+              )}
+            </div>
+
             <button
               onClick={() => setExpanded(!expanded)}
-              className="relative flex items-center justify-center w-11 h-11 m-1 rounded-full transition-colors duration-200 hover:bg-white/5"
+              className="relative m-2 flex h-11 w-11 items-center justify-center rounded-[8px] transition-colors duration-200 hover:bg-white/5"
               aria-label={expanded ? "Close navigation" : "Open navigation"}
             >
               <AnimatePresence mode="wait">
@@ -84,17 +97,15 @@ export default function FooterNav() {
                 )}
               </AnimatePresence>
 
-              {/* Pulse ring when collapsed */}
               {!expanded && (
                 <motion.span
-                  className="absolute inset-0 rounded-full border border-[#00e89d]/30"
-                  animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0, 0.4] }}
+                  className="absolute inset-0 rounded-[8px] border border-[#00e89d]/30"
+                  animate={{ scale: [1, 1.32, 1], opacity: [0.4, 0, 0.4] }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 />
               )}
             </button>
 
-            {/* Expanded nav items */}
             <AnimatePresence>
               {expanded && (
                 <motion.div
@@ -104,10 +115,7 @@ export default function FooterNav() {
                   transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
                   className="overflow-hidden"
                 >
-                  <div className="flex flex-col items-center gap-0.5 px-1 pb-2">
-                    {/* Separator */}
-                    <div className="w-6 h-[1px] mb-1" style={{ background: "linear-gradient(90deg, transparent, rgba(14,165,233,0.3), transparent)" }} />
-
+                  <div className="flex flex-col gap-1 px-2 pb-2">
                     {navItems.map((item, i) => {
                       const active = isActive(item.to);
                       const Icon = item.icon;
@@ -122,13 +130,12 @@ export default function FooterNav() {
                           <Link
                             to={item.to}
                             onClick={() => setExpanded(false)}
-                            className="relative flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-200 group"
-                            title={item.label}
+                            className="group relative flex items-center gap-3 rounded-[8px] px-3 py-3 transition-colors duration-200"
                           >
                             {active && (
                               <motion.div
                                 layoutId="side-tab-bg"
-                                className="absolute inset-0 rounded-full"
+                                className="absolute inset-0 rounded-[8px]"
                                 style={{ background: "rgba(0, 232, 157, 0.12)" }}
                                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
                               />
@@ -136,15 +143,13 @@ export default function FooterNav() {
                             <Icon
                               size={18}
                               className={`relative z-10 transition-colors duration-200 ${
-                                active
-                                  ? "text-[#00e89d]"
-                                  : "text-gray-500 group-hover:text-white"
+                                active ? "text-[#00e89d]" : "text-gray-500 group-hover:text-white"
                               }`}
                             />
-
-                            {/* Tooltip on hover */}
-                            <span className="absolute right-full mr-3 px-2.5 py-1 rounded-lg text-[11px] font-semibold text-white whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200"
-                              style={{ background: "rgba(11, 20, 38, 0.95)", border: "1px solid rgba(14,165,233,0.2)" }}
+                            <span
+                              className={`relative z-10 text-sm font-semibold transition-colors duration-200 ${
+                                active ? "text-white" : "text-gray-400 group-hover:text-white"
+                              }`}
                             >
                               {item.label}
                             </span>
@@ -157,7 +162,7 @@ export default function FooterNav() {
               )}
             </AnimatePresence>
           </div>
-        </motion.div>
+        </motion.aside>
       )}
     </AnimatePresence>
   );
