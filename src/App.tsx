@@ -1,11 +1,12 @@
-import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Navbar from "./components/Navbar";
-import FooterNav from "./components/FooterNav";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
+import FooterNav from "./components/FooterNav";
+import Navbar from "./components/Navbar";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
+const KopanoLabsPage = lazy(() => import("./pages/KopanoLabsPage"));
 const ResumePage = lazy(() => import("./pages/ResumePage"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const OpenSourcePage = lazy(() => import("./pages/OpenSourcePage"));
@@ -14,9 +15,19 @@ const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const resetScroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    resetScroll();
+    const frameId = window.requestAnimationFrame(resetScroll);
+    return () => window.cancelAnimationFrame(frameId);
   }, [pathname]);
+
   return null;
 }
 
@@ -38,6 +49,7 @@ export default function App() {
           >
             <Routes location={location}>
               <Route path="/" element={<HomePage />} />
+              <Route path="/kopano-labs" element={<KopanoLabsPage />} />
               <Route path="/resume" element={<ResumePage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/open-source" element={<OpenSourcePage />} />
