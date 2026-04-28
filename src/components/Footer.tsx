@@ -11,7 +11,12 @@ export default function Footer() {
   return (
     <footer className="border-t border-[rgba(208,133,77,0.12)] bg-[#070909] pb-28 pt-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 text-[12px] uppercase tracking-[0.2em] text-[var(--brand-muted)] sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12">
-        <div className="space-y-2">
+        <div className="space-y-3">
+          <img
+            src="/kopano-labs-logo.png"
+            alt="Kopano Labs"
+            className="h-10 w-auto object-contain"
+          />
           <p>&copy; 2026 Kopano Labs (Pty) Ltd.</p>
           <p className="tracking-[0.16em] text-[var(--brand-soft-text)]">All rights reserved.</p>
         </div>

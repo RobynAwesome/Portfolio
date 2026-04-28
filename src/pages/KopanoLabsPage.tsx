@@ -17,6 +17,7 @@ export default function KopanoLabsPage() {
         <div className="brand-grid absolute inset-0 opacity-28" />
 
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+          <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -51,6 +52,26 @@ export default function KopanoLabsPage() {
               </a>
             </div>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.08 }}
+            className="brand-panel brand-topography rounded-[28px] p-6"
+          >
+            <div className="flex min-h-[220px] items-center justify-center rounded-[22px] border border-[rgba(42,174,141,0.2)] bg-[radial-gradient(circle_at_25%_20%,rgba(42,174,141,0.16),transparent_32%),radial-gradient(circle_at_80%_70%,rgba(32,84,159,0.14),transparent_30%),rgba(7,9,9,0.76)] p-6">
+              <img
+                src="/kopano-labs-logo.png"
+                alt="Kopano Labs logo"
+                className="w-full max-w-[300px] object-contain"
+              />
+            </div>
+            <div className="mt-5 flex items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--brand-muted)]">
+              <span>Official studio mark</span>
+              <span className="text-[var(--brand-olive)]">Cape Town</span>
+            </div>
+          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -161,6 +182,11 @@ export default function KopanoLabsPage() {
             className="brand-panel brand-topography rounded-[24px] p-8 sm:p-10"
           >
             <div className="max-w-3xl">
+              <img
+                src="/kopano-labs-logo.png"
+                alt="Kopano Labs logo"
+                className="mb-7 h-16 w-auto object-contain"
+              />
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(208,133,77,0.16)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--brand-olive)]">
                 <Globe2 size={14} />
                 Contact

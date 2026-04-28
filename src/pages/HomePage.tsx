@@ -221,8 +221,12 @@ export default function HomePage() {
             transition={{ duration: 0.55 }}
             className="brand-panel brand-topography grid gap-6 rounded-[24px] p-6 sm:p-8 lg:grid-cols-[240px_1fr_auto] lg:items-center"
           >
-            <div className="flex h-44 items-center justify-center rounded-[18px] border border-[rgba(208,133,77,0.18)] bg-[rgba(8,11,12,0.82)]">
-              <img src="/favicon.svg" alt="Kopano Labs mark" className="h-24 w-24" />
+            <div className="flex h-44 items-center justify-center rounded-[18px] border border-[rgba(208,133,77,0.18)] bg-[radial-gradient(circle_at_20%_20%,rgba(42,174,141,0.12),transparent_34%),rgba(8,11,12,0.82)] p-6">
+              <img
+                src="/kopano-labs-logo.png"
+                alt="Kopano Labs logo"
+                className="max-h-28 w-full object-contain"
+              />
             </div>
 
             <div>
