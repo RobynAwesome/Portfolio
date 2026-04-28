@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { useMemo, useState } from "react";
-import { ExternalLink, Github, ShieldCheck, Sparkles, TerminalSquare } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Github, ShieldCheck } from "lucide-react";
 import {
   aiProduct,
   featuredCaseStudy,
@@ -8,314 +7,259 @@ import {
   publicLinks,
   qualitySignals,
   supportingProjects,
+  verifiedCredentials,
 } from "../data/portfolioContent";
 
-type Mode = "studio" | "terminal" | "blueprint" | "arcade";
-
-const modes: { key: Mode; label: string; hint: string }[] = [
-  { key: "studio", label: "Studio", hint: "Curated view" },
-  { key: "terminal", label: "Terminal", hint: "Repo-first" },
-  { key: "blueprint", label: "Blueprint", hint: "System view" },
-  { key: "arcade", label: "Arcade", hint: "Play mode" },
+const repositoryCards = [
+  {
+    title: featuredCaseStudy.title,
+    summary:
+      "Live booking and venue operations proof with both public deployment and public repository history.",
+    tech: ["Next.js", "MongoDB", "NextAuth", "Stripe"],
+    links: featuredCaseStudy.links,
+  },
+  {
+    title: aiProduct.title,
+    summary:
+      "Open systems work around orchestration, tooling, runtime control, and persistent context design.",
+    tech: ["Python", "FastAPI", "LiteLLM", "SQLite"],
+    links: aiProduct.links,
+  },
+  ...supportingProjects.slice(0, 4).map((project) => ({
+    title: project.title,
+    summary: project.summary,
+    tech: project.tech.slice(0, 4),
+    links: project.links,
+  })),
 ];
 
-export default function OpenSourcePage() {
-  const [mode, setMode] = useState<Mode>("studio");
-
-  const engineeringIndex = useMemo(
-    () => [
-      {
-        title: featuredCaseStudy.title,
-        summary:
-          "Primary production case study. Live bookings, payments, venue operations, and public repo history tied to a real business surface.",
-        links: featuredCaseStudy.links,
-        tags: ["production", "bookings", "payments", "ops"],
-      },
-      {
-        title: aiProduct.title,
-        summary:
-          "Primary AI systems repo. Multi-agent orchestration, routing, trust checks, replay logs, test surfaces, and documentation depth.",
-        links: aiProduct.links,
-        tags: ["ai runtime", "tools", "evals", "safety"],
-      },
-      ...supportingProjects.map((project) => ({
-        title: project.title,
-        summary: project.summary,
-        links: project.links,
-        tags: project.tech.slice(0, 4),
-      })),
-    ],
-    [],
-  );
+function CardLink({ label, href }: { label: string; href: string }) {
+  const isRepo = /github|repo/i.test(label);
+  const Icon = isRepo ? Github : ExternalLink;
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#060d18] pt-28 pb-24 text-white">
-      <section className="relative overflow-hidden pb-14">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,232,157,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.18),transparent_30%)]" />
-        <div className="absolute inset-0 dot-grid opacity-25" />
-        <div className="relative mx-auto max-w-6xl px-6 sm:px-8 lg:px-12">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 rounded-[10px] border border-[rgba(234,223,207,0.1)] px-3.5 py-2 text-sm font-semibold text-[var(--brand-text)] transition-colors hover:border-[rgba(208,133,77,0.28)] hover:bg-[rgba(208,133,77,0.1)]"
+    >
+      <Icon size={14} />
+      {label}
+    </a>
+  );
+}
+
+export default function OpenSourcePage() {
+  return (
+    <main className="brand-page overflow-hidden pb-24 pt-28">
+      <section className="relative overflow-hidden border-b border-[rgba(208,133,77,0.12)] pb-14">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(208,133,77,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(118,143,92,0.1),transparent_28%)]" />
+        <div className="brand-topography absolute inset-0 opacity-35" />
+        <div className="brand-grid absolute inset-0 opacity-30" />
+
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="max-w-4xl"
           >
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[#00e89d]">
-              Open Source
-            </p>
-            <h1 className="text-4xl font-black leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Public work,
-              <span className="block bg-gradient-to-r from-[#00e89d] via-[#0ea5e9] to-[#a855f7] bg-clip-text text-transparent">
-                with different ways to read it.
-              </span>
+            <p className="brand-kicker">Open Source</p>
+            <h1 className="mt-4 text-[3rem] font-semibold leading-[0.94] tracking-[-0.05em] text-[var(--brand-text)] sm:text-[4.5rem]">
+              Public proof, clean repos, and visible engineering habits.
             </h1>
-            <p className="mt-6 max-w-3xl text-base leading-8 text-gray-300 sm:text-lg">
-              The same public proof can be scanned four ways: curated, repo-first,
-              systems-first, or playful. The evidence stays employer-readable in every mode.
+            <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--brand-soft-text)] sm:text-lg">
+              This page drops the novelty modes and returns to a more corporate structure:
+              repositories first, verification second, quality signals third.
             </p>
           </motion.div>
+        </div>
+      </section>
 
-          <div className="mt-10 inline-flex flex-wrap gap-3 rounded-[8px] border border-white/10 bg-white/[0.03] p-2">
-            {modes.map((item) => (
-              <button
-                key={item.key}
-                onClick={() => setMode(item.key)}
-                className={`rounded-[8px] px-4 py-2 text-sm font-semibold transition-all ${
-                  mode === item.key
-                    ? "bg-[#00e89d] text-[#060d18]"
-                    : "text-gray-300 hover:bg-white/5 hover:text-white"
-                }`}
+      <section className="border-b border-[rgba(208,133,77,0.12)] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="brand-kicker">Repositories</p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-[var(--brand-text)] sm:text-4xl">
+                Start with the repos that carry the clearest public trail.
+              </h2>
+            </div>
+            <a
+              href={publicLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.24em] text-[var(--brand-olive)] transition-colors hover:text-[var(--brand-text)]"
+            >
+              GitHub profile
+              <ArrowUpRight size={15} />
+            </a>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {repositoryCards.map((repo, index) => (
+              <motion.article
+                key={repo.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+                className="brand-panel rounded-[22px] p-6"
               >
-                {item.label} <span className="ml-1 text-xs opacity-70">{item.hint}</span>
-              </button>
+                <h3 className="text-2xl font-semibold tracking-[-0.04em] text-[var(--brand-text)]">
+                  {repo.title}
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-[var(--brand-soft-text)]">{repo.summary}</p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {repo.tech.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-[10px] border border-[rgba(234,223,207,0.08)] bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--brand-muted)]"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {repo.links.map((link) => (
+                    <CardLink key={link.href} label={link.label} href={link.href} />
+                  ))}
+                </div>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      {mode === "studio" ? (
-        <section className="py-6">
-          <div className="mx-auto max-w-6xl px-6 sm:px-8 lg:px-12">
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {engineeringIndex.map((entry, index) => (
-                <motion.div
-                  key={entry.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.45, delay: index * 0.04 }}
-                  className="rounded-[26px] border border-white/10 bg-white/[0.03] p-6"
+      <section className="border-b border-[rgba(208,133,77,0.12)] py-16 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[1fr_1fr] lg:px-12">
+          <div>
+            <p className="brand-kicker">Verified Credentials</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-[var(--brand-text)] sm:text-4xl">
+              Public credentials that can be checked quickly.
+            </h2>
+            <div className="mt-8 space-y-4">
+              {verifiedCredentials.slice(0, 6).map((credential) => (
+                <a
+                  key={credential.title}
+                  href={credential.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brand-panel block rounded-[18px] p-5 transition-colors hover:border-[rgba(208,133,77,0.24)]"
                 >
-                  <div className="flex items-center justify-between gap-3">
-                    <h2 className="text-xl font-black text-white">{entry.title}</h2>
-                    <Sparkles size={16} className="text-[#00e89d]" />
-                  </div>
-                  <p className="mt-4 text-sm leading-7 text-gray-400">{entry.summary}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {entry.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-white/10 bg-[#081224] px-3 py-1.5 text-xs font-medium text-gray-200"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-6 flex flex-wrap gap-4">
-                    {entry.links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#00e89d] hover:text-[#34d399]"
-                      >
-                        {link.label}
-                        <ExternalLink size={14} />
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
+                  <p className="text-lg font-semibold text-[var(--brand-text)]">{credential.title}</p>
+                  <p className="mt-2 text-sm text-[var(--brand-muted)]">
+                    {credential.issuer} • {credential.date}
+                  </p>
+                  {credential.note && (
+                    <p className="mt-3 text-sm leading-7 text-[var(--brand-soft-text)]">
+                      {credential.note}
+                    </p>
+                  )}
+                </a>
               ))}
             </div>
           </div>
-        </section>
-      ) : null}
 
-      {mode === "terminal" ? (
-        <section className="py-6">
-          <div className="mx-auto max-w-6xl px-6 sm:px-8 lg:px-12">
-            <div className="rounded-[28px] border border-[#0ea5e9]/20 bg-[#07111f] p-6 sm:p-8">
-              <div className="mb-6 flex items-center gap-3 text-[#00e89d]">
-                <TerminalSquare size={18} />
-                <p className="font-mono text-sm">open-source://public-index</p>
-              </div>
-              <div className="space-y-5 font-mono text-sm leading-7 text-gray-300">
-                {engineeringIndex.map((entry) => (
-                  <div key={entry.title} className="rounded-2xl border border-white/8 bg-black/20 p-4">
-                    <p className="text-[#00e89d]">$ repo show {entry.title.toLowerCase().replace(/\s+/g, "-")}</p>
-                    <p className="mt-2 text-white">{entry.summary}</p>
-                    <p className="mt-2 text-gray-500">tags: {entry.tags.join(" · ")}</p>
-                    <div className="mt-3 flex flex-wrap gap-4">
-                      {entry.links.map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#0ea5e9] hover:text-[#38bdf8]"
-                        >
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {mode === "blueprint" ? (
-        <section className="py-6">
-          <div className="mx-auto max-w-6xl px-6 sm:px-8 lg:px-12">
-            <div className="rounded-[28px] border border-[#60a5fa]/20 bg-[linear-gradient(135deg,rgba(14,165,233,0.10),rgba(6,13,24,0.88))] p-6 sm:p-8">
-              <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-                <div className="rounded-3xl border border-white/10 bg-[#081224] p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#60a5fa]">
-                    System Layers
-                  </p>
-                  <div className="mt-5 space-y-4">
-                    {[
-                      "Public surfaces: portfolio, live products, roadmap pages",
-                      "Production flows: bookings, auth, payments, admin operations",
-                      "AI layer: routing, moderation, tooling, replay logs, trust checks",
-                      "Proof layer: tests, docs, credentials, public repo history",
-                    ].map((line) => (
-                      <div key={line} className="rounded-2xl border border-white/8 bg-white/[0.03] p-4">
-                        <p className="text-sm leading-7 text-gray-300">{line}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#00e89d]">
-                    Quality Signals
-                  </p>
-                  <div className="mt-5 space-y-4">
-                    {qualitySignals.map((signal) => (
-                      <div key={signal.title} className="border-l-2 border-[#00e89d]/40 pl-4">
-                        <p className="text-sm font-semibold text-white">{signal.title}</p>
-                        <p className="mt-2 text-sm leading-7 text-gray-400">{signal.evidence}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {mode === "arcade" ? (
-        <section className="py-6">
-          <div className="mx-auto max-w-6xl px-6 sm:px-8 lg:px-12">
-            <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-              <div className="rounded-[28px] border border-[#a855f7]/20 bg-[linear-gradient(180deg,rgba(168,85,247,0.14),rgba(6,13,24,0.95))] p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#f472b6]">
-                  Public Achievements
-                </p>
-                <div className="mt-5 grid gap-3">
-                  {publicBadges.slice(0, 6).map((badge) => (
-                    <a
-                      key={badge.title}
-                      href={badge.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 transition-transform hover:-translate-y-0.5"
-                    >
-                      <p className="text-sm font-semibold text-white">{badge.title}</p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.16em] text-gray-500">
-                        {badge.source}
-                      </p>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-[28px] border border-[#00e89d]/20 bg-[linear-gradient(180deg,rgba(0,232,157,0.10),rgba(6,13,24,0.95))] p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#00e89d]">
-                  Proof Board
-                </p>
-                <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                  {[
-                    { label: "Live system", value: "Bookit / 5's Arena" },
-                    { label: "AI build", value: "Kopano Context" },
-                    { label: "Docs depth", value: "MCP vault + handbook" },
-                    { label: "Profile hub", value: "GitHub + LinkedIn + HackerRank" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="rounded-2xl border border-white/10 bg-white/[0.04] p-5"
-                    >
-                      <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500">
-                        {stat.label}
-                      </p>
-                      <p className="mt-2 text-xl font-black text-white">{stat.value}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 flex flex-wrap gap-4">
-                  <a
-                    href={publicLinks.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-[8px] bg-white px-5 py-2.5 text-sm font-bold text-[#060d18]"
-                  >
-                    <Github size={16} />
-                    GitHub
-                  </a>
-                  <a
-                    href={publicLinks.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-[8px] border border-white/15 px-5 py-2.5 text-sm font-semibold text-white"
-                  >
-                    <ExternalLink size={16} />
-                    LinkedIn
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      <section className="border-y border-white/5 bg-[#07111f] py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-6 sm:px-8 lg:px-12">
-          <div className="max-w-3xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#00e89d]">
-              What Repos Prove
-            </p>
-            <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
-              Quality, safety, and public traceability
+          <div>
+            <p className="brand-kicker">Public Badges</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-[var(--brand-text)] sm:text-4xl">
+              Evidence that stays visible outside the resume.
             </h2>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {publicBadges.map((badge) => (
+                <a
+                  key={badge.title}
+                  href={badge.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brand-panel rounded-[18px] p-5 transition-colors hover:border-[rgba(208,133,77,0.24)]"
+                >
+                  <p className="text-lg font-semibold text-[var(--brand-text)]">{badge.title}</p>
+                  <p className="mt-2 text-sm text-[var(--brand-muted)]">
+                    {badge.source} • {badge.kind}
+                  </p>
+                  {badge.note && (
+                    <p className="mt-3 text-sm leading-7 text-[var(--brand-soft-text)]">
+                      {badge.note}
+                    </p>
+                  )}
+                </a>
+              ))}
+            </div>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[rgba(208,133,77,0.12)] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+          <p className="brand-kicker">Quality Signals</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-[var(--brand-text)] sm:text-4xl">
+            Habits that make the public repos more trustworthy.
+          </h2>
 
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {qualitySignals.map((signal) => (
-              <div
+            {qualitySignals.map((signal, index) => (
+              <motion.article
                 key={signal.title}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+                className="brand-panel rounded-[22px] p-6"
               >
-                <ShieldCheck size={18} className="text-[#00e89d]" />
-                <h3 className="mt-4 text-lg font-black text-white">{signal.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-gray-400">{signal.summary}</p>
-                <p className="mt-4 text-sm font-medium text-gray-200">{signal.evidence}</p>
-              </div>
+                <ShieldCheck size={18} className="text-[var(--brand-olive)]" />
+                <h3 className="mt-4 text-xl font-semibold tracking-[-0.03em] text-[var(--brand-text)]">
+                  {signal.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-[var(--brand-soft-text)]">
+                  {signal.summary}
+                </p>
+                <p className="mt-4 text-sm text-[var(--brand-muted)]">{signal.evidence}</p>
+
+                {signal.links?.length ? (
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    {signal.links.map((link) => (
+                      <CardLink key={link.href} label={link.label} href={link.href} />
+                    ))}
+                  </div>
+                ) : null}
+              </motion.article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5 }}
+            className="brand-panel brand-topography rounded-[24px] p-8 text-center sm:p-10"
+          >
+            <p className="brand-kicker">Open Profile</p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-[var(--brand-text)]">
+              The fuller trail still lives on GitHub.
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[var(--brand-soft-text)]">
+              Repositories, contribution history, and the wider implementation trail remain public
+              and browseable through the main GitHub profile.
+            </p>
+            <a
+              href={publicLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="brand-button-copper mt-8 inline-flex items-center justify-center gap-3 rounded-[12px] px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em]"
+            >
+              Open GitHub
+              <ArrowUpRight size={16} />
+            </a>
+          </motion.div>
         </div>
       </section>
     </main>

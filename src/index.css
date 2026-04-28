@@ -58,6 +58,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #070909;
+  color: #eadfcf;
 }
 
 h1, h2, h3, h4 {
@@ -669,4 +671,87 @@ html.redMono .blink-green-dot {
 @keyframes blink-red {
   0%, 100% { opacity: 1; box-shadow: 0 0 6px #ef4444; }
   50% { opacity: 0.3; box-shadow: 0 0 2px #ef4444; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PORTFOLIO BRAND SYSTEM — copper / charcoal / olive
+══════════════════════════════════════════════════════════════ */
+
+:root {
+  --brand-bg: #070909;
+  --brand-surface: rgba(12, 15, 15, 0.92);
+  --brand-line: rgba(208, 133, 77, 0.16);
+  --brand-text: #eadfcf;
+  --brand-soft-text: #d5c4af;
+  --brand-muted: #9d8e7b;
+  --brand-accent: #b96f43;
+  --brand-accent-soft: #d08958;
+  --brand-olive: #7a9866;
+}
+
+#root {
+  min-height: 100vh;
+  background: var(--brand-bg);
+}
+
+.brand-page {
+  background:
+    radial-gradient(circle at top left, rgba(208, 133, 77, 0.08), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(122, 152, 102, 0.08), transparent 24%),
+    linear-gradient(180deg, #060808 0%, #080b0c 55%, #070909 100%);
+  color: var(--brand-text);
+}
+
+.brand-panel {
+  background: linear-gradient(180deg, rgba(16, 20, 20, 0.94), rgba(10, 13, 13, 0.94));
+  border: 1px solid var(--brand-line);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+}
+
+.brand-kicker {
+  font-family: "IBM Plex Mono", "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--brand-accent-soft);
+}
+
+.brand-grid {
+  background-image:
+    linear-gradient(rgba(208, 133, 77, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(208, 133, 77, 0.06) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.brand-topography {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' fill='none'%3E%3Cg stroke='%23b96f43' stroke-width='1' stroke-opacity='0.18'%3E%3Cpath d='M0 154c87-56 164-63 231-20s142 53 223 10 148-53 215-10 141 46 223 8 151-50 228-18 159 43 280-17'/%3E%3Cpath d='M-10 232c83-48 160-51 233-8s147 48 226 5 150-58 221-18 144 45 225 10 153-51 229-14 156 42 272-12'/%3E%3Cpath d='M-8 311c84-45 156-46 228-3s144 46 220 9 146-58 222-18 148 42 225 7 149-48 229-10 154 40 265-8'/%3E%3Cpath d='M0 390c82-42 154-42 226-1s143 45 221 11 146-55 222-18 149 44 226 10 149-43 230-4 154 42 267-5'/%3E%3Cpath d='M2 470c81-40 153-40 223-1s144 46 223 10 148-52 221-16 147 43 225 11 149-42 228-3 154 42 264-4'/%3E%3Cpath d='M-4 550c83-42 156-41 227-1s146 46 223 11 148-52 220-13 145 41 226 8 150-44 228-5 153 42 265-6'/%3E%3Cpath d='M2 632c82-44 155-43 228-2s147 48 223 13 148-50 222-14 145 41 225 6 150-45 229-7 152 40 266-10'/%3E%3Cpath d='M4 716c83-44 155-43 228 0s146 50 223 16 149-49 221-12 145 42 225 9 151-44 230-6 153 42 268-10'/%3E%3Cpath d='M-2 798c87-48 158-46 232-1s149 51 223 16 148-50 221-12 146 43 225 10 152-46 229-8 153 41 270-10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+.brand-button-copper {
+  background: linear-gradient(135deg, rgba(208, 133, 77, 0.92), rgba(170, 94, 51, 0.98));
+  border: 1px solid rgba(208, 133, 77, 0.36);
+  color: #f7efe6;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.brand-button-copper:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.brand-button-olive {
+  background: rgba(122, 152, 102, 0.08);
+  border: 1px solid rgba(122, 152, 102, 0.36);
+  color: #c6d2b8;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.brand-button-olive:hover {
+  transform: translateY(-1px);
+  border-color: rgba(122, 152, 102, 0.52);
+  color: #e6ecde;
 }
