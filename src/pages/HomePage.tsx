@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import EcosystemDiagram from "../components/EcosystemDiagram";
+import FaithPurposeOrbit from "../components/FaithPurposeOrbit";
 import StudioProjectCard from "../components/StudioProjectCard";
 import CVPickerModal from "../components/cv-download/CVPickerModal";
 import {
@@ -32,6 +33,8 @@ const statIcons = [Building2, GraduationCap, BookOpen, MapPin];
 
 export default function HomePage() {
   const [cvModalOpen, setCvModalOpen] = useState(false);
+  const [kopanoOpen, setKopanoOpen] = useState(false);
+  const [amaPhuOpen, setAmaPhuOpen] = useState(false);
 
   return (
     <main className="brand-page overflow-hidden">
@@ -121,16 +124,16 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          <div className="mt-10 grid gap-0 overflow-hidden rounded-[20px] border border-[rgba(208,133,77,0.12)] bg-[rgba(9,12,12,0.86)] md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-10 grid gap-0 overflow-hidden rounded-[20px] border border-[var(--brand-line)] bg-[var(--brand-surface)] md:grid-cols-2 xl:grid-cols-4">
             {homeMetrics.map((metric, index) => {
               const Icon = statIcons[index];
 
               return (
                 <div
                   key={metric.label}
-                  className="flex gap-4 border-b border-[rgba(208,133,77,0.12)] px-6 py-6 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+                  className="flex gap-4 border-b border-[var(--brand-line)] px-6 py-6 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
                 >
-                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-[rgba(208,133,77,0.2)] text-[var(--brand-accent-soft)]">
+                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-[var(--brand-line)] text-[var(--brand-accent-soft)]">
                     <Icon size={22} />
                   </div>
                   <div>
@@ -151,50 +154,88 @@ export default function HomePage() {
 
       <section
         id="about"
-        className="relative border-b border-[rgba(208,133,77,0.12)] bg-[#080b0c] py-16 sm:py-20"
+        className="relative border-b border-[var(--brand-line)] bg-[var(--brand-bg)] py-16 sm:py-20"
       >
         <div className="brand-topography absolute inset-0 opacity-25" />
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
-          >
-            <p className="brand-kicker">About</p>
-            <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-[var(--brand-text)] sm:text-[4.2rem]">
-              I architect systems that serve our people.
-            </h2>
-            <div className="mt-6 max-w-xl space-y-4 text-base leading-8 text-[var(--brand-soft-text)]">
-              {homeHighlights.map((item) => (
-                <p key={item}>{item}</p>
-              ))}
-            </div>
-          </motion.div>
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.55 }}
+            >
+              <p className="brand-kicker">About</p>
+              <h2 className="mt-4 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] text-[var(--brand-text)] sm:text-[4.2rem]">
+                Systems that serve people.
+              </h2>
+              <div className="mt-6 max-w-xl space-y-4 text-base leading-8 text-[var(--brand-soft-text)]">
+                {homeHighlights.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55, delay: 0.08 }}
-            className="brand-panel brand-topography rounded-[24px] p-6 sm:p-8"
-          >
-            <p className="text-5xl leading-none text-[var(--brand-olive)]">“</p>
-            <p className="mt-3 max-w-xl text-[1.7rem] leading-[1.5] tracking-[-0.03em] text-[var(--brand-text)] sm:text-[2rem]">
-              {homeQuote}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.55, delay: 0.08 }}
+              className="brand-panel brand-topography rounded-[24px] p-6 sm:p-8"
+            >
+              <p className="text-5xl leading-none text-[var(--brand-olive)]">“</p>
+              <p className="mt-3 max-w-xl text-[1.7rem] leading-[1.5] tracking-[-0.03em] text-[var(--brand-text)] sm:text-[2rem]">
+                {homeQuote}
+              </p>
+              <div className="mt-8 h-px w-14 bg-[rgba(208,133,77,0.8)]" />
+              <div className="mt-6 flex items-center gap-3 text-sm text-[var(--brand-muted)]">
+                <Sparkles size={16} className="text-[var(--brand-olive)]" />
+                <p>Faith guides. Purpose drives. People first.</p>
+              </div>
+              <FaithPurposeOrbit />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="cape-town"
+        className="relative border-b border-[var(--brand-line)] bg-[var(--brand-bg)] py-14 sm:py-16"
+        data-asset-status="ASSET_REQUIRED"
+      >
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:px-12">
+          <div>
+            <p className="brand-kicker">Origin</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-[var(--brand-text)] sm:text-4xl">
+              Built in Cape Town.
+            </h2>
+            <p className="mt-3 max-w-md text-sm leading-6 text-[var(--brand-soft-text)]">
+              Built for people.
             </p>
-            <div className="mt-8 h-px w-14 bg-[rgba(208,133,77,0.8)]" />
-            <div className="mt-6 flex items-center gap-3 text-sm text-[var(--brand-muted)]">
-              <Sparkles size={16} className="text-[var(--brand-olive)]" />
-              <p>Faith guides. Purpose drives. People first.</p>
-            </div>
-          </motion.div>
+          </div>
+          <div
+            className="relative min-h-[220px] overflow-hidden rounded-[24px] border border-dashed border-[var(--brand-accent-soft)] bg-[var(--brand-surface)] p-6"
+            aria-label="Cape Town visual placeholder — owned asset required"
+          >
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--brand-olive)]">
+              ASSET_REQUIRED
+            </p>
+            <p className="mt-4 max-w-sm text-lg font-semibold tracking-[-0.03em] text-[var(--brand-text)]">
+              Table Mountain / city landscape — owned photo not yet vendored.
+            </p>
+            <p className="mt-3 text-sm text-[var(--brand-muted)]">
+              No stock photography. Coordinates hold the place until an approved local asset lands.
+            </p>
+            <p className="mt-8 font-mono text-[12px] uppercase tracking-[0.18em] text-[var(--brand-accent-soft)]">
+              S 33.9249° · E 18.4241°
+            </p>
+          </div>
         </div>
       </section>
 
       <section
         id="featured-projects"
-        className="border-b border-[rgba(208,133,77,0.12)] bg-[#070909] py-16 sm:py-20"
+        className="border-b border-[var(--brand-line)] bg-[var(--brand-bg)] py-16 sm:py-20"
       >
         <div className="mx-auto mb-14 max-w-7xl px-5 sm:px-8 lg:px-12">
           <motion.div
@@ -214,13 +255,10 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55 }}
-            className="mb-12 grid gap-5 lg:grid-cols-3"
+            className="mb-12 grid gap-5 md:grid-cols-2"
           >
             {educationSignals.map((item) => (
-              <div
-                key={item.institution}
-                className="brand-panel rounded-[24px] p-6"
-              >
+              <div key={item.institution} className="brand-panel rounded-[24px] p-6">
                 <p className="brand-kicker">Education</p>
                 <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-[var(--brand-text)]">
                   {item.institution}
@@ -231,18 +269,7 @@ export default function HomePage() {
                 <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--brand-olive)]">
                   {item.period}
                 </p>
-                <p className="mt-4 text-sm leading-7 text-[var(--brand-soft-text)]">
-                  {item.note}
-                </p>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand-olive)] transition-colors hover:text-[var(--brand-text)]"
-                >
-                  Visit institution
-                  <ArrowUpRight size={14} />
-                </a>
+                <p className="mt-4 text-sm leading-7 text-[var(--brand-soft-text)]">{item.note}</p>
               </div>
             ))}
           </motion.div>
@@ -253,7 +280,7 @@ export default function HomePage() {
             <div>
               <p className="brand-kicker">Featured Projects</p>
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[var(--brand-text)] sm:text-4xl">
-                Public work with clear operating context.
+                Built. Shipped. Proven.
               </h2>
             </div>
             <Link
@@ -265,15 +292,15 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {studioProjects.map((project, index) => (
-              <StudioProjectCard key={project.title} project={project} index={index} />
+              <StudioProjectCard key={project.title} project={project} index={index} compact />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#070909] py-16 sm:py-20">
+      <section className="bg-[var(--brand-bg)] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -284,12 +311,10 @@ export default function HomePage() {
             <div className="max-w-3xl">
               <p className="brand-kicker">Execution Lanes</p>
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-[var(--brand-text)] sm:text-4xl">
-                The home page should close with both ecosystem lanes visible.
+                Two Worlds. One Mission.
               </h2>
-              <p className="mt-4 text-base leading-7 text-[var(--brand-soft-text)]">
-                Kopano Labs carries the sovereign systems thesis. Ama-Phu Entertainment carries the
-                creative, music, and public-discovery lane. They belong together at the bottom of
-                the home page.
+              <p className="mt-4 max-w-xl text-sm leading-6 text-[var(--brand-soft-text)]">
+                Systems and culture. Same operator. Same proof standard.
               </p>
             </div>
           </motion.div>
@@ -300,9 +325,23 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.55 }}
-              className="brand-panel brand-topography grid gap-6 rounded-[24px] p-6 sm:p-8 lg:grid-cols-[220px_1fr] lg:items-center"
+              role="button"
+              tabIndex={0}
+              onClick={() => setKopanoOpen((value) => !value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setKopanoOpen((value) => !value);
+                }
+              }}
+              onMouseEnter={() => setKopanoOpen(true)}
+              onFocus={() => setKopanoOpen(true)}
+              aria-expanded={kopanoOpen}
+              className={`brand-panel brand-topography grid cursor-pointer gap-6 rounded-[24px] p-6 text-left sm:p-8 lg:grid-cols-[220px_1fr] lg:items-center ${
+                kopanoOpen ? "ring-1 ring-[var(--brand-accent-soft)]" : ""
+              }`}
             >
-              <div className="flex h-44 items-center justify-center rounded-[18px] border border-[rgba(208,133,77,0.18)] bg-[radial-gradient(circle_at_20%_20%,rgba(42,174,141,0.12),transparent_34%),rgba(8,11,12,0.82)] p-6">
+              <div className="flex h-44 items-center justify-center rounded-[18px] border border-[var(--brand-line)] bg-[var(--brand-surface-soft)] p-6">
                 <img
                   src="/kopano-labs-logo.png"
                   alt="Kopano Labs logo"
@@ -311,31 +350,34 @@ export default function HomePage() {
               </div>
 
               <div>
-                <p className="brand-kicker">The Studio</p>
+                <p className="brand-kicker">Kopano</p>
                 <h3 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-[var(--brand-text)]">
-                  Kopano Labs
+                  Systems. Research. Products.
                 </h3>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--brand-soft-text)]">
-                  A sovereign product studio building the digital backbone of Africa’s future.
+                <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--brand-soft-text)]">
+                  Sovereign product studio for African digital infrastructure.
                 </p>
-                <div className="mt-5 flex flex-wrap gap-4">
-                  {studioNotes.map((item) => (
-                    <span
-                      key={item}
-                      className="inline-flex items-center gap-2 text-sm text-[var(--brand-muted)]"
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-accent-soft)]" />
-                      {item}
-                    </span>
-                  ))}
-                </div>
-                <p className="mt-5 text-sm leading-7 text-[var(--brand-muted)]">
-                  Product studio. Systems thinking. African excellence.
-                </p>
+                <motion.div
+                  animate={{ height: kopanoOpen ? "auto" : 0, opacity: kopanoOpen ? 1 : 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-5 flex flex-wrap gap-4">
+                    {studioNotes.map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex items-center gap-2 text-sm text-[var(--brand-muted)]"
+                      >
+                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-accent-soft)]" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
                 <div className="mt-6">
                   <Link
                     to="/kopano-labs"
                     className="brand-button-copper inline-flex items-center justify-center gap-3 rounded-[12px] px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em]"
+                    onClick={(event) => event.stopPropagation()}
                   >
                     Explore Kopano Labs
                     <ArrowUpRight size={16} />
@@ -349,15 +391,29 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.55, delay: 0.06 }}
-              className="brand-panel brand-topography grid gap-6 rounded-[24px] p-6 sm:p-8 lg:grid-cols-[220px_1fr] lg:items-center"
+              role="button"
+              tabIndex={0}
+              onClick={() => setAmaPhuOpen((value) => !value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setAmaPhuOpen((value) => !value);
+                }
+              }}
+              onMouseEnter={() => setAmaPhuOpen(true)}
+              onFocus={() => setAmaPhuOpen(true)}
+              aria-expanded={amaPhuOpen}
+              className={`brand-panel brand-topography grid cursor-pointer gap-6 rounded-[24px] p-6 text-left sm:p-8 lg:grid-cols-[220px_1fr] lg:items-center ${
+                amaPhuOpen ? "ring-1 ring-[var(--brand-accent-soft)]" : ""
+              }`}
             >
-              <div className="flex h-44 flex-col justify-between rounded-[18px] border border-[rgba(208,133,77,0.18)] bg-[radial-gradient(circle_at_22%_20%,rgba(208,133,77,0.14),transparent_28%),radial-gradient(circle_at_80%_74%,rgba(42,174,141,0.14),transparent_28%),rgba(8,11,12,0.82)] p-6">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-[rgba(208,133,77,0.18)] text-[var(--brand-accent-soft)]">
+              <div className="flex h-44 flex-col justify-between rounded-[18px] border border-[var(--brand-line)] bg-[var(--brand-surface-soft)] p-6">
+                <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-[var(--brand-line)] text-[var(--brand-accent-soft)]">
                   <Music4 size={22} />
                 </div>
                 <div>
                   <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--brand-olive)]">
-                    Music · Discovery · Venue crossover
+                    Music · Culture · Artists
                   </p>
                   <p className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-[var(--brand-text)]">
                     Ama-Phu Entertainment
@@ -366,32 +422,34 @@ export default function HomePage() {
               </div>
 
               <div>
-                <p className="brand-kicker">Creative Lane</p>
+                <p className="brand-kicker">Ama-Phu</p>
                 <h3 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-[var(--brand-text)]">
-                  Ama-Phu Entertainment
+                  Music. Culture. Live.
                 </h3>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--brand-soft-text)]">
-                  The music and public-discovery arm of the ecosystem, now with its own dedicated
-                  page, on-site listening, and clearer crossover to the wider product lane.
+                <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--brand-soft-text)]">
+                  Creative lane with listening, discovery, and arena crossover.
                 </p>
-                <div className="mt-5 flex flex-wrap gap-4">
-                  {["Music surface", "Creator routing", "5's Arena crossover"].map((item) => (
-                    <span
-                      key={item}
-                      className="inline-flex items-center gap-2 text-sm text-[var(--brand-muted)]"
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-accent-soft)]" />
-                      {item}
-                    </span>
-                  ))}
-                </div>
-                <p className="mt-5 text-sm leading-7 text-[var(--brand-muted)]">
-                  Keep the user here, then let the dedicated page carry the deeper proof.
-                </p>
+                <motion.div
+                  animate={{ height: amaPhuOpen ? "auto" : 0, opacity: amaPhuOpen ? 1 : 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-5 flex flex-wrap gap-4">
+                    {["Music surface", "Creator routing", "5's Arena crossover"].map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex items-center gap-2 text-sm text-[var(--brand-muted)]"
+                      >
+                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-accent-soft)]" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     to="/ama-phu-entertainment"
                     className="brand-button-copper inline-flex items-center justify-center gap-3 rounded-[12px] px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em]"
+                    onClick={(event) => event.stopPropagation()}
                   >
                     Explore Ama-Phu
                     <ArrowUpRight size={16} />
@@ -401,6 +459,7 @@ export default function HomePage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="brand-button-olive inline-flex items-center justify-center gap-3 rounded-[12px] px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em]"
+                    onClick={(event) => event.stopPropagation()}
                   >
                     Open link hub
                     <ArrowUpRight size={16} />
@@ -412,7 +471,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CV Download CTA */}
       <section className="relative border-t border-[rgba(208,133,77,0.12)] py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,232,157,0.06),transparent_40%)]" />
         <motion.div
@@ -428,9 +486,8 @@ export default function HomePage() {
           <h2 className="text-3xl font-semibold tracking-[-0.04em] text-[var(--brand-text)] sm:text-4xl">
             Download my CV
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-7 text-[var(--brand-soft-text)]">
-            Choose a role focus, enter your details, and get a tailored PDF that matches this site's
-            design — dark theme, clear structure, sovereign energy.
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[var(--brand-soft-text)]">
+            Pick a role focus. Get a tailored PDF.
           </p>
           <button
             type="button"

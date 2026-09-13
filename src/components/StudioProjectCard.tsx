@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { StudioProject } from "../data/siteContent";
@@ -20,6 +21,8 @@ export default function StudioProjectCard({
   index = 0,
   compact = false,
 }: StudioProjectCardProps) {
+  const [imageFailed, setImageFailed] = useState(false);
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 24 }}
@@ -30,11 +33,29 @@ export default function StudioProjectCard({
       className="group brand-panel overflow-hidden rounded-[24px]"
     >
       <div className="relative aspect-[16/10] overflow-hidden border-b border-[var(--brand-line)] bg-[#0d1112]">
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
+        {!imageFailed ? (
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            onError={() => setImageFailed(true)}
+          />
+        ) : (
+          <div
+            className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_30%_20%,rgba(208,133,77,0.18),transparent_40%),#0d1112] px-6 text-center"
+            role="img"
+            aria-label={project.imageAlt}
+          >
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--brand-olive)]">
+                {project.category}
+              </p>
+              <p className="mt-3 text-xl font-semibold tracking-[-0.04em] text-[var(--brand-text)]">
+                {project.title}
+              </p>
+            </div>
+          </div>
+        )}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,5,5,0.12),rgba(3,5,5,0.08)_45%,rgba(3,5,5,0.88)_100%)]" />
         <div className="brand-topography absolute inset-0 opacity-35" />
         <span
@@ -47,22 +68,22 @@ export default function StudioProjectCard({
       <div className={compact ? "p-5 sm:p-6" : "p-6 sm:p-7"}>
         <div className="mb-3 flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-[2rem] font-semibold leading-none tracking-[-0.04em] text-[var(--brand-text)]">
+            <h3 className="text-[1.7rem] font-semibold leading-none tracking-[-0.04em] text-[var(--brand-text)] sm:text-[2rem]">
               {project.title}
             </h3>
-            <p className="mt-3 text-sm leading-6 text-[var(--brand-muted)]">
-              {project.description}
-            </p>
+            <p className="mt-3 text-sm leading-6 text-[var(--brand-muted)]">{project.description}</p>
           </div>
           <span className="hidden font-mono text-[11px] uppercase tracking-[0.24em] text-[var(--brand-olive)] sm:inline">
             0{index + 1}
           </span>
         </div>
 
-        <p className="mb-5 text-sm leading-6 text-[var(--brand-soft-text)]">{project.detail}</p>
+        {!compact && project.detail ? (
+          <p className="mb-5 text-sm leading-6 text-[var(--brand-soft-text)]">{project.detail}</p>
+        ) : null}
 
         <div className="mb-5 flex flex-wrap gap-2">
-          {project.stack.map((item) => (
+          {project.stack.slice(0, compact ? 3 : project.stack.length).map((item) => (
             <span
               key={item}
               className="rounded-[8px] border border-[rgba(234,223,207,0.1)] bg-[rgba(255,255,255,0.03)] px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--brand-muted)]"
@@ -96,7 +117,7 @@ export default function StudioProjectCard({
             {project.primaryLink.label}
             <ArrowUpRight size={15} />
           </a>
-          {project.secondaryLink && (
+          {!compact && project.secondaryLink && (
             <a
               href={project.secondaryLink.href}
               target="_blank"

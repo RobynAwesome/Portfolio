@@ -105,21 +105,17 @@ export const journeyMilestones: JourneyMilestone[] = [
   {
     year: "2026",
     status: "Exploring",
-    title: "Education path expands into AI and agentic systems",
+    title: "Education path held to evidence",
     detail:
-      "The current public education story now spans CPUT computer engineering, a Johns Hopkins agentic AI and machine learning certificate lane, and the Robert Kennedy College MSc AI pathway supported by the Lancashire / RKC materials.",
+      "Public education story stays with CPUT computer engineering in progress, plus Johns Hopkins Agentic AI as provisional admission only. Graduate AI pathways remain PENDING_EVIDENCE until enrollment or award receipts exist — biography follows the same proof discipline as Project RUNE.",
     links: [
       {
-        label: "The Johns Hopkins University",
-        href: "https://www.jhu.edu/",
+        label: "Cape Peninsula University of Technology",
+        href: "https://www.cput.ac.za/",
       },
       {
-        label: "University of Lancashire MSc AI",
-        href: "https://www.lancashire.ac.uk/postgraduate/courses/artificial-intelligence-msc",
-      },
-      {
-        label: "Robert Kennedy College programmes",
-        href: "https://www.college.ch/programmes",
+        label: "Johns Hopkins Engineering Executive Education",
+        href: "https://ep.jhu.edu/",
       },
     ],
   },
@@ -215,22 +211,17 @@ export const digitalProfileGroups: LinkGroup[] = [
   {
     title: "Education and Learning Path",
     summary:
-      "The current learning and graduate-study lane across core engineering, agentic AI, and AI systems study.",
+      "Evidence-gated learning lane: CPUT engineering in progress; Johns Hopkins Agentic AI as provisional admission only until completion is verified.",
     items: [
       {
-        label: "The Johns Hopkins University",
-        href: "https://www.jhu.edu/",
-        note: "Certificate in Agentic AI and machine learning as reflected in your supplied profile evidence.",
+        label: "Cape Peninsula University of Technology",
+        href: "https://www.cput.ac.za/",
+        note: "BEng Tech Computer Engineering — in progress.",
       },
       {
-        label: "University of Lancashire MSc AI",
-        href: "https://www.lancashire.ac.uk/postgraduate/courses/artificial-intelligence-msc",
-        note: "On-campus programme overview and curriculum summary.",
-      },
-      {
-        label: "Robert Kennedy College programmes",
-        href: "https://www.college.ch/programmes",
-        note: "Swiss online delivery partner and programme catalogue.",
+        label: "Johns Hopkins Engineering Executive Education",
+        href: "https://ep.jhu.edu/",
+        note: "Certificate Program in Agentic AI — provisional admission (completion NOT_VERIFIED).",
       },
     ],
   },
@@ -273,13 +264,13 @@ export const amaPhuAdmissionsJourney: AdmissionsJourneyBeat[] = [
   },
   {
     period: "Now",
-    title: "Why I am pursuing MSc Artificial Intelligence (RKC)",
+    title: "Graduate AI study remains PENDING_EVIDENCE",
     summary:
-      "I am applying to Robert Kennedy College because the next layer of my work is not prettier interfaces — it is honest systems that survive African infrastructure friction. I already build on local metal with auditable agents and cyber-physical student pipelines. Formal graduate training is how I tighten the mathematics, evaluation discipline, and research posture behind that work — without losing the creative lane that keeps me human on the pavement.",
+      "Interest in formal graduate AI training is real — mathematics, evaluation discipline, and research posture behind African-infrastructure systems work. Until enrollment or award receipts exist, no MSc completion claim is published. Same proof chain as RUNE: did it → can prove it → can publish it.",
     proof: [
       {
-        label: "MSc AI programme (RKC)",
-        href: "https://www.robertkennedycollege.com/programmes/master-of-science-artificial-intelligence/",
+        label: "Project RUNE (proof-by-receipt)",
+        href: "https://github.com/RobynAwesome/Project-Rune",
       },
     ],
   },

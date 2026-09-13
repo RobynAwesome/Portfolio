@@ -1,0 +1,64 @@
+{
+  "name": "@kopano-labs/kpgs-three",
+  "version": "0.1.0",
+  "description": "KPGS TypeScript graphics primitives for original, accessible Three.js experiences.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/assets",
+    "dist/contracts",
+    "dist/core",
+    "dist/governance",
+    "dist/quality",
+    "dist/scenes",
+    "dist/index.d.ts",
+    "dist/index.d.ts.map",
+    "dist/index.js",
+    "dist/index.js.map",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "test": "npm run build && tsc -p tsconfig.test.json && node --test .test-dist/test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kopano-Labs/KPGSthree.ts.git"
+  },
+  "keywords": [
+    "threejs",
+    "typescript",
+    "3d",
+    "webgl",
+    "webgpu",
+    "gltf",
+    "kopano-labs"
+  ],
+  "author": "Kopano Labs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Kopano-Labs/KPGSthree.ts/issues"
+  },
+  "homepage": "https://github.com/Kopano-Labs/KPGSthree.ts#readme",
+  "dependencies": {
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "@types/three": "0.185.0",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

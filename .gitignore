@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+!vendor/kpgs-three/dist/
+!vendor/kpgs-three/dist/**
 *.local
 .tmp.driveupload/
 
@@ -25,3 +27,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+vendor/**/node_modules/
+

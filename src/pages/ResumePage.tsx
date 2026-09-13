@@ -48,16 +48,10 @@ const education = [
     note: "Deep foundations in software and hardware engineering",
   },
   {
-    degree: "Certificate in Agentic AI, Machine Learning",
-    institution: "The Johns Hopkins University",
-    period: "May 2026",
-    note: "Python, generative AI, prompt engineering, protocol engineering, LangChain, and LangGraph.",
-  },
-  {
-    degree: "MSc in Artificial Intelligence, Machine Learning",
-    institution: "Robert Kennedy College",
-    period: "May 2026",
-    note: "AI graduate-study lane reflected across the portfolio and roadmap surfaces.",
+    degree: "Certificate Program in Agentic AI — provisional admission",
+    institution: "Johns Hopkins Engineering Executive and Professional Education",
+    period: "Offer dated Aug 2026",
+    note: "Provisional admission only. Completion NOT_VERIFIED — not an earned certificate.",
   },
 ];
 

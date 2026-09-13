@@ -13,11 +13,13 @@
     "check": "npm run typecheck && npm run build"
   },
   "dependencies": {
+    "@kopano-labs/kpgs-three": "file:vendor/kpgs-three",
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.577.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.30.3"
+    "react-router-dom": "^6.30.3",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

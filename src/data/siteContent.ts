@@ -40,6 +40,8 @@ export const studioLinks = {
   fivesArenaBlog: "https://blog.fivesarena.com/",
   starfallSalvage: "https://starfallsalvage.kopanolabs.com/",
   kopanoContext: "https://context.kopanolabs.com/",
+  projectRune: "https://github.com/RobynAwesome/Project-Rune",
+  orcid: "https://orcid.org/0009-0000-3995-6147",
   github: "https://github.com/RobynAwesome",
   linkedin: "https://www.linkedin.com/in/kholofelo-robyn-rababalela-7a26273b6/",
   koFi: "https://ko-fi.com/robynawesome/",
@@ -52,25 +54,25 @@ export const ecosystemLinks: EcosystemLink[] = [
   {
     href: studioLinks.portfolio,
     label: "KRRababalela",
-    note: "Chief portfolio, education lane, and public ecosystem map.",
+    note: "Public identity root, research lane, education evidence, and ecosystem map.",
     status: "Live",
   },
   {
     href: studioLinks.kopanoLabs,
     label: "Kopano Labs",
-    note: "Studio surface for sovereign products, strategy, and systems work.",
+    note: "Studio surface for sovereign products, strategy, research translation, and systems work.",
     status: "Live",
   },
   {
     href: studioLinks.kasiLink,
     label: "KasiLink",
-    note: "Township-first work network with Lite investor discovery.",
+    note: "Township-first work network. Public outcome receipts remain pilot-stage.",
     status: "Live",
   },
   {
     href: studioLinks.fivesArena,
     label: "Five's Arena",
-    note: "Live 5-a-side booking and tournament surface.",
+    note: "Live 5-a-side booking, discovery, and competition surface.",
     status: "Live",
   },
   {
@@ -97,8 +99,8 @@ export const canonicalBio = {
   name: 'Kholofelo "Robyn" Rababalela',
   role: "Chief Architect, Kopano Labs",
   affiliation:
-    "CPUT computer engineering with learning tracks through The Johns Hopkins University and Robert Kennedy College",
-  location: "Cape Town, South Africa (V&A Waterfront / CPUT)",
+    "CPUT Computer Engineering student with independent research in protocol-driven agentic memory, AI governance, and resilient runtime systems",
+  location: "Cape Town, South Africa",
   missionStatement:
     '"Unity through Technology — building digital infrastructure that respects African realities (load-shedding, data residency, POPIA)."',
   recognition: "Finalist, SA Startup Week 2026",
@@ -116,23 +118,23 @@ export const canonicalBio = {
   ],
 };
 
-export const homeTraits = ["Architect", "Builder", "Believer"];
+export const homeTraits = ["Architect", "Research Builder", "Believer"];
 
 export const homeMetrics = [
   {
-    label: "Degree",
+    label: "Current Study",
     value: "CPUT",
-    detail: "BEng Tech in Computer Engineering",
+    detail: "BEng Tech in Computer Engineering — in progress",
   },
   {
-    label: "Certificate",
-    value: "Johns Hopkins",
-    detail: "Agentic AI and machine learning track",
+    label: "Research Identity",
+    value: "ORCID",
+    detail: "0009-0000-3995-6147",
   },
   {
-    label: "Graduate AI",
-    value: "Robert Kennedy College",
-    detail: "MSc AI and machine learning pathway",
+    label: "Flagship Research Build",
+    value: "RUNE",
+    detail: "Runtime Unified Network Endorsement",
   },
   {
     label: "Based In",
@@ -142,8 +144,8 @@ export const homeMetrics = [
 ];
 
 export const homeHighlights = [
-  "I lead Kopano Labs in building sovereign digital infrastructure and products that reflect African realities, secure by design and built to last.",
-  "The education path running alongside the work now spans CPUT computer engineering, Johns Hopkins agentic AI study, and the Robert Kennedy College MSc AI lane.",
+  "I build sovereign digital infrastructure for African realities — secure by design, proof before promotion.",
+  "Research stays fail-closed: claim, evidence, state, action, receipt. Pilots stay labelled until verified.",
 ];
 
 export const homeQuote =
@@ -152,47 +154,54 @@ export const homeQuote =
 export const studioNotes = [
   "Sovereign by design",
   "Secure by default",
-  "Built for scale",
+  "Proof before promotion",
 ];
 
 export const educationSignals: EducationSignal[] = [
   {
     institution: "Cape Peninsula University of Technology",
-    award: "Bachelor of Engineering, Computer Engineering",
+    award: "BEng Tech in Computer Engineering — current study",
     period: "2025 - 2028",
-    note:
-      "Core engineering path covering software design, electronics, computer architecture, telecommunications engineering, and operating systems.",
+    note: "Computer Engineering in progress.",
     href: "https://www.cput.ac.za/",
   },
   {
-    institution: "The Johns Hopkins University",
-    award: "Certificate in Agentic AI, Machine Learning",
-    period: "May 2026",
-    note:
-      "Agentic AI lane with Python, generative AI, prompt engineering, protocol engineering, LangChain, and LangGraph visible in the public profile evidence you shared.",
-    href: "https://www.jhu.edu/",
-  },
-  {
-    institution: "Robert Kennedy College",
-    award: "MSc in Artificial Intelligence, Machine Learning",
-    period: "May 2026",
-    note:
-      "AI graduate-study lane now reflected directly in the portfolio alongside the Lancashire / RKC programme research materials.",
-    href: "https://www.college.ch/",
+    institution: "Johns Hopkins Engineering",
+    award: "Provisional admission — Certificate Program in Agentic AI",
+    period: "5 August 2026",
+    note: "Provisional admission only. Completion not verified.",
+    href: "https://ep.jhu.edu/",
   },
 ];
 
 export const studioProjects: StudioProject[] = [
   {
+    title: "Project RUNE",
+    description: "Fail-closed endorsement for agent claims.",
+    detail: "",
+    status: "MVP",
+    deliveryLabel: "Active",
+    category: "Agent Governance",
+    stack: ["Python", "MCP", "Ed25519", "Fail-closed"],
+    image: "/project-banners/rune-emblem.svg",
+    imageAlt: "Project RUNE endorsement and convergence emblem",
+    primaryLink: {
+      href: studioLinks.projectRune,
+      label: "Explore RUNE",
+    },
+    secondaryLink: {
+      href: studioLinks.orcid,
+      label: "Research identity",
+    },
+  },
+  {
     title: "Bookit 5s Arena",
-    description:
-      "Football court booking platform operating as a live MVP for 5-a-side football infrastructure.",
-    detail:
-      "Positioned to scale into the World Cup 5s 48-nation tournament, 29–31 May 2026.",
+    description: "Live 5-a-side booking infrastructure.",
+    detail: "",
     status: "MVP",
     deliveryLabel: "Live",
     category: "SaaS Platform",
-    stack: ["Next.js", "TypeScript", "Postgres", "Stripe"],
+    stack: ["React", "Node.js", "MongoDB", "APWA"],
     image: "/project-banners/bookit-banner-opt.png",
     imageAlt: "Bookit 5s Arena project banner",
     primaryLink: {
@@ -200,20 +209,18 @@ export const studioProjects: StudioProject[] = [
       label: "Visit live platform",
     },
     secondaryLink: {
-      href: "https://github.com/RobynAwesome/Bookit-5s-Arena",
+      href: "https://github.com/Kopano-Labs/Bookit-5s-Arena",
       label: "View GitHub",
     },
   },
   {
     title: "KasiLink",
-    description:
-      "Township gig economy platform designed mobile-first and resilient under uneven connectivity.",
-    detail:
-      "PWA-first product thinking for offline-capable discovery, trust, and local economic access.",
+    description: "Township-first work network. Pilot outcomes stay labelled.",
+    detail: "",
     status: "Active",
     deliveryLabel: "Pilot",
     category: "Connectivity Platform",
-    stack: ["IoT", "Mesh", "Rust", "Tailwind"],
+    stack: ["PWA", "Offline-first", "Trust"],
     image: "/project-banners/kasilink-banner.svg",
     imageAlt: "KasiLink project banner",
     primaryLink: {
@@ -227,14 +234,12 @@ export const studioProjects: StudioProject[] = [
   },
   {
     title: "Kopano Context",
-    description:
-      "Contextual identity and data orchestration framework for African data ecosystems.",
-    detail:
-      "Architecture work around durable context, memory-aware tooling, and multi-agent product systems.",
+    description: "User-governed AI memory and multi-agent state.",
+    detail: "",
     status: "In Development",
     deliveryLabel: "Active",
     category: "Identity & Data Layer",
-    stack: ["Go", "gRPC", "Kafka", "CockroachDB"],
+    stack: ["MCP", "Context", "Receipts"],
     image: "/project-banners/mcp-banner.svg",
     imageAlt: "Kopano Context project banner",
     primaryLink: {
@@ -244,6 +249,44 @@ export const studioProjects: StudioProject[] = [
     secondaryLink: {
       href: studioLinks.kopanoContext,
       label: "Reserved domain",
+    },
+  },
+  {
+    title: "Harvest 4 All",
+    description: "Civic hackathon build for food access.",
+    detail: "",
+    status: "Active",
+    deliveryLabel: "Active",
+    category: "Civic Impact",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/project-banners/harvest-banner.png",
+    imageAlt: "Harvest 4 All project banner",
+    primaryLink: {
+      href: "https://github.com/RobynAwesome/Harvest-4-All",
+      label: "View repository",
+    },
+    secondaryLink: {
+      href: "https://www.cxia4irhack.co.za",
+      label: "Hackathon site",
+    },
+  },
+  {
+    title: "5's Arena Blog",
+    description: "Editorial layer around the live arena stack.",
+    detail: "",
+    status: "MVP",
+    deliveryLabel: "Live",
+    category: "Content Platform",
+    stack: ["Auth", "CMS", "Images"],
+    image: "/project-banners/blog-banner.svg",
+    imageAlt: "5's Arena Blog banner",
+    primaryLink: {
+      href: studioLinks.fivesArenaBlog,
+      label: "Visit live blog",
+    },
+    secondaryLink: {
+      href: "https://github.com/RobynAwesome/5s-Arena-Blog",
+      label: "View GitHub",
     },
   },
 ];
@@ -258,7 +301,7 @@ export const studioPrinciples = [
     body: "Treat memory, workflow, and operator control as product primitives rather than optional extras.",
   },
   {
-    title: "Sovereign Delivery",
-    body: "Ship infrastructure that can be hosted, reasoned about, and trusted close to home.",
+    title: "Proof Before Promotion",
+    body: "Separate intention, demonstration, deployment, discovery, and verified outcome instead of collapsing them into one success claim.",
   },
 ];

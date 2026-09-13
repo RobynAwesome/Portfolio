@@ -1,6 +1,6 @@
 node_modules
-dist
-dist-ssr
+/dist
+/dist-ssr
 .git
 .github
 .tmp.driveupload
