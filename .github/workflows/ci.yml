@@ -41,7 +41,7 @@ jobs:
             "api/cv-files/web-developer.pdf"
             "api/cv-files/software-developer.pdf"
             "api/cv-files/frontend-backend-developer.pdf"
-            "public/og-image.jpg"
+            "public/og-image.png"
             "public/favicon.ico"
           )
           for f in "${files[@]}"; do
