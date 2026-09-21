@@ -13,6 +13,11 @@ import {
   Trophy,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  evidenceRelaySnapshot,
+  evidenceRelaySources,
+  type EvidenceRelaySourceId,
+} from "../data/evidenceRelay";
 import { studioLinks } from "../data/siteContent";
 import { useThemeMode } from "./theme/ThemeModeProvider";
 
@@ -92,6 +97,13 @@ const systemNodes: SystemNode[] = [
     asset: "/project-banners/rune-emblem.svg",
     assetAlt: "Project RUNE emblem",
   },
+  {
+    id: "relay",
+    title: "Evidence Relay",
+    body: "Cloud, local, and Drive evidence converge into one research story without pretending every source is live or complete.",
+    icon: Radar,
+    related: ["core", "rune", "graph"],
+  },
 ];
 
 const orbitLayout: Record<string, { x: string; y: string }> = {
@@ -100,13 +112,18 @@ const orbitLayout: Record<string, { x: string; y: string }> = {
   bookit: { x: "6%", y: "68%" },
   graph: { x: "70%", y: "66%" },
   rune: { x: "38%", y: "78%" },
+  relay: { x: "39%", y: "2%" },
 };
 
 export default function EcosystemDiagram() {
   const { isReadMode, isCrazyMode } = useThemeMode();
   const [selectedId, setSelectedId] = useState("core");
+  const [selectedRelaySourceId, setSelectedRelaySourceId] =
+    useState<EvidenceRelaySourceId>("cloud");
   const selectedIndex = systemNodes.findIndex((n) => n.id === selectedId);
   const selected = systemNodes[selectedIndex] ?? systemNodes[0];
+  const selectedRelaySource =
+    evidenceRelaySources.find((source) => source.id === selectedRelaySourceId) ?? evidenceRelaySources[0];
   const related = useMemo(() => new Set(selected.related), [selected]);
 
   const go = (delta: number) => {
@@ -132,7 +149,11 @@ export default function EcosystemDiagram() {
         </div>
 
         <Suspense fallback={null}>
-          <KpgsSpatialStage selectedNodeId={selectedId} className="hidden lg:block" />
+          <KpgsSpatialStage
+            selectedNodeId={selectedId}
+            relaySourceId={selectedRelaySourceId}
+            className="hidden lg:block"
+          />
         </Suspense>
 
         <AnimatePresence mode="wait">
@@ -151,6 +172,47 @@ export default function EcosystemDiagram() {
               {selected.title}
             </h4>
             <p className="mt-3 text-sm leading-6 text-[var(--brand-soft-text)]">{selected.body}</p>
+
+            {selected.id === "relay" && (
+              <div className="mt-5 rounded-[18px] border border-[var(--brand-line)] bg-[var(--brand-surface)] p-4">
+                <div className="flex flex-wrap gap-2" role="group" aria-label="Choose an evidence source">
+                  {evidenceRelaySources.map((source) => (
+                    <button
+                      key={source.id}
+                      type="button"
+                      aria-pressed={selectedRelaySourceId === source.id}
+                      onClick={() => setSelectedRelaySourceId(source.id)}
+                      className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-accent-soft)] ${
+                        selectedRelaySourceId === source.id
+                          ? "border-[var(--brand-accent-soft)] bg-[var(--brand-accent-soft)] text-[#101615]"
+                          : "border-[var(--brand-line)] text-[var(--brand-soft-text)] hover:border-[var(--brand-accent-soft)]"
+                      }`}
+                    >
+                      {source.title}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-4" aria-live="polite">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-sm font-semibold text-[var(--brand-text)]">{selectedRelaySource.title}</p>
+                    <span className="rounded-full border border-[var(--brand-line)] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--brand-muted)]">
+                      {selectedRelaySource.state}
+                    </span>
+                  </div>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--brand-olive)]">
+                    {selectedRelaySource.label}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[var(--brand-soft-text)]">
+                    {selectedRelaySource.description}
+                  </p>
+                </div>
+
+                <p className="mt-4 border-t border-[var(--brand-line)] pt-3 text-xs leading-5 text-[var(--brand-muted)]">
+                  {evidenceRelaySnapshot.publicNote} Observed {evidenceRelaySnapshot.observedAt}.
+                </p>
+              </div>
+            )}
 
             {selected.asset && (
               <div className="mt-4 overflow-hidden rounded-[16px] border border-[var(--brand-line)] bg-[var(--brand-surface)]">
@@ -365,3 +427,4 @@ export default function EcosystemDiagram() {
     </div>
   );
 }
+
