@@ -76,14 +76,14 @@ needed evidence = authenticated runtime connector contract, capability lease, en
 ## Promotion state
 
 - Current proof state: `poc`.
-- Preview deployment: pending for the implementation commit.
+- Preview deployment: READY at Vercel deployment `dpl_7Xwz2wRAUqSXeHWnH4tgkh8xsMtW`, serving the implementation branch commit `97b8d90b89e524b42fa93c672e08a3f7cf9ae225` at `https://personal-portfolio-1i3l091m0-robynawesomes-projects.vercel.app`.
 - Owner visual review: pending.
 - Production promotion: not authorized by this receipt.
 - Merge of PR #14: remains out of scope.
 
 ## Next admissible action
 
-Commit and push this bounded branch, deploy the exact branch head as a Vercel preview, verify the deployed SHA and relay interaction, then append the deployment receipt. Keep the public domain and draft PR #14 unchanged until owner review.
+Keep the preview URL and exact branch head available for owner visual review. Do not promote to the public domain or merge PR #14 until owner review and the required promotion evidence are present.
 
 /s/ Kholofelo Robyn Rababalela
 
