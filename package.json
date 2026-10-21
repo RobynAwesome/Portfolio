@@ -35,7 +35,7 @@
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1",
-    "vite": "^8.0.1"
+    "vite": "^8.3.5"
   },
   "description": "Junior software engineer portfolio focused on production systems and AI tooling",
   "main": "index.html",
